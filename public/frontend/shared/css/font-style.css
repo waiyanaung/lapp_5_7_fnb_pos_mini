@@ -1,0 +1,11 @@
+html * {
+  font-family: BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif !important;
+}
+
+.glyphicon {
+  font-family: 'Glyphicons Halflings' !important;
+}
+
+.fa {
+  font: normal normal normal 14px/1 FontAwesome !important;
+}

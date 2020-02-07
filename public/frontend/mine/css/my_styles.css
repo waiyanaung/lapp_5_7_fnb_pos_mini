@@ -1,0 +1,565 @@
+/* start frontend nav css */
+
+.navbar-inverse {
+    background-color: white;
+}
+
+.span_middle {
+    text-align: center;
+}
+
+
+/* end frontend nav css */
+
+
+/* for frontend header logo */
+
+.frontend-header-logo {
+    height: inherit;
+}
+
+.page {
+    margin-top: 30px;
+}
+
+.paper {
+    -webkit-box-shadow: 7px 7px 6px -3px rgba(0, 0, 0, 0.34);
+    -moz-box-shadow: 7px 7px 6px -3px rgba(0, 0, 0, 0.34);
+    box-shadow: 7px 7px 6px -3px rgba(0, 0, 0, 0.34);
+    border: 1px solid #cccccc;
+    padding: 10px;
+    margin: 10px auto;
+}
+
+.image {
+    width: 100%;
+    height: 200px;
+    /* max-width:100%; 
+  max-height:100%; */
+    /* margin:auto;
+  display:block; */
+}
+
+.time {
+    font-size: 0.8em;
+    font-style: italic;
+    color: gray;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+}
+
+.name {
+    color: #e76666;
+}
+
+.title {
+    /* font-weight: bold;
+  font-size: 0.8em; */
+}
+
+.location {
+    font-size: 0.8em;
+}
+
+
+/* For the div style of under header menu */
+
+.div_under_header_menu {
+    height: 84px;
+    width: 100%;
+    background-color: #3C5A99;
+    margin: 0px 0px 10px 0px;
+}
+
+
+/* For the div style of under header menu *
+
+/* The whole page background color */
+
+body {
+    background-color: lightblue;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#footer_section {
+    padding-top: 20px;
+    border-top: 1px solid #ffffff;
+}
+
+#footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.footer_font_small {
+    font-size: xx-small;
+}
+
+
+/* Item detail Page Shop Image Slider */
+
+.slider_one_for_shop_image_slider {
+    position: relative;
+    margin: 0 auto;
+    top: 0px;
+    left: 0px;
+    width: 800px;
+    height: 500px;
+    overflow: hidden;
+    visibility: hidden;
+    background-color: rgb(238, 212, 212);
+    "
+
+}
+
+.slider_images_for_shop_image_slider {
+    cursor: default;
+    position: relative;
+    top: -44px;
+    left: 0px;
+    width: 800px;
+    height: 450px;
+    overflow: hidden;
+    "
+
+}
+
+.slider_two_for_shop_image_slider {
+    position: relative;
+    margin: 0 auto;
+    top: 0px;
+    left: 0px;
+    width: 800px;
+    height: 360px;
+    overflow: hidden;
+    visibility: hidden;
+    background-color: #fff;
+}
+
+.slider_images_two_for_shop_image_slider {
+    cursor: default;
+    position: relative;
+    top: -85px;
+    left: 0px;
+    width: 850px;
+    height: 350px;
+    overflow: hidden;
+}
+
+.slider_imagess_for_shop_image_slider {
+    cursor: default;
+    position: relative;
+    left: 0px;
+    width: 290px;
+    height: auto;
+    overflow: hidden;
+    float: right;
+}
+
+
+/* Rounded Corner Div Style for category and item show */
+
+.rounded_div_with_shadow1 {
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 2px 10px 8px skyblue;
+    border-radius: 15px;
+    border-color: rgb(62, 62, 243);
+}
+
+.rounded_div_with_shadow {
+    border: 1px solid white;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
+    background-color: #a0f7f7;
+}
+
+.rounded_div_with_shadow2 {
+    border: 1px solid white;
+    padding: 15px;
+    margin: 0px 0px 0px 0px;
+    background-color: #a0f7f7;
+    min-height: 330px;
+}
+
+.rounded_div_with_shadow3 {
+    border: 1px solid;
+    padding: 10px;
+    margin: 0px 0px 0px 0px;
+    background-color: #a0f7f7;
+    min-height: 30px;
+}
+
+.rounded_div_with_shadow4 {
+    border: 1px solid;
+    padding: 15px;
+    margin: 0px 0px 0px 0px;
+    background-color: #a0f7f7;
+    min-height: 330px;
+}
+
+.rounded_div_with_shadow5 {
+    border: 1px solid white;
+    padding: 15px;
+    margin: 20px 0px 0px 0px;
+    background-color: #a0f7f7;
+    min-height: 330px;
+}
+
+.rounded_div_with_shadow6 {
+    /* border: 1px solid; */
+    padding: 15px;
+    margin: 20px 0px 0px 0px;
+    background-color: #a0f7f7;
+    min-height: 30px;
+}
+
+.rounded_div_with_shadow7 {
+    /* border: 1px solid; */
+    padding: 15px;
+    margin: 20px 0px 0px 0px;
+    background-color: #e4f5f5;
+    min-height: 220px;
+}
+
+.div_with_margin_50 {
+    margin: 50px 0px 0px 0px;
+}
+
+.div_width_300px {
+    max-width: 300px;
+}
+
+.link_button {
+    color: blue;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.link_button2 {
+    background-color: rgb(128, 184, 202);
+    border: none;
+    color: rgb(20, 1, 1);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    min-height: 40px;
+    font-weight: bold;
+}
+
+.link_button3 {
+    background-color: rgb(128, 184, 202);
+    border: none;
+    color: rgb(20, 1, 1);
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: bold;
+    min-height: 40px;
+}
+
+.link_button4 {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+p.button {
+    position: absolute;
+    bottom: 0;
+    /*text-align: center;*/
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    padding-bottom: 20px;
+}
+
+
+/* Scroll To Top */
+
+.scrollToTop {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: blue;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    color: white;
+    display: none;
+}
+
+.scrollToTop:hover {
+    text-decoration: none;
+}
+
+* Style the Image Used to Trigger the Modal */ #myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {
+    opacity: 0.7;
+}
+
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 82px;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Black w/ opacity */
+}
+
+
+/* Modal Content (Image) */
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+
+/* Add Animation - Zoom in the Modal */
+
+.modal-content,
+#caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+
+/* The Close Button */
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* 100% Image Width on Smaller Screens */
+
+@media only screen and (max-width: 700px) {
+    .modal-content {
+        width: 100%;
+    }
+}
+
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+
+
+/* For image gallery detail image's captiion - start */
+
+.img_caption {
+    position: absolute;
+    right: 16px;
+    bottom: 15px;
+    left: 15px;
+    padding: 15px;
+    background: rgba(116, 69, 87, 0.38);
+    z-index: 500;
+}
+
+.img_caption h5 {
+    font-family: 'Playfair Display';
+    color: #fff;
+    margin: 0px;
+}
+
+.img_caption h5 small {
+    font-weight: 400;
+    font-family: 'Playfair Display';
+    line-height: 1;
+    color: #fff;
+}
+
+.img {
+    position: relative;
+    float: left;
+    width: 100px;
+    height: 100px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+/* For image gallery detail image's captiion - end */
+
+
+/* No Underline hyperlink for image labels - start */
+
+.no_underline_link:link {
+    text-decoration: none;
+}
+
+.no_underline_link:visited {
+    text-decoration: none;
+    color: green;
+}
+
+.no_underline_link:hover {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.no_underline_link:active {
+    text-decoration: none;
+}
+
+
+/* No Underline hyperlink for image labels - end*/
+
+
+/* Gallery Image's Div - Start */
+
+.gallery_image_div {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 190px;
+    padding: 10px 2px 4px 2px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    color: #fff;
+    ;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 16px;
+    overflow: auto;
+    text-overflow: ellipsis;
+    text-align: center;
+    line-height: 15px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+}
+
+.gallery_image_div1 {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 190px;
+    padding: 10px 2px 4px 2px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    color: #fff;
+    ;
+    display: inline-block;
+    -webkit-box-shadow: 0px 3px 0px 0px #862f30;
+    -moz-box-shadow: 0px 3px 0px 0px #862f30;
+    box-shadow: 1px 1px 1px 1px #862f30;
+    font-weight: 700;
+    font-size: 16px;
+    overflow: auto;
+    text-overflow: ellipsis;
+    text-align: center;
+    line-height: 15px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+}
+
+
+/* Gallery Image's Div - End */
+
+.custom_hr {
+    border: none;
+    height: 1px;
+    /* Set the hr color */
+    color: #333;
+    /* old IE */
+    background-color: #333;
+    /* Modern Browsers */
+}
+
+.div_with_bottom_line {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ffffff;
+}
+
+.div_with_top_padding {
+    padding-top: 10px;
+}
+
+.image_for_item_detail {
+    width: 250px;
+    height: 200px;
+    /* max-width:100%;    
+max-height:100%;    
+margin:auto;    
+display:block; */
+}
+
+input[type="text"],
+[type="number"],
+[type="email"],
+textarea {
+    /* background-color: lightblue; */
+}

@@ -1,0 +1,79 @@
+.create_form {
+    border: 1px solid #efefef;
+    background: #fff;
+}
+/* Center the image and position the close button */
+.imgcontainer {
+    text-align: center;
+    padding-top: 25px;
+}
+.create_form h2 {
+    text-align: center;
+    padding-bottom: 30px;
+    font-family: 'Playfair Display';
+}
+.formgroup {
+    padding-bottom: 60px !important;
+}
+.formcontrols {
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 9px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #efefef;
+    border: 1px solid #eee;
+    background-color: #fff;
+    border-radius: 2px;
+    font-family: 'Playfair Display';
+}
+.formcontrols:hover {
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 9px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #efefef;
+    border: 1px solid #eee;
+    background-color: #fff;
+    border-radius: 2px;
+    font-family: 'Playfair Display';
+}
+.form_text{
+    padding-top: 15px;
+}
+.form_text span {
+    color: #909090 !important;
+    font-size: 13px;
+    font-family: 'Playfair Display';    
+}
+.form_text a {
+    color: #3C5A99;
+    font-size: 13px;
+    font-family: 'Playfair Display';
+}
+.form_textone{
+    padding-top: 20px;
+}
+.form_textone span {
+    color: #909090 !important;
+    font-size: 14px;
+    font-family: 'Playfair Display';    
+}
+.form_textone a{
+    color: #3C5A99;
+    font-size: 14px;
+    font-family: 'Playfair Display';
+}
+.col-sm-12.pd_lf_5.form_text {
+    color: #3C5A99;
+    font-size: 13px;
+    font-family: 'Playfair Display';
+}
+span.psw {
+    float: right; 
+    font-size: 13px;
+    font-family: 'Playfair Display';
+}

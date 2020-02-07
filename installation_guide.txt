@@ -1,0 +1,44 @@
+Guide for the window OS 
+________________________________________________________________________
+
+
+To run the Laravel Web Application at your pc, you need the following steps
+
+Stage 1 : Enivronment Setup ( Softwares )
+
+Step 1  => php [v7.*.*], mysql, apache (XAMPP control panel)
+Step 2  => Composer
+Step 3  => GitBash
+--------------------------------------------------------------------
+
+Stage 2: Database Configuration
+
+Step 1  => create a new database name with eg. "checklist_db"
+Step 2  => create the configuration file name with ".env" by copying the ".env.example" 
+Step 2  => Edit the database setting for the project at ".env" file and "database.php"
+            
+at "project_name_foler > .env" file 
+change the database name, username and password
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=checklist_db
+DB_USERNAME=root
+DB_PASSWORD=your_database_password
+------------------------------------------------------------------------
+
+Stage 3  : To comiple and run the laravel project
+
+Step 1  => Open command prompt Or Git Bash Command line
+Step 2  => Go to under the project folder
+Step 3  => php artisan config:clear
+Step 4  => php artisan cache:clear
+Step 5  => php artisan view:clear
+Step 6  => php artisan config:cache
+Step 7  => composer dump-autoload
+Step 8  => php artisan migrate
+Step 9  => php artisan db:seed
+Step 10 => php artisan serve
+Step 11  => open the project at web browser by the address "http://localhost:8000/
+------------------------------------------------------------------------"
