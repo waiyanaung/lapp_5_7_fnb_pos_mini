@@ -27,7 +27,8 @@ class AddTransactionTable extends Migration
             $table->integer('tax_type')->nullable();
             $table->decimal('tax_amt',10,2)->nullable();
             $table->integer('main_discount_type')->nullable();
-            $table->decimal('main_discounts',10,2)->nullable();
+            $table->decimal('main_discount_percent',10,2)->nullable();
+            $table->decimal('main_discount_amt',10,2)->nullable();
             $table->decimal('total_item_discounts',10,2)->nullable();
             $table->decimal('grand_total',10,2)->nullable();
 
