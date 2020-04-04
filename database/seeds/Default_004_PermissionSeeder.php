@@ -93,6 +93,10 @@ class Default_004_PermissionSeeder extends Seeder
             ['id' => 81, 'module' => 'Backend Config', 'name' => 'View', 'description' => 'Editing', 'url' => 'backend_app/config', 'created_by' => 1, 'created_at' => $today],
             ['id' => 82, 'module' => 'Backend Multi Language', 'name' => 'Multi_Language', 'description' => 'Backend Multi_Language', 'url' => 'backend_app/language', 'created_by' => 1, 'created_at' => $today],
 
+            // System Reference
+            ['id' => 83, 'module' => 'Backend_System_reference', 'name' => 'Backend_System_reference', 'description' => 'Backend_System_reference', 'url' => 'backend_app/reference', 'created_by' => 1, 'created_at' => $today],
+
+
             // Page
             ['id' => 91, 'module' => 'Page', 'name' => 'Listing', 'description' => 'Page Listing', 'url' => 'backend_app/page', 'created_by' => 1, 'created_at' => $today],
             ['id' => 92, 'module' => 'Page', 'name' => 'Edit', 'description' => 'Page Edit', 'url' => 'backend_app/page/edit', 'created_by' => 1, 'created_at' => $today],
@@ -231,6 +235,7 @@ class Default_004_PermissionSeeder extends Seeder
             ['id' => 255, 'module' => 'Item', 'name' => 'Update', 'description' => 'Item Update', 'url' => 'backend_app/item/update', 'created_by' => 1, 'created_at' => $today],
             ['id' => 256, 'module' => 'Item', 'name' => 'Destroy', 'description' => 'Item Destroy', 'url' => 'backend_app/item/destroy', 'created_by' => 1, 'created_at' => $today],
             ['id' => 257, 'module' => 'Item', 'name' => 'Activate', 'description' => 'Item Activate', 'url' => 'backend_app/item/enable', 'created_by' => 1, 'created_at' => $today],
+            ['id' => 258, 'module' => 'Item', 'name' => 'API', 'description' => 'Item Listing', 'url' => 'backend_app/api/item', 'created_by' => 1, 'created_at' => $today],
 
             // Slider
             ['id' => 261, 'module' => 'Slider', 'name' => 'Listing', 'description' => 'Slider Listing', 'url' => 'backend_app/slider', 'created_by' => 1, 'created_at' => $today],
@@ -285,6 +290,17 @@ class Default_004_PermissionSeeder extends Seeder
              ['id' => 366, 'module' => 'Transaction_Order', 'name' => 'Destroy', 'description' => 'Transaction_Order Destroy', 'url' => 'backend_app/transaction_order/destroy', 'created_by' => 1, 'created_at' => $today],
              ['id' => 367, 'module' => 'Transaction_Order', 'name' => 'Activate', 'description' => 'Transaction_Order Activate', 'url' => 'backend_app/transaction_order/enable', 'created_by' => 1, 'created_at' => $today],
  
+             // Transaction
+             ['id' => 371, 'module' => 'Transaction', 'name' => 'Listing', 'description' => 'Transaction Listing', 'url' => 'backend_app/transaction', 'created_by' => 1, 'created_at' => $today],
+             ['id' => 372, 'module' => 'Transaction', 'name' => 'New', 'description' => 'Transaction New', 'url' => 'backend_app/transaction/create', 'created_by' => 1, 'created_at' => $today],
+             ['id' => 373, 'module' => 'Transaction', 'name' => 'store', 'description' => 'Transaction Store', 'url' => 'backend_app/transaction', 'created_by' => 1, 'created_at' => $today],
+             ['id' => 374, 'module' => 'Transaction', 'name' => 'Edit', 'description' => 'Transaction Edit', 'url' => 'backend_app/transaction/edit', 'created_by' => 1, 'created_at' => $today],
+             ['id' => 375, 'module' => 'Transaction', 'name' => 'Update', 'description' => 'Transaction Update', 'url' => 'backend_app/transaction/update', 'created_by' => 1, 'created_at' => $today],
+             ['id' => 376, 'module' => 'Transaction', 'name' => 'Destroy', 'description' => 'Transaction Destroy', 'url' => 'backend_app/transaction/destroy', 'created_by' => 1, 'created_at' => $today],
+             ['id' => 377, 'module' => 'Transaction', 'name' => 'Show', 'description' => 'Transaction Show', 'url' => 'backend_app/transaction/show', 'created_by' => 1, 'created_at' => $today],
+             ['id' => 378, 'module' => 'Transaction', 'name' => 'Show', 'description' => 'Transaction Show', 'url' => 'backend_app/transaction/show', 'created_by' => 1, 'created_at' => $today],
+ 
+
 
             //  //CSVImport
             // ['id'=>600,'module'=>'CSVImport','name'=>'Listing','description'=>'CSVImport Listing','url'=>'backend_app/import','created_by'=>1,'created_at'=>$today],

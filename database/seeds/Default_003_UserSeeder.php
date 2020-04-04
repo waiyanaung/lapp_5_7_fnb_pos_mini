@@ -25,13 +25,15 @@ class Default_003_UserSeeder extends Seeder
         //Posmini@321
         // $2y$10$gIzaXMve/PT9yXtGGgceHe.MqwIsr5SE/GxtwXHOJeZYdqIsdfNoW
 
-        ['id'=>2,'phone'=>'09123123123', 'user_name'=>'admin','display_name'=>'Administrator', 'password' =>'$2y$10$gIzaXMve/PT9yXtGGgceHe.MqwIsr5SE/GxtwXHOJeZYdqIsdfNoW', 'email' =>'admin@gmail.com','role_id' =>'2','address'=>'Building 99, Room 99, MICT Park, Hlaing Township, Yangon, Myanmar','description'=>'This is super admin role','created_by'=>1,'created_at'=>$today],
+        ['id'=>2,'phone'=>'09123123121', 'user_name'=>'administrator','display_name'=>'Super Administrator', 'password' =>'$2y$10$gIzaXMve/PT9yXtGGgceHe.MqwIsr5SE/GxtwXHOJeZYdqIsdfNoW', 'email' =>'administrator@gmail.com','role_id' =>'1','address'=>'Building 99, Room 99, MICT Park, Hlaing Township, Yangon, Myanmar','description'=>'This is super admin role','created_by'=>1,'created_at'=>$today],
 
-        ['id'=>3,'phone'=>'09123123122', 'user_name'=>'supervisor','display_name'=>'Supervisor', 'password' =>'$2y$10$gIzaXMve/PT9yXtGGgceHe.MqwIsr5SE/GxtwXHOJeZYdqIsdfNoW', 'email' =>'verifier@gmail.com','role_id' =>'3','address'=>'Building 99, Room 9, MICT Park, Hlaing Township, Yangon, Myanmar','description'=>'This is super admin role','created_by'=>1,'created_at'=>$today],
+        ['id'=>3,'phone'=>'09123123123', 'user_name'=>'admin','display_name'=>'Administrator', 'password' =>'$2y$10$gIzaXMve/PT9yXtGGgceHe.MqwIsr5SE/GxtwXHOJeZYdqIsdfNoW', 'email' =>'admin@gmail.com','role_id' =>'2','address'=>'Building 99, Room 99, MICT Park, Hlaing Township, Yangon, Myanmar','description'=>'This is super admin role','created_by'=>1,'created_at'=>$today],
+
+        ['id'=>4,'phone'=>'09123123122', 'user_name'=>'supervisor','display_name'=>'Supervisor', 'password' =>'$2y$10$gIzaXMve/PT9yXtGGgceHe.MqwIsr5SE/GxtwXHOJeZYdqIsdfNoW', 'email' =>'verifier@gmail.com','role_id' =>'3','address'=>'Building 99, Room 9, MICT Park, Hlaing Township, Yangon, Myanmar','description'=>'This is super admin role','created_by'=>1,'created_at'=>$today],
         
-        ['id'=>4,'phone'=>'09123123124', 'user_name'=>'account','display_name'=>'Account', 'password' =>'$2y$10$gIzaXMve/PT9yXtGGgceHe.MqwIsr5SE/GxtwXHOJeZYdqIsdfNoW', 'email' =>'account@gmail.com','role_id' =>'4','address'=>'Building 99, Room 99, MICT Park, Hlaing Township, Yangon, Myanmar','description'=>'This is super admin role','created_by'=>1,'created_at'=>$today],
+        ['id'=>5,'phone'=>'09123123124', 'user_name'=>'account','display_name'=>'Account', 'password' =>'$2y$10$gIzaXMve/PT9yXtGGgceHe.MqwIsr5SE/GxtwXHOJeZYdqIsdfNoW', 'email' =>'account@gmail.com','role_id' =>'4','address'=>'Building 99, Room 99, MICT Park, Hlaing Township, Yangon, Myanmar','description'=>'This is super admin role','created_by'=>1,'created_at'=>$today],
 
-        ['id'=>5,'phone'=>'09123123125', 'user_name'=>'basicuser','display_name'=>'Basic User', 'password' =>'$2y$10$gIzaXMve/PT9yXtGGgceHe.MqwIsr5SE/GxtwXHOJeZYdqIsdfNoW', 'email' =>'basicuser@gmail.com','role_id' =>'5','address'=>'Building 99, Room 99, MICT Park, Hlaing Township, Yangon, Myanmar','description'=>'This is super admin role','created_by'=>1,'created_at'=>$today],
+        ['id'=>6,'phone'=>'09123123125', 'user_name'=>'basicuser','display_name'=>'Basic User', 'password' =>'$2y$10$gIzaXMve/PT9yXtGGgceHe.MqwIsr5SE/GxtwXHOJeZYdqIsdfNoW', 'email' =>'basicuser@gmail.com','role_id' =>'5','address'=>'Building 99, Room 99, MICT Park, Hlaing Township, Yangon, Myanmar','description'=>'This is super admin role','created_by'=>1,'created_at'=>$today],
 
     );
 

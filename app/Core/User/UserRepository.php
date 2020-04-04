@@ -89,6 +89,12 @@ class UserRepository implements UserRepositoryInterface
         return $users;
     }
 
+    public function getUsersByRoleId($role_id)
+    {
+        $users = User::whereNull('deleted_at')->where('status' ,'=', 1)->where('role_id' ,'=', $role_id)->get();
+        return $users;
+    }
+
     public function getUserByEmail($email){
         $user = DB::select("SELECT * FROM core_users WHERE email = '$email'");
         return $user;

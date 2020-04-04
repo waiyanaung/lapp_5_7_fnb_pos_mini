@@ -29,24 +29,169 @@ class ItemController extends Controller
 
     public function index(Request $request)
     {
-        if (Auth::check()) {
-            $items = $this->repo->getObjsAllByLastItemFilter();
-            $categoryRepo = new CategoryRepository();
-            $categories = $categoryRepo->getObjs();
 
-            $countryRepo = new CountryRepository();
-            $countries = $countryRepo->getObjs();
+        if($request->ajax()){
 
-            $brand_repo = new BrandRepository();
-            $brands = $brand_repo->getObjs();
-            
-            return view('backend.item.index')
-                ->with('objs', $items)
-                ->with('brands', $brands)
-                ->with('countries', $countries)
-                ->with('categories', $categories);
+            $returnedObj['laravelStatus'] = ReturnMessage::INTERNAL_SERVER_ERROR;
+            $returnedObj['laravelStatusMessage'] = "fail";
+            $returnedObj['ojbs'] = array();
+
+            if (Auth::check()) {
+                $items = $this->repo->getObjsAllByLastItemFilter();
+                $categoryRepo = new CategoryRepository();
+                $categories = $categoryRepo->getObjs();
+    
+                $countryRepo = new CountryRepository();
+                $countries = $countryRepo->getObjs();
+    
+                $brand_repo = new BrandRepository();
+                $brands = $brand_repo->getObjs();
+                
+                $returnedObj['laravelStatus'] = ReturnMessage::OK;
+                $returnedObj['laravelStatusMessage'] = "Success";
+                $items =  '
+                <option value="1">Aungmyethazan</option>
+                <option value="2">Chanayethazan</option>
+                <option value="3">Chanmyathazi</option>
+                <option value="4">Maha Aungmye</option>
+                ';;
+                $returnedObj['ojbs'] = $items;
+
+                return response()->json(array('returnedObj'=> $returnedObj), 500);
+            }
+            return response()->json(array('returnedObj'=> $returnedObj), 500);
         }
-        return redirect('/');
+        else{
+            if (Auth::check()) {
+                $items = $this->repo->getObjsAllByLastItemFilter();
+                $categoryRepo = new CategoryRepository();
+                $categories = $categoryRepo->getObjs();
+    
+                $countryRepo = new CountryRepository();
+                $countries = $countryRepo->getObjs();
+    
+                $brand_repo = new BrandRepository();
+                $brands = $brand_repo->getObjs();
+                
+                return view('backend.item.index')
+                    ->with('objs', $items)
+                    ->with('brands', $brands)
+                    ->with('countries', $countries)
+                    ->with('categories', $categories);
+            }
+            return redirect('/');
+        }
+        
+    }
+
+    public function getItems(Request $request)
+    {
+
+        if($request->ajax()){
+            $category_id = Input::get('category_id');;
+            $returnedObj['laravelStatus'] = ReturnMessage::INTERNAL_SERVER_ERROR;
+            $returnedObj['laravelStatusMessage'] = "fail";
+            $returnedObj['objs'] = "";
+            $item_list = "";
+
+            if (Auth::check()) {
+                if($category_id == null){
+                    $items = $this->repo->getObjsAllByLastItemFilter();
+                }
+                else{
+                    $items = $this->repo->getItemByCategoryId($category_id);
+                }
+
+                if(isset($items) && count($items)>0){
+                    $item_list .= '<option value="0" disabled selected>Select One</option>';
+                    foreach($items as $item){
+                        $item_list .= '<option value="'. $item->id .'">'. $item->name .'</option>';
+                    }
+                }
+                
+                $returnedObj['laravelStatus'] = ReturnMessage::OK;
+                $returnedObj['laravelStatusMessage'] = "Success";                
+                $returnedObj['objs'] = $item_list;
+                return response()->json(array('returnedObj'=> $returnedObj), 200);
+            }
+            return response()->json(array('returnedObj'=> $returnedObj), 500);
+        }
+        else{
+            if (Auth::check()) {
+                $items = $this->repo->getObjsAllByLastItemFilter();
+                $categoryRepo = new CategoryRepository();
+                $categories = $categoryRepo->getObjs();
+    
+                $countryRepo = new CountryRepository();
+                $countries = $countryRepo->getObjs();
+    
+                $brand_repo = new BrandRepository();
+                $brands = $brand_repo->getObjs();
+                
+                return view('backend.item.index')
+                    ->with('objs', $items)
+                    ->with('brands', $brands)
+                    ->with('countries', $countries)
+                    ->with('categories', $categories);
+            }
+            return redirect('/');
+        }
+        
+    }
+
+    public function getItem(Request $request)
+    {
+
+        if($request->ajax()){
+            $item_id = Input::get('item_id');;
+            $returnedObj['laravelStatus'] = ReturnMessage::INTERNAL_SERVER_ERROR;
+            $returnedObj['laravelStatusMessage'] = "fail";
+            $returnedObj['objs'] = "";
+            $item_list = "";
+
+            if (Auth::check()) {
+                if($item_id == null){
+                    return response()->json(array('returnedObj'=> $returnedObj), 500);
+                }
+                else{
+                    $item = $this->repo->getItemById($item_id);
+                }
+
+                if(isset($item) && count($item)>0){
+                    $returnedObj['laravelStatus'] = ReturnMessage::OK;
+                    $returnedObj['laravelStatusMessage'] = "Success";                
+                    $returnedObj['objs'] = $item;
+                }
+                else{
+                    $returnedObj['laravelStatusMessage'] = "Fail, There is no item about this id!";                
+                    $returnedObj['objs'] = $item_list;
+                }                
+                
+                return response()->json(array('returnedObj'=> $returnedObj), 200);
+            }
+            return response()->json(array('returnedObj'=> $returnedObj), 500);
+        }
+        else{
+            if (Auth::check()) {
+                $items = $this->repo->getObjsAllByLastItemFilter();
+                $categoryRepo = new CategoryRepository();
+                $categories = $categoryRepo->getObjs();
+    
+                $countryRepo = new CountryRepository();
+                $countries = $countryRepo->getObjs();
+    
+                $brand_repo = new BrandRepository();
+                $brands = $brand_repo->getObjs();
+                
+                return view('backend.item.index')
+                    ->with('objs', $items)
+                    ->with('brands', $brands)
+                    ->with('countries', $countries)
+                    ->with('categories', $categories);
+            }
+            return redirect('/');
+        }
+        
     }
 
     public function create()

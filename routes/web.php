@@ -88,6 +88,15 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
         Route::get('register/check_email', ['as' => 'register/check_email', 'uses' => 'Frontend\UserRegistrationController@check_email']);
         Route::get('register/verify/{confirmationCode}', 'Frontend\UserRegistrationController@verify');
         Route::get('userAuth', array('as' => 'backend_app/userAuth', 'uses' => 'Core\UserController@getAuthUser'));
+
+        // Sample Routes for developers
+        Route::get('sample/dynamic_form', array('as' => '/backend_app/sample/dynamic_form', 'uses' => 'Sample\SamplesController@addMore'));
+        Route::post('sample/dynamic_form', array('as' => '/backend_app/sample/dynamic_form', 'uses' => 'Sample\SamplesController@addMorePost'));
+
+        Route::post('api/items', array('as' => 'backend_app/api/items', 'uses' => 'Setup\Item\ItemController@getItems'));
+        Route::post('api/item', array('as' => 'backend_app/api/item', 'uses' => 'Setup\Item\ItemController@getItem'));
+
+
     });
 
     Route::group(['middleware' => 'right'], function () {
@@ -99,6 +108,10 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
             Route::get('config', array('as' => 'backend_app/config', 'uses' => 'Core\ConfigController@edit'));
             Route::post('config', array('as' => 'backend_app/config', 'uses' => 'Core\ConfigController@update'));
             /* End Config */
+
+             /* Start System Reference */
+             Route::get('reference', array('as' => 'backend_app/reference', 'uses' => 'Backend\SystemReferenceController@index'));
+             /* End ConfSystem Referenceig */
 
             /* Start Role */
             Route::get('role', array('as' => 'backend_app/role', 'uses' => 'Core\RoleController@index'));
@@ -332,7 +345,7 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
             Route::post('item/update', array('as' => 'backend_app/item/update', 'uses' => 'Setup\Item\ItemController@update'));
             Route::post('item/destroy', array('as' => 'backend_app/item/destroy', 'uses' => 'Setup\Item\ItemController@destroy'));
             Route::post('item/enable', array('as' => 'backend_app/item/enable', 'uses' => 'Setup\Item\ItemController@enable'));
-
+            
             //Brand
             Route::get('brand', array('as' => 'backend_app/brand', 'uses' => 'Setup\Brand\BrandController@index'));
             Route::get('brand/create', array('as' => 'backend_app/brand/create', 'uses' => 'Setup\Brand\BrandController@create'));
@@ -378,6 +391,17 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
             Route::post('transaction_order/update', array('as' => 'backend_app/transaction_order/update', 'uses' => 'Setup\TransactionOrder\TransactionOrderController@update'));
             Route::post('transaction_order/destroy', array('as' => 'backend_app/transaction_order/destroy', 'uses' => 'Setup\TransactionOrder\TransactionOrderController@destroy'));
             Route::post('transaction_order/enable', array('as' => 'backend_app/transaction_order/enable', 'uses' => 'Setup\TransactionOrder\TransactionOrderController@enable'));
+
+            //Transaction
+            Route::get('transaction', array('as' => 'backend_app/transaction', 'uses' => 'Setup\Transaction\TransactionController@index'));
+            Route::get('transaction/create', array('as' => 'backend_app/transaction/create', 'uses' => 'Setup\Transaction\TransactionController@create'));
+            Route::post('transaction/store', array('as' => 'backend_app/transaction/store', 'uses' => 'Setup\Transaction\TransactionController@store'));
+            Route::get('transaction/{id}/edit', array('as' => 'backend_app/transaction/edit', 'uses' => 'Setup\Transaction\TransactionController@edit'));
+            Route::post('transaction/update', array('as' => 'backend_app/transaction/update', 'uses' => 'Setup\Transaction\TransactionController@update'));
+            Route::post('transaction/destroy', array('as' => 'backend_app/transaction/destroy', 'uses' => 'Setup\Transaction\TransactionController@destroy'));
+            Route::post('transaction/enable', array('as' => 'backend_app/transaction/enable', 'uses' => 'Setup\Transaction\TransactionController@enable'));
+            Route::get('transaction/{id}', array('as' => 'backend_app/transaction/show', 'uses' => 'Setup\Transaction\TransactionController@show'));
         });
     });
+
 });

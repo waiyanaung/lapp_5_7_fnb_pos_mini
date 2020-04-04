@@ -225,5 +225,17 @@ class ItemRepository implements ItemRepositoryInterface
         return $result;
     }
 
+    public function getItemByCategoryId($category_id){
+        $result = Item::where('category_id', $category_id)->whereNull('deleted_at')->get();
+        return $result;
+    }
+
+    
+    public function getItemById($id){
+        $result_raw = Item::where('id', $id)->whereNull('deleted_at')->first();
+        $result = $result_raw->toArray();
+        return $result;
+    }
+
   
 }

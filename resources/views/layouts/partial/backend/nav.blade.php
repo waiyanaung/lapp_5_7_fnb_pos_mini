@@ -78,14 +78,26 @@ $user_role_id = $user_info['userRoleId'];
                             
                             <li class="sidebar-item"><a href="/backend_app/activities" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Activity Log</span></a></li>
                             
+                            <li class="sidebar-item"><a href="/backend_app/reference" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">System Reference</span></a></li>
+                            
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Samples</span></a>
+                        <ul aria-expanded="false" class="collapse  first-level">
+                            
+                            <li class="sidebar-item"><a href="/backend_app/sample/dynamic_form" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Dynamic Form</span></a></li>
+                            
                         </ul>
                     </li>
                 @elseif ($user_role_id == 2)
 
                     <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-shopping-cart m-r-5 m-l-5"></i><span class="hide-menu">Transactions</span></a>
-                        <ul aria-expanded="false" class="collapse  first-level">                        
+                        <ul aria-expanded="false" class="collapse  first-level">  
                             
-                            <li class="sidebar-item"><a href="/backend_app/transaction_order" class="sidebar-link"><i class="ti-list m-r-5 m-l-5"></i><span class="hide-menu">Order</span></a></li>
+                            <li class="sidebar-item"><a href="/backend_app/transaction" class="sidebar-link"><i class="ti-list m-r-5 m-l-5"></i><span class="hide-menu">Transaction</span></a></li>
+                            
+                            <li class="sidebar-item"><a href="/backend_app/transaction_order" class="sidebar-link"><i class="ti-list m-r-5 m-l-5"></i><span class="hide-menu">Pre-Order</span></a></li>
                         </ul>
                     </li>
 

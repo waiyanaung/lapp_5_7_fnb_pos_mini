@@ -93,6 +93,9 @@ class Default_005_RolePermissionSeeder extends Seeder
             ['role_id'=>1, 'permission_id'=>81,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>1, 'permission_id'=>82,'created_by'=>1,'created_at'=>$today],
 
+             // System Reference
+             ['role_id'=>1, 'permission_id'=>83,'created_by'=>1,'created_at'=>$today],
+
             // Page
             ['role_id'=>1, 'permission_id'=>91,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>1, 'permission_id'=>92,'created_by'=>1,'created_at'=>$today],
@@ -231,6 +234,7 @@ class Default_005_RolePermissionSeeder extends Seeder
             ['role_id'=>1, 'permission_id'=>255,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>1, 'permission_id'=>256,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>1, 'permission_id'=>257,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>258,'created_by'=>1,'created_at'=>$today],
 
             //Slider
             ['role_id'=>1, 'permission_id'=>261,'created_by'=>1,'created_at'=>$today],
@@ -284,6 +288,16 @@ class Default_005_RolePermissionSeeder extends Seeder
             ['role_id'=>1, 'permission_id'=>365,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>1, 'permission_id'=>366,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>1, 'permission_id'=>367,'created_by'=>1,'created_at'=>$today],
+
+            //transaction
+            ['role_id'=>1, 'permission_id'=>371,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>372,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>373,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>374,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>375,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>376,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>377,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>378,'created_by'=>1,'created_at'=>$today],
 
             // Role Permissions for the Role 1 - End
 
@@ -401,6 +415,7 @@ class Default_005_RolePermissionSeeder extends Seeder
             ['role_id'=>2, 'permission_id'=>255,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>2, 'permission_id'=>256,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>2, 'permission_id'=>257,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>258,'created_by'=>1,'created_at'=>$today],
 
             //Slider
             ['role_id'=>2, 'permission_id'=>261,'created_by'=>1,'created_at'=>$today],
@@ -455,7 +470,16 @@ class Default_005_RolePermissionSeeder extends Seeder
              ['role_id'=>2, 'permission_id'=>365,'created_by'=>1,'created_at'=>$today],
              ['role_id'=>2, 'permission_id'=>366,'created_by'=>1,'created_at'=>$today],
              ['role_id'=>2, 'permission_id'=>367,'created_by'=>1,'created_at'=>$today],
- 
+
+            //transaction
+            ['role_id'=>2, 'permission_id'=>371,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>372,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>373,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>374,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>375,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>376,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>377,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>378,'created_by'=>1,'created_at'=>$today],
 
             // Role Permissions for the Role 2 - End
             
@@ -533,6 +557,16 @@ class Default_005_RolePermissionSeeder extends Seeder
             ['role_id'=>3, 'permission_id'=>174,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>3, 'permission_id'=>175,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>3, 'permission_id'=>176,'created_by'=>1,'created_at'=>$today],
+
+            //transaction
+            ['role_id'=>3, 'permission_id'=>371,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>372,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>373,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>374,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>375,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>376,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>377,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>378,'created_by'=>1,'created_at'=>$today],
             // Role Permissions for the Role 3 - End
 
 

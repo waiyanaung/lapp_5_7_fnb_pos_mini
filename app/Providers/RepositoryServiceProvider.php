@@ -63,7 +63,10 @@ class RepositoryServiceProvider extends ServiceProvider
 
         $this->app->bind('App\Setup\Brand\BrandRepositoryInterface','App\Setup\Brand\BrandRepository');
         $this->app->bind('App\Setup\FaqInformation\FaqInformationRepositoryInterface','App\Setup\FaqInformation\FaqInformationRepository');
+
         $this->app->bind('App\Setup\TransactionOrder\TransactionOrderRepositoryInterface','App\Setup\TransactionOrder\TransactionOrderRepository');
+
+        $this->app->bind('App\Setup\Transaction\TransactionRepositoryInterface','App\Setup\Transaction\TransactionRepository');
         
     }
 }
