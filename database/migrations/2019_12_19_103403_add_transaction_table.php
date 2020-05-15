@@ -16,7 +16,7 @@ class AddTransactionTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->string('id', 30)->primary();
             $table->integer('status')->default(1);
-            $table->date('date');
+            $table->date('date')->nullable();
             $table->string('remark')->nullable();
 
             $table->integer('customer_id')->nullable();            
@@ -31,6 +31,8 @@ class AddTransactionTable extends Migration
             $table->decimal('main_discount_amt',10,2)->nullable();
             $table->decimal('total_item_discounts',10,2)->nullable();
             $table->decimal('grand_total',10,2)->nullable();
+            $table->decimal('paid_amt',10,2)->nullable();
+            $table->decimal('due_amt',10,2)->nullable();
 
             $table->integer('created_by')->default(1);
             $table->integer('updated_by')->default(1);

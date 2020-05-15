@@ -67,7 +67,7 @@ function report_search_with_type(module){
             var dateComparison = check_year(from_year, to_year);
 
             if(dateComparison){
-                form_action = "/cl/"+module+"/search/" + type + "/" + from_year + "/" + to_year;
+                form_action = "/backend_app/"+module+"/search/" + type + "/" + from_year + "/" + to_year;
 
                 if(status != undefined){
                     form_action += "/"+status;
@@ -99,7 +99,7 @@ function report_search_with_type(module){
             var dateComparison = check_month(from_month, to_month);
 
             if(dateComparison){
-                form_action = "/cl/"+module+"/search/" + type + "/" + from_month + "/" + to_month;
+                form_action = "/backend_app/"+module+"/search/" + type + "/" + from_month + "/" + to_month;
 
                 if(status != undefined){
                     form_action += "/"+status;
@@ -132,7 +132,7 @@ function report_search_with_type(module){
             var dateComparison = check_date(from_date, to_date);
 
             if(dateComparison){
-                form_action = "/cl/"+module+"/search/" + type + "/" + from_date + "/" + to_date;
+                form_action = "/backend_app/"+module+"/search/" + type + "/" + from_date + "/" + to_date;
 
                 if(status != undefined){
                     form_action += "/"+status;
@@ -172,7 +172,7 @@ function report_export_with_type(module){
             var dateComparison = check_year(from_year, to_year);
 
             if(dateComparison){
-                form_action = "/cl/"+module+"/exportexcel/" + type + "/" + from_year + "/" + to_year;
+                form_action = "/backend_app/"+module+"/exportexcel/" + type + "/" + from_year + "/" + to_year;
                 if(status != undefined){
                     form_action += "/"+status;
                 }
@@ -203,7 +203,7 @@ function report_export_with_type(module){
             var dateComparison = check_month(from_month, to_month);
 
             if(dateComparison){
-                form_action = "/cl/"+module+"/exportexcel/" + type + "/" + from_month + "/" + to_month;
+                form_action = "/backend_app/"+module+"/exportexcel/" + type + "/" + from_month + "/" + to_month;
                 if(status != undefined){
                     form_action += "/"+status;
                 }
@@ -219,7 +219,7 @@ function report_export_with_type(module){
         var to_date = $("#to_date").val();
 
         if(from_date == "" && to_date == ""){
-            var form_action = "/cl/"+module+"/exportexcel";
+            var form_action = "/backend_app/"+module+"/exportexcel";
         }
         else if(from_date == "" && to_date != "") {
             sweetAlert("Oops...", "Please Choose the date !");
@@ -233,7 +233,7 @@ function report_export_with_type(module){
             var dateComparison = check_date(from_date, to_date);
 
             if(dateComparison){
-                form_action = "/cl/"+module+"/exportexcel/" + type + "/" + from_date + "/" + to_date;
+                form_action = "/backend_app/"+module+"/exportexcel/" + type + "/" + from_date + "/" + to_date;
                 if(status != undefined){
                     form_action += "/"+status;
                 }

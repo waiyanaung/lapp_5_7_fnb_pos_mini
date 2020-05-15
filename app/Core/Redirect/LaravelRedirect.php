@@ -12,7 +12,7 @@ class LaravelRedirect implements LaravelRedirectInterface {
 
     public function firstRedirect() {
         if(Check::validSession()){
-            return Redirect::intended("/cl/dashboard");
+            return Redirect::intended("/backend_app/dashboard");
         }
         else{
             return Redirect::intended("/");
@@ -21,7 +21,7 @@ class LaravelRedirect implements LaravelRedirectInterface {
     
     public function firstRedirectPath() {
         if(Check::validSession()) {
-            return "cl/dashboard";
+            return "backend_app/dashboard";
         }
         else{
             return "/";
@@ -31,7 +31,7 @@ class LaravelRedirect implements LaravelRedirectInterface {
 
     public function afterAuthedRedirect() {
         if(Check::validSession()) {
-            return Redirect::intended("cl/dashboard");
+            return Redirect::intended("backend_app/dashboard");
         }
         else{
             return Redirect::intended("/");
@@ -40,7 +40,7 @@ class LaravelRedirect implements LaravelRedirectInterface {
 
     public function afterAuthedRedirectPath() {
         if(Check::validSession()) {
-            return "cl/dashboard";
+            return "backend_app/dashboard";
         }
         else{
             return "/";

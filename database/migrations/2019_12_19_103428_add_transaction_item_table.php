@@ -17,7 +17,9 @@ class AddTransactionItemTable extends Migration
             $table->string('id', 30)->primary();
             $table->string('transaction_id', 30);
             $table->integer('status')->default(1);            
+            $table->integer('category_id')->nullable();            
             $table->integer('item_id')->nullable();
+            $table->date('date')->nullable();
             
             $table->integer('item_qty')->nullable();
             $table->decimal('item_price',10,2)->nullable();

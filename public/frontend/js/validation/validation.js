@@ -5,7 +5,7 @@ $(document).ready(function() {
             countries_name  : {
                 required	: true,
                 //remote		: {
-                //    url: "/cl/country/check_country_name",
+                //    url: "/backend_app/country/check_country_name",
                 //    type: "get",
                 //    data:
                 //    {
@@ -36,7 +36,7 @@ $(document).ready(function() {
             city_name  : {
                 required	: true,
                 remote		: {
-                    url: "/cl/city/check_city_name",
+                    url: "/backend_app/city/check_city_name",
                     type: "get",
                     data: {
                         city_name: function () {

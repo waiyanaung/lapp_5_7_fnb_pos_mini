@@ -143,6 +143,23 @@ class Check
         return "";
     }
 
+    public static function backendUrl() {
+
+        $ConfigRepository = new ConfigRepository();
+        $backend_url = $ConfigRepository->getConfigByCode('SETTING_BACKEND_URL');
+
+        if(isset($backend_url) && count($backend_url)>0 ) {
+
+            if(isset($backend_url[0]->value) && $backend_url[0]->value != ""){
+                return $backend_url[0]->value;
+            }
+            else{
+                return "/backend_app";
+            }
+        }
+        return "/backend_app";
+    }
+
     public static function createSession($id) {
 
         $userRepository = new UserRepository();

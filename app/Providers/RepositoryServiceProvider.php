@@ -67,6 +67,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind('App\Setup\TransactionOrder\TransactionOrderRepositoryInterface','App\Setup\TransactionOrder\TransactionOrderRepository');
 
         $this->app->bind('App\Setup\Transaction\TransactionRepositoryInterface','App\Setup\Transaction\TransactionRepository');
+        $this->app->bind('App\Setup\TransactionPayment\TransactionPaymentRepositoryInterface','App\Setup\TransactionPayment\TransactionPaymentRepository');
         
     }
 }

@@ -85,7 +85,7 @@
                             <!-- pwd -->
                             <div class="row m-t-20 p-t-20 border-top border-secondary">
                                 <div class="col-12">
-                                    <a class="btn btn-success" href="/cl" id="to-login" name="action">Back To Login</a>
+                                    <a class="btn btn-success" href="/backend_app" id="to-login" name="action">Back To Login</a>
                                     <button class="btn btn-info float-right" type="submit" name="action">Recover</button>                    
                                 </div>
                             </div>

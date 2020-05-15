@@ -38,5 +38,15 @@ class Transaction extends Model
         ,
     ];
 
+    public function customer()
+    {
+        return $this->belongsTo('App\User','customer_id','id');
+    }
+
+    public function childs()
+    {
+        return $this->hasMany('App\Setup\TransactionItem\TransactionItem','transaction_id','id');
+    }
+
     
 }

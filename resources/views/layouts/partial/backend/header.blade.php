@@ -116,7 +116,7 @@ $companyLogo = \App\Core\Check::companyLogo();
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="/cl">
+                    <a class="navbar-brand" href="/backend_app">
                         <!-- Logo icon -->
                         <b class="logo-icon p-l-10">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->

@@ -1,7 +1,9 @@
 <?php
-
 Route::group(['middleware' => 'frontendorbackend'], function () {
+    // getting backend_url
 
+    $backend_app    = \App\Core\Check::backendUrl();
+    
     //Frontend
     Route::get('/', 'Frontend\HomeController@index');
     Route::get('/home', 'Frontend\HomeController@index')->name('home');
@@ -68,6 +70,7 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
 
     //Backend
     Route::group(['prefix' => 'backend_app'], function () {
+
         Route::get('/', 'Auth\AuthController@showLogin');
         Route::get('login', array('as' => 'backend_app/login', 'uses' => 'Auth\AuthController@showLogin'));
         Route::post('login', array('as' => 'backend_app/login', 'uses' => 'Auth\AuthController@doLogin'));
@@ -90,8 +93,8 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
         Route::get('userAuth', array('as' => 'backend_app/userAuth', 'uses' => 'Core\UserController@getAuthUser'));
 
         // Sample Routes for developers
-        Route::get('sample/dynamic_form', array('as' => '/backend_app/sample/dynamic_form', 'uses' => 'Sample\SamplesController@addMore'));
-        Route::post('sample/dynamic_form', array('as' => '/backend_app/sample/dynamic_form', 'uses' => 'Sample\SamplesController@addMorePost'));
+        Route::get('sample/dynamic_form', array('as' => 'backend_app/sample/dynamic_form', 'uses' => 'Sample\SamplesController@addMore'));
+        Route::post('sample/dynamic_form', array('as' => 'backend_app/sample/dynamic_form', 'uses' => 'Sample\SamplesController@addMorePost'));
 
         Route::post('api/items', array('as' => 'backend_app/api/items', 'uses' => 'Setup\Item\ItemController@getItems'));
         Route::post('api/item', array('as' => 'backend_app/api/item', 'uses' => 'Setup\Item\ItemController@getItem'));

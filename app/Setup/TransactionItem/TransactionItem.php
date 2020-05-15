@@ -14,29 +14,31 @@ class TransactionItem extends Model
 
     protected $fillable = [
         'id',
-        'name',
-        'name_mm',
-        'name_jp',
-        'name_zh',
-        'country_id',
-        'code',
-        'image_url',
-        'hidden_display',
-        'inverter_type',
-        'brand_id',
-        'country_id',
-        'item_horse_power_id',
-        'item_cooling_capacity_id',
-        'item_air_flow_type_id',
-        'item_refrigerant_type_id',
-        'item_swing_type_id',
-        'what_is_inbox',
-        'outdoor_unit',
-        'indoor_unit',
-        'custom_features',
+        'transaction_id',
+        'status',
+        'item_id',
+        'date',
+        'item_qty',
+        'item_price',
+        'item_amt',
+        'discount_type',
+        'discount_percent',
+        'discount_amt',
+        'sub_total_amt',
         'updated_at','created_at','deleted_at','updated_by','created_by','deleted_by'
         ,
     ];
+
+    public function item()
+    {
+        return $this->belongsTo('App\Setup\Item\Item','item_id','id');
+    }
+
+
+    public function category()
+    {
+        return $this->belongsTo('App\Setup\Category\Category','category_id','id');
+    }
 
     
 }

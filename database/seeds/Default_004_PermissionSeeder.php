@@ -293,7 +293,7 @@ class Default_004_PermissionSeeder extends Seeder
              // Transaction
              ['id' => 371, 'module' => 'Transaction', 'name' => 'Listing', 'description' => 'Transaction Listing', 'url' => 'backend_app/transaction', 'created_by' => 1, 'created_at' => $today],
              ['id' => 372, 'module' => 'Transaction', 'name' => 'New', 'description' => 'Transaction New', 'url' => 'backend_app/transaction/create', 'created_by' => 1, 'created_at' => $today],
-             ['id' => 373, 'module' => 'Transaction', 'name' => 'store', 'description' => 'Transaction Store', 'url' => 'backend_app/transaction', 'created_by' => 1, 'created_at' => $today],
+             ['id' => 373, 'module' => 'Transaction', 'name' => 'store', 'description' => 'Transaction Store', 'url' => 'backend_app/transaction/store', 'created_by' => 1, 'created_at' => $today],
              ['id' => 374, 'module' => 'Transaction', 'name' => 'Edit', 'description' => 'Transaction Edit', 'url' => 'backend_app/transaction/edit', 'created_by' => 1, 'created_at' => $today],
              ['id' => 375, 'module' => 'Transaction', 'name' => 'Update', 'description' => 'Transaction Update', 'url' => 'backend_app/transaction/update', 'created_by' => 1, 'created_at' => $today],
              ['id' => 376, 'module' => 'Transaction', 'name' => 'Destroy', 'description' => 'Transaction Destroy', 'url' => 'backend_app/transaction/destroy', 'created_by' => 1, 'created_at' => $today],
