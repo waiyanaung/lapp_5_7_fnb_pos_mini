@@ -103,7 +103,7 @@ class ItemController extends Controller
                 }
 
                 if(isset($items) && count($items)>0){
-                    $item_list .= '<option value="0" disabled selected>Select One</option>';
+                    $item_list .= '<option value="" selected>Select Item</option>';
                     foreach($items as $item){
                         $item_list .= '<option value="'. $item->id .'">'. $item->name .'</option>';
                     }

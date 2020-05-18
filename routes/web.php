@@ -96,6 +96,9 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
         Route::get('sample/dynamic_form', array('as' => 'backend_app/sample/dynamic_form', 'uses' => 'Sample\SamplesController@addMore'));
         Route::post('sample/dynamic_form', array('as' => 'backend_app/sample/dynamic_form', 'uses' => 'Sample\SamplesController@addMorePost'));
 
+        Route::get('sample/dynamic_form2/create', array('as' => 'backend_app/sample/dynamic_form2/create', 'uses' => 'Sample\SamplesController@create'));
+        Route::post('sample/dynamic_form2/store', array('as' => 'backend_app/sample/dynamic_form2/store', 'uses' => 'Sample\SamplesController@store'));
+
         Route::post('api/items', array('as' => 'backend_app/api/items', 'uses' => 'Setup\Item\ItemController@getItems'));
         Route::post('api/item', array('as' => 'backend_app/api/item', 'uses' => 'Setup\Item\ItemController@getItem'));
 
