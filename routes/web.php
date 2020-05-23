@@ -407,6 +407,7 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
             Route::post('transaction/destroy', array('as' => 'backend_app/transaction/destroy', 'uses' => 'Setup\Transaction\TransactionController@destroy'));
             Route::post('transaction/enable', array('as' => 'backend_app/transaction/enable', 'uses' => 'Setup\Transaction\TransactionController@enable'));
             Route::get('transaction/{id}', array('as' => 'backend_app/transaction/show', 'uses' => 'Setup\Transaction\TransactionController@show'));
+            Route::post('transaction/payment/store', array('as' => 'backend_app/transaction/payment/store', 'uses' => 'Setup\Transaction\TransactionController@addPayment'));
         });
     });
 

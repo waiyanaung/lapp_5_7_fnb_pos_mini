@@ -22,7 +22,8 @@ class CreateTransactionPaymentTable extends Migration
             $table->integer('payment_type')->default(1);            
             $table->decimal('paid_amt',10,2)->nullable();
             $table->decimal('change_amt',10,2)->nullable();
-            $table->string('remark')->nullable();
+            $table->string('bank_reference',100)->nullable();
+            $table->string('remark',255)->nullable();
 
             $table->integer('created_by')->default(1);
             $table->integer('updated_by')->default(1);

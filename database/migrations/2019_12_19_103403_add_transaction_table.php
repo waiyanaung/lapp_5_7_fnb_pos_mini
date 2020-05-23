@@ -32,7 +32,7 @@ class AddTransactionTable extends Migration
             $table->decimal('main_discount_amt',10,2)->nullable();
             $table->decimal('total_item_discounts',10,2)->nullable();
             $table->decimal('grand_total',10,2)->nullable();
-            $table->decimal('paid_amt',10,2)->nullable();
+            $table->decimal('paid_amt',10,2)->nullable()->default(0);
             $table->decimal('due_amt',10,2)->nullable();
 
             $table->integer('created_by')->default(1);

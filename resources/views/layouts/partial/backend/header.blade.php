@@ -123,7 +123,7 @@ $companyLogo = \App\Core\Check::companyLogo();
                         <b class="logo-icon p-l-10">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="/backend/matrix_admin/assets/images/logo-icon.png" alt="homepage" class="light-logo" />
+                            {{-- <img src="/backend/matrix_admin/assets/images/logo-icon.png" alt="homepage" class="light-logo" /> --}}
                            
                         </b>
                         <!--End Logo icon -->
@@ -136,7 +136,7 @@ $companyLogo = \App\Core\Check::companyLogo();
                                 $companyName    = \App\Core\Check::companyName();
                                 $companyLogo    = \App\Core\Check::companyLogo();
                                 ?>
-                                <span class="font_white"><h4><?php echo $companyName; ?></h4></span>
+                                <span class="font_white"><h4><?php //echo $companyName; ?></h4></span>
                         </span>
                         <!-- Logo icon -->
                         <!-- <b class="logo-icon"> -->

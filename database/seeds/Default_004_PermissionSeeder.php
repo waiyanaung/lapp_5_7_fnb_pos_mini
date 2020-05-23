@@ -299,6 +299,8 @@ class Default_004_PermissionSeeder extends Seeder
              ['id' => 376, 'module' => 'Transaction', 'name' => 'Destroy', 'description' => 'Transaction Destroy', 'url' => 'backend_app/transaction/destroy', 'created_by' => 1, 'created_at' => $today],
              ['id' => 377, 'module' => 'Transaction', 'name' => 'Show', 'description' => 'Transaction Show', 'url' => 'backend_app/transaction/show', 'created_by' => 1, 'created_at' => $today],
              ['id' => 378, 'module' => 'Transaction', 'name' => 'Show', 'description' => 'Transaction Show', 'url' => 'backend_app/transaction/show', 'created_by' => 1, 'created_at' => $today],
+             ['id' => 379, 'module' => 'Transaction', 'name' => 'Add New Payment', 'description' => 'Transaction Payment', 'url' => 'backend_app/transaction/payment/store', 'created_by' => 1, 'created_at' => $today],
+             
  
 
 

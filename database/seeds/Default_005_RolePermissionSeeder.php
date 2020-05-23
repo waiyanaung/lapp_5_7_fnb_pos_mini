@@ -298,6 +298,8 @@ class Default_005_RolePermissionSeeder extends Seeder
             ['role_id'=>1, 'permission_id'=>376,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>1, 'permission_id'=>377,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>1, 'permission_id'=>378,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>379,'created_by'=>1,'created_at'=>$today],
+            
 
             // Role Permissions for the Role 1 - End
 
@@ -480,6 +482,7 @@ class Default_005_RolePermissionSeeder extends Seeder
             ['role_id'=>2, 'permission_id'=>376,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>2, 'permission_id'=>377,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>2, 'permission_id'=>378,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>379,'created_by'=>1,'created_at'=>$today],
 
             // Role Permissions for the Role 2 - End
             
@@ -567,6 +570,7 @@ class Default_005_RolePermissionSeeder extends Seeder
             ['role_id'=>3, 'permission_id'=>376,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>3, 'permission_id'=>377,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>3, 'permission_id'=>378,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>379,'created_by'=>1,'created_at'=>$today],
             // Role Permissions for the Role 3 - End
 
 

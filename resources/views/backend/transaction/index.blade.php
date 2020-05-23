@@ -57,6 +57,7 @@
                                     <th class="bg_n_fontcolor">Transaction ID</th>
                                     <th class="bg_n_fontcolor">Customer Name</th>
                                     <th class="bg_n_fontcolor">Phone</th>
+                                    <th class="bg_n_fontcolor">Status</th>
                                     <th class="bg_n_fontcolor">Total Item Qty</th>
                                     <th class="bg_n_fontcolor">Sub Total</th>
                                     <th class="bg_n_fontcolor">Service Charges</th>
@@ -64,7 +65,6 @@
                                     <th class="bg_n_fontcolor">Total Item Discount</th>
                                     <th class="bg_n_fontcolor">Main Discount</th>
                                     <th class="bg_n_fontcolor">Grand Total</th>
-                                    <th class="bg_n_fontcolor">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -75,13 +75,6 @@
                                         <td><a href="/backend_app/transaction/{{$obj->id}}/edit">{{$obj->customer->first_name}} {{$obj->customer->last_name}}</a></td>
                                         
                                         <td>{{$obj->customer->phone}}</td>
-                                        <td>{{$obj->total_item_qty}}</td>
-                                        <td>{{$obj->sub_total}}</td>
-                                        <td>{{$obj->service_charges}}</td>
-                                        <td>{{$obj->tax_amt}}</td>
-                                        <td>{{$obj->total_item_discounts}}</td>
-                                        <td>{{$obj->main_discount_amt}}</td>
-                                        <td>{{$obj->grand_total}}</td>
                                         <td>
                                             @if($obj->status == 1)
                                                 Pending
@@ -91,6 +84,13 @@
                                                 VOID
                                             @endif
                                         </td>
+                                        <td>{{$obj->total_item_qty}}</td>
+                                        <td>{{$obj->sub_total}}</td>
+                                        <td>{{$obj->service_charges}}</td>
+                                        <td>{{$obj->tax_amt}}</td>
+                                        <td>{{$obj->total_item_discounts}}</td>
+                                        <td>{{$obj->main_discount_amt}}</td>
+                                        <td>{{$obj->grand_total}}</td>
                                     </tr>
                                 @endforeach                    
                             </tbody>

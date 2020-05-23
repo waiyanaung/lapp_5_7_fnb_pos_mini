@@ -103,6 +103,11 @@
             <div class="col-md-12 text-right">
                 <div class="card">
                     <div class="card-body border-top">
+
+                        @if(isset($obj) && $obj->due_amt > 0)
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paymentModal" data-whatever="@mdo">Add New Payment</button>
+                        @endif
+                        
                         <button type="button" class="btn btn-primary btn-md btn_submit">
                             @if(isset($obj))
                             Update
@@ -127,33 +132,134 @@
                     <div class="col-md-4">
                         <h5 class="card-title m-b-0">Customer Name</h5>
                         <div class="form-group m-t-20">
-                            <select class="form-control customer_id" name="customer_id" id="customer_id">
-                                @if(isset($obj))
-                                @foreach($customers as $customer)
-                                @if($customer->id == $obj->customer_id)
-                                <option value="{{$customer->id}}" selected>{{$customer->first_name}}
-                                    {{$customer->last_name}}</option>
-                                @else
-                                <option value="{{$customer->id}}">{{$customer->first_name}} {{$customer->last_name}}
-                                </option>
-                                @endif
-                                @endforeach
-                                @else
-                                <option value="" selected>Select Customer</option>
-                                @foreach($customers as $customer)
-                                <option value="{{$customer->id}}">{{$customer->first_name}} {{$customer->last_name}}
-                                </option>
-                                @endforeach
-                                @endif
-                            </select>
+                            @if(isset($obj))
+                                <input type"text" class="form-control" id="customer_id" name="customer_id" value="{{$obj->customer->first_name}} {{$obj->customer->last_name}}" readonly>
+                            @else
+                                <select class="form-control customer_id" name="customer_id" id="customer_id">
+                                    @if(isset($obj))
+                                    @foreach($customers as $customer)
+                                    @if($customer->id == $obj->customer_id)
+                                    <option value="{{$customer->id}}" selected>{{$customer->first_name}}
+                                        {{$customer->last_name}}</option>
+                                    @else
+                                    <option value="{{$customer->id}}">{{$customer->first_name}} {{$customer->last_name}}
+                                    </option>
+                                    @endif
+                                    @endforeach
+                                    @else
+                                    <option value="" selected>Select Customer</option>
+                                    @foreach($customers as $customer)
+                                    <option value="{{$customer->id}}">{{$customer->first_name}} {{$customer->last_name}}
+                                    </option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            @endif
                             <p id="customer_id_error" class="text-danger">{{$errors->first('customer_id')}}</p>
                         </div>
                     </div>
 
+                    @if(isset($obj))
+                        <div class="col-md-4">
+                            <h5 class="card-title m-b-0">Transaction Status</h5>
+                            <div class="form-group m-t-20">
+                                <input type"text" class="form-control" id="status" name="status" value="{{$obj->status}}" " readonly>
+                            </div>
+                        </div>
 
+                        <div class="col-md-4">
+                            <h5 class="card-title m-b-0">Transaction Created at</h5>
+                            <div class="form-group m-t-20">
+                                <input type"text" class="form-control" id="status" name="status" value="{{ date_format($obj->created_at,"d-M-Y H:i:s") }}" " readonly>
+                            </div>
+                        </div>
+
+                    @endif
 
                 </div>
                 <!-- End class='row' One -->
+
+                <!-- Start class='row' One -->
+                @if(isset($obj))
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 class="card-title m-b-0">Transaction Remark</h5>
+                            <div class="form-group m-t-20">
+                                <input type"text" class="form-control" value="{{ $obj->remark }}" " readonly>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+                <!-- End class='row' One -->
+
+            </div>
+        </div>
+
+        {{-- payment - for edit case - start --}}
+        @if(isset($obj))
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="card-title m-b-0">Receipt Summary</h5><br>
+                        </div>
+                    </div>
+
+                    <!-- Start class='row' Three -->
+                    <div class="row">
+                        <div class="col-md-12 table-responsive">
+                            <table class="text-right table table-bordered table-striped">
+                                <thead>
+                                    <td class="bg_n_fontcolor2">Sub Total</td>
+                                    <td class="bg_n_fontcolor2">Service Charges</td>
+                                    <td class="bg_n_fontcolor2">Tax Amount</td>
+                                    <td class="bg_n_fontcolor2">Discount Type</td>
+                                    <td class="bg_n_fontcolor2">Discount Amount</td>
+                                    <td class="bg_n_fontcolor2">Total Payable Amount</td>
+                                    <td class="bg_n_fontcolor2">Paid Amount</td>
+                                    <td class="bg_n_fontcolor2">Due Amount</td>
+                                    
+                                </thead>
+                                
+                                <tr>
+                                    <td class="bg_n_fontcolor"><label>{{ $obj->sub_total }}</label></td>
+                                    <td class="bg_n_fontcolor"><label>{{ $obj->service_charges }}</label></td>
+                                    <td class="bg_n_fontcolor"><label>{{ $obj->tax_amt }}</label></td>
+                                    <td class="bg_n_fontcolor">
+                                        <label>
+                                            @if($obj->main_discount_type == 1)
+                                                {{$obj->main_discount_percent}} {{ '%' }}
+                                            @elseif($obj->main_discount_type == 2)
+                                                {{ 'Amount' }}
+                                            @else
+                                                {{ 'No Discount' }}
+                                            @endif
+                                        </label>     
+                                    </td>
+                                    <td class="bg_n_fontcolor"><label>{{ $obj->main_discount_amt }}</label></td>
+                                    <td class="bg_n_fontcolor"><label>{{ $obj->grand_total }}</label></td>
+                                    <td class="bg_n_fontcolor"><label>{{ $obj->paid_amt }}</label></td>
+                                    <td class="bg_n_fontcolor"><label>{{ $obj->due_amt }}</label></td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End class='row' Three -->
+
+                </div>
+            </div>
+        @endif
+        
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5 class="card-title m-b-0">Items</h5><br>
+                    </div>
+                </div>
 
                 <!-- Start class='row' Two -->
                 <div class="row">
@@ -163,101 +269,116 @@
                             <table class="table table-bordered table-striped" id="dynamic_field">
                                 <thead>
                                     <tr>
-                                        <th class="bg_n_fontcolor">Category Name</th>
-                                        <th class="bg_n_fontcolor">Item Name</th>
-                                        <th class="bg_n_fontcolor">Item Price</th>
-                                        <th class="bg_n_fontcolor">Item Quantity</th>
-                                        <th class="bg_n_fontcolor">Item Amount</th>
-                                        <th class="bg_n_fontcolor">Action</th>
+                                        <th class="bg_n_fontcolor2">Category Name</th>
+                                        <th class="bg_n_fontcolor2">Item Name</th>
+                                        <th class="bg_n_fontcolor2">Item Price</th>
+                                        <th class="bg_n_fontcolor2">Item Quantity</th>
+                                        <th class="bg_n_fontcolor2">Item Amount</th>
+                                        @if(!isset($obj))
+                                            <th class="bg_n_fontcolor2">Action</th>
+                                        @endif
                                     </tr>
                                 </thead>
 
                                 <tbody>
 
-                                    {{-- for edit case  --}}
+                                    {{-- for edit case - start --}}
                                     @if(isset($obj))
-                                    @foreach ($obj->childs as $item_counter => $transaction_item)
 
-                                    <tr id="row{{$item_counter}}" class="dynamic-added">
-                                        <td>
-                                            <select class="form-control width-150 category_id" name="category_id[]"
-                                                id="0" onchange="getItems(this.id)">
-                                                
-                                                @if(isset($obj))
-                                                    <option value="">Select Category</option>
-                                                    @foreach($categories as $category)
-                                                        @if($category->id == $transaction_item->category_id)
-                                                            <option value="{{$category->id}}" selected>{{$category->name}}</option>
-                                                        @else
+                                        @if($obj->children()->exists())
+                                        @foreach ($obj->children as $item_counter => $transaction_item)
+
+                                        <tr id="row{{$item_counter}}" class="dynamic-added">
+                                            <td>
+                                                <label>{{$transaction_item->category->name}}</label>
+                                                {{-- <select class="form-control width-150 category_id" name="category_id[]"
+                                                    id="0" onchange="getItems(this.id)">
+                                                    
+                                                    @if(isset($obj))
+                                                        <option value="">Select Category</option>
+                                                        @foreach($categories as $category)
+                                                            @if($category->id == $transaction_item->category_id)
+                                                                <option value="{{$category->id}}" selected>{{$category->name}}</option>
+                                                            @else
+                                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @else
+                                                        <option value="" selected>Select Category</option>
+                                                        @foreach($categories as $category)
                                                             <option value="{{$category->id}}">{{$category->name}}</option>
-                                                        @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select> --}}
+                                                <p id="0_error" class="text-danger">{{$errors->first('category_id0')}}</p>
+                                            </td>
+
+                                            <td>
+                                                <label>{{$transaction_item->item->name}}</label>
+                                                {{-- <select class="form-control width-150 item_id" name="item_id[]"
+                                                    id="item_id0" onchange="getItem(this.id)">
+                                                    <option value="" selected>Select Item</option>
+                                                    @if(isset($obj))
+                                                    @foreach($items as $item)
+                                                    @if($item->id == $transaction_item->item_id)
+                                                    <option value="{{$item->id}}" selected>{{$item->name}}</option>
+                                                    @else
+                                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                                    @endif
                                                     @endforeach
-                                                @else
-                                                    <option value="" selected>Select Category</option>
-                                                    @foreach($categories as $category)
-                                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                                    @else
+                                                    <option value="" selected>Select Item</option>
+                                                    @foreach($items as $item)
+                                                    <option value="{{$item->id}}">{{$item->name}}</option>
                                                     @endforeach
-                                                @endif
-                                            </select>
-                                            <p id="0_error" class="text-danger">{{$errors->first('category_id0')}}</p>
-                                        </td>
+                                                    @endif
+                                                </select> --}}
+                                                <p id="item_id0_error" class="text-danger">{{$errors->first('item_id0')}}
+                                                </p>
 
-                                        <td>
-                                            <select class="form-control width-150 item_id" name="item_id[]"
-                                                id="item_id0" onchange="getItem(this.id)">
-                                                <option value="" selected>Select Item</option>
-                                                @if(isset($obj))
-                                                @foreach($items as $item)
-                                                @if($item->id == $transaction_item->item_id)
-                                                <option value="{{$item->id}}" selected>{{$item->name}}</option>
+                                            </td>
+
+                                            <td>
+                                                <input readonly type="text" name="price[]" id="price0"
+                                                    class="form-control width-100 name_list item_price"
+                                                    value="{{ isset($transaction_item)? $transaction_item->item_price:Request::old('item_price') }}" />
+                                            </td>
+
+                                            <td>
+                                                <input readonly type="number" min="1" step="1" name="item_qty[]" id="item_qty0"
+                                                    placeholder="Enter your Quantity"
+                                                    class="form-control width-100 name_list item_qty"
+                                                    value="{{ isset($transaction_item)? $transaction_item->item_qty:Request::old('item_qty0') }}"
+                                                    onchange="updateAmount(this.id)" />
+                                                <p id="item_qty0_error" class="text-danger">{{$errors->first('item_qty0')}}
+                                                </p>
+                                            </td>
+
+                                            <td>
+                                                <input readonly type="text" name="item_amount[]" id="item_amount0"
+                                                    class="form-control width-100 name_list item_amt"
+                                                    value="{{ isset($transaction_item)? $transaction_item->item_amt:Request::old('item_amt') }}" />
+                                            </td>
+
+                                            @if(isset($obj))
+                                                
+                                            @else
+                                                @if($item_counter == 0)
+                                                <td>
+                                                    <button type="button" name="add" id="add"
+                                                        class="btn btn-success form-control">Add Item</button></td>
                                                 @else
-                                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                                    <?php echo '<td><button type="button" name="remove" id="'.$item_counter.'" class="btn btn-danger btn_remove form-control">Remove Item</button></td></tr>'; ?>
                                                 @endif
-                                                @endforeach
-                                                @else
-                                                <option value="" selected>Select Item</option>
-                                                @foreach($items as $item)
-                                                <option value="{{$item->id}}">{{$item->name}}</option>
-                                                @endforeach
-                                                @endif
-                                            </select>
-                                            <p id="item_id0_error" class="text-danger">{{$errors->first('item_id0')}}
-                                            </p>
+                                            @endif
+                                        </tr>
 
-                                        </td>
-
-                                        <td><input readonly type="text" name="price[]" id="price0"
-                                                class="form-control width-100 name_list item_price"
-                                                value="{{ isset($transaction_item)? $transaction_item->item_price:Request::old('item_price') }}" />
-                                        </td>
-
-                                        <td>
-                                            <input type="number" min="1" step="1" name="item_qty[]" id="item_qty0"
-                                                placeholder="Enter your Quantity"
-                                                class="form-control width-100 name_list item_qty"
-                                                value="{{ isset($transaction_item)? $transaction_item->item_qty:Request::old('item_qty0') }}"
-                                                onchange="updateAmount(this.id)" />
-                                            <p id="item_qty0_error" class="text-danger">{{$errors->first('item_qty0')}}
-                                            </p>
-                                        </td>
-
-                                        <td><input readonly type="text" name="item_amount[]" id="item_amount0"
-                                                class="form-control width-100 name_list item_amt"
-                                                value="{{ isset($transaction_item)? $transaction_item->item_amt:Request::old('item_amt') }}" />
-                                        </td>
-
-                                        @if($item_counter == 0)
-                                        <td><button type="button" name="add" id="add"
-                                                class="btn btn-success form-control">Add Item</button></td>
-                                        @else
-                                        <?php echo '<td><button type="button" name="remove" id="'.$item_counter.'" class="btn btn-danger btn_remove form-control">Remove Item</button></td></tr>'; ?>
+                                        @endforeach
                                         @endif
-                                    </tr>
-
-                                    @endforeach
-
-                                    {{-- for create case --}}
+                                    {{-- for edit case - end --}}
+                                    
                                     @else
+                                    {{-- for create case - start --}}
                                     <tr>
                                         <td>
                                             <select class="form-control width-150 category_id" name="category_id[]"
@@ -310,154 +431,166 @@
                                                 class="btn btn-success form-control">Add Item</button></td>
                                     </tr>
                                     @endif
+                                    {{-- for create case - end --}}
+
                                 </tbody>
                             </table>
-                            {{-- <input type="button" name="submit" id="submit" class="btn btn-info" value="Submit btn" />   --}}
+                            
                         </div>
                     </div>
                 </div>
                 <!-- End class='row' Two -->
 
-                <!-- Start class='row' Three -->
-                <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-8 table-responsive">
-                        <table class="text-right table table-bordered table-striped" id="dynamic_field">
-                            <tr>
-                                <td class="font-weight-bold">Sub Total Price :</td>
-                                <td>
-                                    <label
-                                        id="show_sub_total">{{ isset($obj)? $obj->sub_total:'Total Price' }}</label>
-                                    <input type="hidden" id="sub_total" name="sub_total"
-                                        value="{{ isset($obj)? $obj->sub_total:Request::old('sub_total') }}">
-                                </td>
-                            </tr>
+            </div>
+    </div>
 
-                            <tr>
-                                <td class="font-weight-bold">Receipt Discount Type :</td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <select id="main_discount_type" name="main_discount_type" class="form-control"
-                                                onchange="changeMainDiscountType(this.id)">
+        {{-- payment - for edit case - start --}}
+        @if(isset($obj))
 
-                                                @if(isset($obj))
-                                                    <option value="0" selected>No Discount</option>
-                                                    <option value="1">Percent %</option>
-                                                    <option value="2">Amount</option>
-                                                @else
-                                                    <option value="0" selected>No Discount</option>
-                                                    <option value="1">Percent %</option>
-                                                    <option value="2">Amount</option>
-                                                @endif
+            <div class="card">
+                <div class="card-body">
 
-                                            </select>
-                                        </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="card-title m-b-0">Payment History</h5><br>
+                        </div>
+                    </div>
+                    
+                    <!-- Start class='row' Three -->
+                    <div class="row">
+                        <div class="col-md-12 table-responsive">
+                            <table class="text-right table table-bordered table-striped">
+                                <thead>
+                                    <td class="bg_n_fontcolor2">Payment No.</td>
+                                    <td class="bg_n_fontcolor2">Total Payable Amount</td>
+                                    <td class="bg_n_fontcolor2">Paid Amount</td>
+                                    <td class="bg_n_fontcolor2">Changed Amount</td>
+                                    <td class="bg_n_fontcolor2">Payment Type</td>
+                                    <td class="bg_n_fontcolor2">Bank Reference</td>
+                                    <td class="bg_n_fontcolor2">Paid at</td>
+                                    <td class="bg_n_fontcolor2">Payment Remark</td>
+                                </thead>
+                                @if($obj->payments()->exists())
+                                    @foreach ($obj->payments as $key_payment => $tran_payment)
+                                        <tr>
 
-                                        <div class="col-md-6">
+                                            <td class="font-weight-bold">
+                                                <label>{{ $key_payment + 1 }}</label>
+                                            </td>
+                                            
+                                            <td>
+                                                <label>{{ $obj->grand_total }}</label>
+                                            </td>
+                                            
+                                            <td>
+                                                <label>{{ $tran_payment->paid_amt }}</label>
+                                            </td>
 
-                                            <input type="number" min="0" max="100" step="1" class="form-control" id="main_discount_percent" name="main_discount_percent" value="{{ isset($obj)? $obj->main_discount_percent:Request::old('main_discount_percent') }}" onchange="calculateTotalPrice()">
-                                       
-                                            <input type="number" min="0" max="100" step="1" class="form-control" id="main_discount_value" name="main_discount_value" value="{{ isset($obj)? $obj->main_discount_value:Request::old('main_discount_value') }}"  onchange="calculateTotalPrice()">
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                            <td class="font-weight-bold">
+                                                <label>{{ $tran_payment->change_amt }}</label>
+                                            </td>
+                                            
+                                            <td>
+                                                <label>
+                                                    @if($tran_payment->payment_type == 1)
+                                                        {{ 'Cash' }}
+                                                    @elseif($tran_payment->payment_type == 2)
+                                                        {{ 'Bank Transfer' }}
+                                                    @else
+                                                        {{ '' }}
+                                                    @endif
+                                                </label>                                       
+                                            </td>
 
-                            <tr>
-                                <td class="font-weight-bold">Receipt Discount Amount :</td>
-                                <td>
-                                    <label
-                                        id="show_main_discount_amt">{{ isset($obj)? $obj->main_discount_amt:'Receipt Discount Amount'}}</label>
-                                    <input type="hidden" id="main_discount_amt" name="main_discount_amt"
-                                        value="{{ isset($obj)? $obj->main_discount_amt:Request::old('main_discount_amt') }}">
-                                </td>
-                            </tr>
+                                            <td class="font-weight-bold">
+                                                <label>{{ $tran_payment->bank_reference }}</label>
+                                            </td>
 
-                            <tr>
-                                <td class="font-weight-bold">Net Payable Amount :</td>
-                                <td>
-                                    <label
-                                        id="show_grand_total">{{ isset($obj)? $obj->grand_total:'Net Payable Amount'}}</label>
-                                    <input type="hidden" id="grand_total" name="grand_total"
-                                        value="{{ isset($obj)? $obj->grand_total:Request::old('grand_total') }}">
-                                </td>
-                            </tr>
+                                            <td class="font-weight-bold">
+                                                <label>{{ date_format($tran_payment->created_at,"d-M-Y H:i:s") }}</label>
+                                            </td>
 
-                            <tr>
-                                <td class="font-weight-bold">Pay Amount :</td>
-                                <td class="font-weight-bold">
-                                    <input class="form-control" type="number" min="0" id="paid_amt" name="paid_amt"
-                                        onchange="calculateTotalPrice()">
-                                </td>
-                            </tr>
+                                            <td class="font-weight-bold">
+                                                <label>{{ $tran_payment->remark }}</label>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <td colspan="8" class="bg_n_fontcolor">
+                                        <p class="text-center">There is no paymet yet !!!! </p>
+                                        </td>
+                                    </tr>
+                                @endif
 
-                            <tr>
-                                <td class="font-weight-bold">Payment Type :</td>
-                                <td>
-                                    <select id="payment_type" name="payment_type" class="form-control"
-                                        onchange="changePaymentType(this.id)">
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End class='row' Three -->
 
-                                        @if(isset($obj))
-                                            <option value="1" selected>Cash</option>
-                                            <option value="2">Bank Transfer</option>
-                                        @else
-                                            <option value="1" selected>Cash</option>
-                                            <option value="2">Bank Transfer</option>
-                                        @endif
+                </div>
+            </div>
+                    
 
-                                    </select>
-                                </td>
-                            </tr>
+            @if($obj->due_amt > 0)
 
-                            <tr>
-                                <td class="font-weight-bold">Payment Remark / Bank Reference :</td>
-                                <td>
-                                    <input type="text" id="payment_remark" name="payment_remark"
-                                        class="form-control" readonly>
-                                </td>
-                            </tr>
+                <div class="card">
+                    <div class="card-body">
+    
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5 class="card-title m-b-0">New Payment</h5>
+                                <hr>
+                            </div>
+                        </div>
 
-                            <tr>
-                                <td class="font-weight-bold">Change Amount :</td>
-                                <td class="font-weight-bold">
-                                    <label id="show_change_amt">0</label>
-                                    <input type="hidden" id="change_amt" name="change_amt" value="0">
-                                </td>
-                            </tr>
+                        @include('backend.transaction.transaction_payment')
 
-                            <tr>
-                                <td class="font-weight-bold">Due Amount :</td>
-                                <td class="font-weight-bold">
-                                    <label id="show_due_amt">0</label>
-                                    <input type="hidden" id="due_amt" name="due_amt" value="0">
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td colspan="2" class="font-weight-bold">
-                                    <textarea rows="2" cols="50" rows="10" class="form-control" name="remark" id="remark"
-                            placeholder="Enter Transaction Remark">{{ isset($obj)? $obj->remark:Request::old('remark') }}</textarea>
-                                </td>
-                            </tr>
-                        </table>
                     </div>
                 </div>
-                <!-- End class='row' Three -->
 
+            @endif
+
+        {{-- payment - for edit case - end --}}
+                
+        @else
+        
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 class="card-title m-b-0">New Payment</h5>
+                            <hr>
+                        </div>
+                    </div>
+
+                    {{-- payment - for create case - end --}}
+
+                        @include('backend.transaction.transaction_payment')
+
+                    {{-- for create case - end --}}
+
+                </div>
             </div>
-        </div>
+        @endif
+
+            
 
         <div class="row">
             <div class="col-md-12 text-right">
                 <div class="card">
                     <div class="card-body border-top">
+
+                        @if(isset($obj) && $obj->due_amt > 0)
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paymentModal" data-whatever="@mdo">Add New Payment</button>
+                        @endif
+
                         <button type="button" class="btn btn-primary btn-md btn_submit ">
                             @if(isset($obj))
-                            Update
+                                Update
 
                             @else
-                            Create
+                                Create
                             @endif
                         </button>
                         <button onclick="cancel_setup('transaction')" type="button"
@@ -467,6 +600,8 @@
             </div>
         </div>
         {!! Form::close() !!}
+
+        @include('backend.transaction.transaction_payment_new')
 </div>
 
 <!-- ============================================================== -->
@@ -481,7 +616,7 @@
         $( "#main_discount_percent" ).hide();
         $( "#main_discount_value" ).hide();
 
-        $('.btn_submit').on('click', function(event){
+        $('.btn_submit').on('click', function(event){            
             
             // form validation with javascript for the transaction 
             let form_validated_result = validateForm();
@@ -489,9 +624,19 @@
                 return false;
             }
 
+            // checking pay amount case 
+            let paid_amt = $("#paid_amt").val();
+            if(paid_amt == ""){
+                alert_msg = "There is no ' Pay Amount ' !!! . \n Will you create New Transaction ?";
+            }
+            else{
+                alert_msg = "Create New Transaction !";
+            }
+
+
             swal({
                 title: "Are you sure ?",
-                text: "Create New Transaction !",
+                text: alert_msg,
                 icon: "warning",
                 buttons: true,
                 closeOnClickOutside: false,
@@ -738,6 +883,7 @@
         let temp_item_price =  $("#" + selected_price_id).val();
         let temp_item_amount = item_qty * temp_item_price;
         $("#item_amount" + temp_id).val(temp_item_amount);
+        
         calculateTotalPrice();
     }
 
@@ -757,7 +903,7 @@
                 sub_total = sub_total + temp_total_price;
             }            
         }
-
+        sub_total = sub_total.toFixed(2)
         $("#show_sub_total").text(sub_total);
         $("#sub_total").val(sub_total);
 
@@ -765,29 +911,34 @@
         let main_discount_type = $("#main_discount_type").val();
         let main_discount_percent = $("#main_discount_percent").val();
         let main_discount_value = $("#main_discount_value").val();
-        let main_discount_amt = 0 ;
+        let main_discount_amt = 0.00 ;
         
         // discouont type is percent case
         if(main_discount_type == 1){
             let temp_percent = main_discount_percent / 100;
             main_discount_amt = temp_percent * sub_total;
-            $("#main_discount_value").val(0);
+            $("#main_discount_value").val(0.00);
+            main_discount_amt = main_discount_amt.toFixed(2);
         }
         // discount type is amount / value case
         else if(main_discount_type == 2){
-            main_discount_amt = main_discount_value;
-            $("#main_discount_percent").val(0);
+            main_discount_amt = parseFloat(main_discount_value);
+            $("#main_discount_percent").val(0.00);
+            main_discount_amt = main_discount_amt.toFixed(2);
         }
         // NO discount type case
         else{
-            main_discount_amt = 0;
-            $("#main_discount_percent").val(0);
-            $("#main_discount_valmain_discount_valueue").val(0);
-        }        
-        $("#main_discount_amt").text(main_discount_amt);
+            main_discount_amt = 0.00;
+            $("#main_discount_percent").val(0.00);
+            $("#main_discount_value").val(0);
+            main_discount_amt = main_discount_amt.toFixed(2);
+        }
+        
+        $("#main_discount_amt").val(main_discount_amt);
         $("#show_main_discount_amt").text(main_discount_amt);
 
         total_price = sub_total - main_discount_amt;
+        total_price = total_price.toFixed(2);
 
         // showing Net Payble Amt
         $("#show_grand_total").text(total_price);
@@ -805,10 +956,11 @@
             due_amt = total_price - paid_amt;
             change_amt = 0;
         }        
-
+        change_amt = change_amt.toFixed(2);
         $("#show_change_amt").text(change_amt);
         $("#change_amt").val(change_amt);
 
+        due_amt = due_amt.toFixed(2);
         $("#show_due_amt").text(due_amt);
         $("#due_amt").val(due_amt);
 
@@ -817,30 +969,41 @@
     function changePaymentType(id){
         let payment_type = $("#" + id).val();
         if(payment_type == 1){
-            $( "#payment_remark" ).prop( "readonly", true );
+            $( "#bank_reference" ).prop( "readonly", true );
+            $( "#bank_reference" ).val("");
         }
         else{
-            $( "#payment_remark" ).prop( "readonly", false );
+            $( "#bank_reference" ).prop( "readonly", false );
         }
     }
     
     function changeMainDiscountType(id){
         let main_dis_type = $("#" + id).val();
+        $( "#main_discount_percent" ).val(0.00);
+        $( "#main_discount_value" ).val(0.00);
+        
+        $( "#show_main_discount_amt").text(0.00);
+        $( "#main_discount_amt" ).val(0.00);
+
+        // selecting percent case
         if(main_dis_type == 1){
             $( "#main_discount_percent" ).show();
             $( "#main_discount_value" ).hide();
+            $( "#no_discount" ).hide();
         }
+        // selecting value / amount case 
         else if(main_dis_type == 2){
             $( "#main_discount_percent" ).hide();
             $( "#main_discount_value" ).show();
+            $( "#no_discount" ).hide();
         }
+        // selecting no discount case 
         else{
-            $( "#main_discount_percent" ).val(0);
-            $( "#main_discount_value" ).val(0);
             $( "#main_discount_percent" ).hide();
             $( "#main_discount_value" ).hide();
+            $( "#no_discount" ).show();
         }
-
+        
         calculateTotalPrice();
     }
 </script>

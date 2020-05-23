@@ -6,6 +6,14 @@
     font-size: 12px;
   }
 
+  .bg_n_fontcolor2 {
+    text-transform: uppercase;
+    color: white;
+    background-color: rgb(56, 49, 49);
+    font-weight: 500;
+    font-size: 12px;
+  }
+
 .custom_checkbox {
   /* Double-sized Checkboxes */
   -ms-transform: scale(2); /* IE */

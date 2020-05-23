@@ -43,10 +43,16 @@ class Transaction extends Model
         return $this->belongsTo('App\User','customer_id','id');
     }
 
-    public function childs()
+    public function children()
     {
         return $this->hasMany('App\Setup\TransactionItem\TransactionItem','transaction_id','id');
     }
+
+    public function payments()
+    {
+        return $this->hasMany('App\Setup\TransactionPayment\TransactionPayment','transaction_id','id');
+    }
+
 
     
 }
