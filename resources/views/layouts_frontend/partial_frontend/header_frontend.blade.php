@@ -133,6 +133,10 @@ $companyLogo    = \App\Core\Check::companyLogo();
                         <a class="nav-link" href="/contact_us">Contact Us</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="/backend_app">Log In</a>
+                    </li>
+
                     {{-- @if(!\Illuminate\Support\Facades\Session::has('customer'))
                 <li class="nav-item">
                     <a href="/register">Register</a>

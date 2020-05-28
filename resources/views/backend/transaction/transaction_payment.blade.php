@@ -61,7 +61,7 @@
                                         @elseif($obj->main_discount_type == 2)
                                             {{ $obj->main_discount_value }}
                                         @else
-                                            {{ ' - ' }}
+                                            {{ ' 0.00 ' }}
                                         @endif
                                     </label>
                                 
@@ -108,8 +108,8 @@
                 <tr>
                     <td class="font-weight-bold">Due Amount :</td>
                     <td class="font-weight-bold">
-                        <label id="show_due_amt">0</label>
-                        <input type="hidden" id="due_amt" name="due_amt" value="0">
+                        <label id="show_due_amt">{{ isset($obj)? $obj->due_amt:0 }}</label>
+                        <input type="hidden" id="due_amt" name="due_amt" value="{{ isset($obj)? $obj->due_amt:0 }}">
                     </td>
                 </tr>
 
@@ -157,8 +157,8 @@
 
                     <tr>
                         <td colspan="2" class="font-weight-bold">
-                            <textarea rows="2" cols="50" rows="10" class="form-control" name="bank_reference" id="bank_reference"
-                    placeholder="Enter Bank Reference" readonly>{{ isset($obj)? $obj->bank_reference:Request::old('bank_reference') }}</textarea>
+                            <input type="text" class="form-control" name="bank_reference" id="bank_reference"
+                    placeholder="Enter Bank Reference" readonly value="{{ isset($obj)? $obj->bank_reference:Request::old('bank_reference') }}">
                         </td>
                     </tr>
 

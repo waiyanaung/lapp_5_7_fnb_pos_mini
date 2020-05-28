@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master_transaction')
 @section('title','Transaction')
 @section('content')
 
@@ -27,12 +27,30 @@
                 @endif
             </h4>
             <div class="ml-auto text-right">
-                <nav aria-label="breadcrumb">
+                {{-- <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/backend_app">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Transaction</li>
                     </ol>
-                </nav>
+                </nav> --}}
+
+                @if(isset($obj) && $obj->due_amt > 0)
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paymentModal" data-whatever="@mdo">Add New Payment</button>
+                        @endif
+                        
+                        @if(!isset($obj))
+                        <button type="button" class="btn btn-primary btn-md btn_submit">
+                            @if(isset($obj))
+                            Update
+
+                            @else
+                            Create
+                            @endif
+                        </button>
+                        @endif
+
+                        <button onclick="cancel_setup('transaction')" type="button"
+                            class="btn btn-secondary btn-md">Cancel</button>
             </div>
         </div>
     </div>
@@ -99,29 +117,7 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12 text-right">
-                <div class="card">
-                    <div class="card-body border-top">
-
-                        @if(isset($obj) && $obj->due_amt > 0)
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paymentModal" data-whatever="@mdo">Add New Payment</button>
-                        @endif
-                        
-                        <button type="button" class="btn btn-primary btn-md btn_submit">
-                            @if(isset($obj))
-                            Update
-
-                            @else
-                            Create
-                            @endif
-                        </button>
-                        <button onclick="cancel_setup('transaction')" type="button"
-                            class="btn btn-secondary btn-md">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
         <div class="card">
             <div class="card-body">
@@ -168,11 +164,13 @@
                         </div>
 
                         <div class="col-md-4">
-                            <h5 class="card-title m-b-0">Transaction Created at</h5>
+                            <h5 class="card-title m-b-0">Payment Status</h5>
                             <div class="form-group m-t-20">
-                                <input type"text" class="form-control" id="status" name="status" value="{{ date_format($obj->created_at,"d-M-Y H:i:s") }}" " readonly>
+                                <input type"text" class="form-control" id="status_payment" name="status_payment" value="{{$obj->status_payment}}" " readonly>
                             </div>
                         </div>
+
+                        
 
                     @endif
 
@@ -182,7 +180,15 @@
                 <!-- Start class='row' One -->
                 @if(isset($obj))
                     <div class="row">
-                        <div class="col-md-12">
+
+                        <div class="col-md-4">
+                            <h5 class="card-title m-b-0">Transaction Created at</h5>
+                            <div class="form-group m-t-20">
+                                <input type"text" class="form-control" id="status" name="status" value="{{ date_format($obj->created_at,"d-M-Y H:i:s") }}" " readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
                             <h5 class="card-title m-b-0">Transaction Remark</h5>
                             <div class="form-group m-t-20">
                                 <input type"text" class="form-control" value="{{ $obj->remark }}" " readonly>
@@ -270,6 +276,7 @@
                                 <thead>
                                     <tr>
                                         <th class="bg_n_fontcolor2">Category Name</th>
+                                        <th class="bg_n_fontcolor2">Brand Name</th>
                                         <th class="bg_n_fontcolor2">Item Name</th>
                                         <th class="bg_n_fontcolor2">Item Price</th>
                                         <th class="bg_n_fontcolor2">Item Quantity</th>
@@ -286,94 +293,70 @@
                                     @if(isset($obj))
 
                                         @if($obj->children()->exists())
-                                        @foreach ($obj->children as $item_counter => $transaction_item)
+                                            @foreach ($obj->children as $item_counter => $transaction_item)
 
-                                        <tr id="row{{$item_counter}}" class="dynamic-added">
-                                            <td>
-                                                <label>{{$transaction_item->category->name}}</label>
-                                                {{-- <select class="form-control width-150 category_id" name="category_id[]"
-                                                    id="0" onchange="getItems(this.id)">
-                                                    
-                                                    @if(isset($obj))
-                                                        <option value="">Select Category</option>
-                                                        @foreach($categories as $category)
-                                                            @if($category->id == $transaction_item->category_id)
-                                                                <option value="{{$category->id}}" selected>{{$category->name}}</option>
-                                                            @else
-                                                                <option value="{{$category->id}}">{{$category->name}}</option>
-                                                            @endif
-                                                        @endforeach
-                                                    @else
-                                                        <option value="" selected>Select Category</option>
-                                                        @foreach($categories as $category)
-                                                            <option value="{{$category->id}}">{{$category->name}}</option>
-                                                        @endforeach
-                                                    @endif
-                                                </select> --}}
-                                                <p id="0_error" class="text-danger">{{$errors->first('category_id0')}}</p>
-                                            </td>
-
-                                            <td>
-                                                <label>{{$transaction_item->item->name}}</label>
-                                                {{-- <select class="form-control width-150 item_id" name="item_id[]"
-                                                    id="item_id0" onchange="getItem(this.id)">
-                                                    <option value="" selected>Select Item</option>
-                                                    @if(isset($obj))
-                                                    @foreach($items as $item)
-                                                    @if($item->id == $transaction_item->item_id)
-                                                    <option value="{{$item->id}}" selected>{{$item->name}}</option>
-                                                    @else
-                                                    <option value="{{$item->id}}">{{$item->name}}</option>
-                                                    @endif
-                                                    @endforeach
-                                                    @else
-                                                    <option value="" selected>Select Item</option>
-                                                    @foreach($items as $item)
-                                                    <option value="{{$item->id}}">{{$item->name}}</option>
-                                                    @endforeach
-                                                    @endif
-                                                </select> --}}
-                                                <p id="item_id0_error" class="text-danger">{{$errors->first('item_id0')}}
-                                                </p>
-
-                                            </td>
-
-                                            <td>
-                                                <input readonly type="text" name="price[]" id="price0"
-                                                    class="form-control width-100 name_list item_price"
-                                                    value="{{ isset($transaction_item)? $transaction_item->item_price:Request::old('item_price') }}" />
-                                            </td>
-
-                                            <td>
-                                                <input readonly type="number" min="1" step="1" name="item_qty[]" id="item_qty0"
-                                                    placeholder="Enter your Quantity"
-                                                    class="form-control width-100 name_list item_qty"
-                                                    value="{{ isset($transaction_item)? $transaction_item->item_qty:Request::old('item_qty0') }}"
-                                                    onchange="updateAmount(this.id)" />
-                                                <p id="item_qty0_error" class="text-danger">{{$errors->first('item_qty0')}}
-                                                </p>
-                                            </td>
-
-                                            <td>
-                                                <input readonly type="text" name="item_amount[]" id="item_amount0"
-                                                    class="form-control width-100 name_list item_amt"
-                                                    value="{{ isset($transaction_item)? $transaction_item->item_amt:Request::old('item_amt') }}" />
-                                            </td>
-
-                                            @if(isset($obj))
-                                                
-                                            @else
-                                                @if($item_counter == 0)
+                                            <tr id="row{{$item_counter}}" class="dynamic-added">
                                                 <td>
-                                                    <button type="button" name="add" id="add"
-                                                        class="btn btn-success form-control">Add Item</button></td>
-                                                @else
-                                                    <?php echo '<td><button type="button" name="remove" id="'.$item_counter.'" class="btn btn-danger btn_remove form-control">Remove Item</button></td></tr>'; ?>
-                                                @endif
-                                            @endif
-                                        </tr>
+                                                    <label>{{$transaction_item->category->name}}</label>
+                                                    <p id="0_error" class="text-danger">{{$errors->first('category_id0')}}</p>
+                                                </td>
 
-                                        @endforeach
+                                                <td>
+                                                    <label>{{$transaction_item->brand->name}}</label>
+                                                    <p id="brand0_error" class="text-danger">{{$errors->first('brand_id0')}}
+                                                    </p>
+
+                                                </td>
+
+                                                <td>
+                                                    <label>{{$transaction_item->item->name}}</label>
+                                                    <p id="item_id0_error" class="text-danger">{{$errors->first('item_id0')}}
+                                                    </p>
+
+                                                </td>
+
+                                                <td>
+                                                    <input readonly type="text" name="price[]" id="price0"
+                                                        class="form-control text-right name_list item_price"
+                                                        value="{{ isset($transaction_item)? $transaction_item->item_price:Request::old('item_price') }}" />
+                                                </td>
+
+                                                <td>
+                                                    <input readonly type="number" min="1" step="1" name="item_qty[]" id="item_qty0"
+                                                        placeholder="Enter your Quantity"
+                                                        class="form-control name_list item_qty text-right"
+                                                        value="{{ isset($transaction_item)? $transaction_item->item_qty:Request::old('item_qty0') }}"
+                                                        onchange="updateAmount(this.id)" />
+                                                    <p id="item_qty0_error" class="text-danger">{{$errors->first('item_qty0')}}
+                                                    </p>
+                                                </td>
+
+                                                <td>
+                                                    <input readonly type="text" name="item_amount[]" id="item_amount0"
+                                                        class="form-control text-right name_list item_amt"
+                                                        value="{{ isset($transaction_item)? $transaction_item->item_amt:Request::old('item_amt') }}" />
+                                                </td>
+
+                                                @if(isset($obj))
+                                                    
+                                                @else
+                                                    @if($item_counter == 0)
+                                                    <td>
+                                                        <button type="button" name="add" id="add"
+                                                            class="btn btn-success form-control">Add Item</button></td>
+                                                    @else
+                                                        <?php echo '<td><button type="button" name="remove" id="'.$item_counter.'" class="btn btn-danger btn_remove form-control">Remove Item</button></td></tr>'; ?>
+                                                    @endif
+                                                @endif
+                                            </tr>
+
+                                            @endforeach
+
+                                            <tr>
+                                                <td class="bg_n_fontcolor text-right" colspan="4">Total</td>
+                                                <td class="bg_n_fontcolor text-right">{{ $obj->total_item_qty }}</td>
+                                                <td class="bg_n_fontcolor text-right">{{ $obj->sub_total }}</td>
+                                            </tr>
                                         @endif
                                     {{-- for edit case - end --}}
                                     
@@ -382,7 +365,7 @@
                                     <tr>
                                         <td>
                                             <select class="form-control width-150 category_id" name="category_id[]"
-                                                id="0" onchange="getItems(this.id)">
+                                                id="0" onchange="getBrandsByCategory(this.id)">
                                                 @if(isset($obj))
                                                 @foreach($categories as $category)
                                                 @if($category->id == $obj->category_id)
@@ -399,6 +382,15 @@
                                                 @endif
                                             </select>
                                             <p id="0_error" class="text-danger">{{$errors->first('category_id0')}}</p>
+
+                                        </td>
+
+                                        <td>
+                                            <select class="form-control width-150 category_id" name="brand_id[]"
+                                                id="brand_id0" onchange="getItemsByBrand(this.id)">
+                                                <option value="">Select Brand</option>
+                                            </select>
+                                            <p id="0_error" class="text-danger">{{$errors->first('brand_id0')}}</p>
 
                                         </td>
 
@@ -585,6 +577,7 @@
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paymentModal" data-whatever="@mdo">Add New Payment</button>
                         @endif
 
+                        @if(!isset($obj))
                         <button type="button" class="btn btn-primary btn-md btn_submit ">
                             @if(isset($obj))
                                 Update
@@ -593,6 +586,7 @@
                                 Create
                             @endif
                         </button>
+                        @endif
                         <button onclick="cancel_setup('transaction')" type="button"
                             class="btn btn-secondary btn-md">Cancel</button>
                     </div>
@@ -663,7 +657,7 @@
 
             let new_row = '<tr id="row'+i+'" class="dynamic-added">';
             new_row += '<td>';
-            new_row += '    <select class="form-control width-150 category_id" name="category_id[]" id="'+i+'" onchange="getItems(this.id)">';
+            new_row += '    <select class="form-control width-150 category_id" name="category_id[]" id="'+i+'" onchange="getBrandsByCategory(this.id)">';
             new_row += '        <option value="" selected>Select Category</option>';
             new_row += '<?php foreach($categories as $category){ echo '<option value="'. $category->id . '">'. $category->name .'</option>';}?>';
             new_row += '    </select>';
@@ -671,9 +665,15 @@
             new_row += '</td>';
 
             new_row += '<td>';
+            new_row += '   <select class="form-control width-150 item_id" name="brand_id[]" id="brand_id'+i+'"  onchange="getItemsByBrand(this.id)">';
+            new_row += '       <option value="" selected>Select Brand</option>';
+            new_row += '   </select>';
+            new_row += '<p id="brand_id'+i+'_error" class="text-danger">{{$errors->first("brand_id' +i+ '")}}</p>';
+            new_row += '</td>';
+
+            new_row += '<td>';
             new_row += '   <select class="form-control width-150 item_id" name="item_id[]" id="item_id'+i+'"  onchange="getItem(this.id)">';
             new_row += '       <option value="" selected>Select Item</option>';
-            //new_row += '<?php foreach($items as $item){ echo '<option value="'. $item->id . '">'. $item->name .'</option>';}?>';
             new_row += '   </select>';
             new_row += '<p id="item_id'+i+'_error" class="text-danger">{{$errors->first("item_id' +i+ '")}}</p>';
             new_row += '</td>';
@@ -837,41 +837,103 @@
         })
     }   
 
-    function getItems(id){
+    function getBrandsByCategory(id){
         let category_id = $("#" + id).val();
         $.ajax({
             type:'POST',
-            url:'/backend_app/api/items',
-            data:{ _token: "{{csrf_token()}}",category_id: category_id },
+            url:'/backend_app/api/brands_by_category',
+            data:{ _token: "{{csrf_token()}}",filter : 'category', category_id: category_id },
             dataType: 'json',
             success:function(data){
                 let temp_data = data.returnedObj;
-                $("#item_id" + id).html(temp_data.objs);
+                $("#brand_id" + id).html(temp_data.objs);
+                getItemsByBrand("brand_id" + id);
+                
+            }
+        }); 
+    }
+
+    function getItemsByBrand(id){
+        
+        let selected_brand_id = $("#" + id).val();
+        let brand_id = id.replace("brand_id", "");
+        let temp_id = brand_id;
+        $.ajax({
+            type:'POST',
+            url:'/backend_app/api/items',
+            data:{ _token: "{{csrf_token()}}",filter: 'brand', brand_id : selected_brand_id },
+            dataType: 'json',
+            success:function(data){
+                let temp_data = data.returnedObj;
+                $("#item_id" + brand_id).html(temp_data.objs);
+            },
+            error:function(data){
+                resetItemQty(temp_id);
             }
         });
+        calculateTotalPrice();
+        getItem("item_id" + temp_id);
     }
 
     function getItem(id){
         let item_id = $("#" + id).val();
         let temp_id = id.replace("item_id", "");
-        let selected_price_id = "price" + temp_id; 
+        let selected_price_id = "price" + temp_id;
+        let selected_brand_val = $("#brand_id" + temp_id).val();
+        if(selected_brand_val == ""){
+            item_id = "";
+        }
+
         $.ajax({
             type:'POST',
             url:'/backend_app/api/item',
             data:{ _token: "{{csrf_token()}}",item_id: item_id },
             dataType: 'json',
             success:function(data){
-                $("#item_qty" + temp_id).val(1);
-                let temp_data = data.returnedObj.objs;
-                let item_price = temp_data.price;
-                $("#" + selected_price_id).val(item_price);
-
-                let item_qty = $("#item_qty" + temp_id).val();;
-                let temp_item_amount = item_qty * item_price;
-                $("#item_amount" + temp_id).val(temp_item_amount);
-
+                if(data.returnedObj.laravelStatus == "500" ){
+                    resetItemQty(temp_id);
+                }
+                else{
+                    $("#item_qty" + temp_id).val(1);
+                    let temp_data = data.returnedObj.objs;
+                    let item_price = temp_data.price;
+                    $("#" + selected_price_id).val(item_price);
+                    let item_qty = $("#item_qty" + temp_id).val();
+                    let temp_item_amount = item_qty * item_price;
+                    $("#item_amount" + temp_id).val(temp_item_amount);
+                }
                 calculateTotalPrice();
+            },
+            error:function(data){
+                resetItemQty(temp_id);
+                calculateTotalPrice();
+            }
+        });
         
+        
+    }
+
+    function resetItemQty(temp_id){
+        $("#item_qty" + temp_id).val(0);
+        let selected_price_id = "price" + temp_id; 
+        let temp_data = [];
+        let item_price = 0;
+        $("#" + selected_price_id).val(item_price);
+        let item_qty = 0;
+        let temp_item_amount = item_qty * item_price;
+        $("#item_amount" + temp_id).val(temp_item_amount);         
+    }
+
+    function getItemsByCategory(id){
+        let category_id = $("#" + id).val();
+        $.ajax({
+            type:'POST',
+            url:'/backend_app/api/items',
+            data:{ _token: "{{csrf_token()}}",filter : 'category', category_id: category_id },
+            dataType: 'json',
+            success:function(data){
+                let temp_data = data.returnedObj;
+                $("#item_id" + id).html(temp_data.objs);
             }
         });
     }

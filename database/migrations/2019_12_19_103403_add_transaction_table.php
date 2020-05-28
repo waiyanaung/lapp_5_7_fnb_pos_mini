@@ -16,6 +16,7 @@ class AddTransactionTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->string('id', 30)->primary();
             $table->integer('status')->default(1);
+            $table->integer('status_payment')->default(1);
             $table->date('date')->nullable();
             $table->string('remark')->nullable();
 

@@ -61,22 +61,26 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Pay Amount:</label>
-                            <input class="form-control" type="number" min="0" id="paid_amt_payment" name="paid_amt_payment">
-                            <p id="paid_amt_error" class="text-danger">{{$errors->first('paid_amt_payment')}}</p>
-                        </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="recipient-name" class="col-form-label">Pay Amount:</label>
+                                    <input class="form-control" type="number" min="0" id="paid_amt_payment" name="paid_amt_payment">
+                                    <p id="paid_amt_error" class="text-danger">{{$errors->first('paid_amt_payment')}}</p>
+                                </div>
 
-                        <div class="form-group">
-                            <label for="message-text" class="col-form-label">Payment Type:</label>
-                            <select id="payment_type" name="payment_type" class="form-control" onchange="changePaymentType(this.id)">
-                                <option value="1" selected>Cash</option>
-                                <option value="2">Bank Transfer</option>
-                            </select>
+                                <div class="col">
+                                    <label for="message-text" class="col-form-label">Payment Type:</label>
+                                    <select id="payment_type" name="payment_type" class="form-control" onchange="changePaymentType(this.id)">
+                                        <option value="1" selected>Cash</option>
+                                        <option value="2">Bank Transfer</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Bank Reference:</label>
-                            <textarea rows="2" cols="50" rows="10" class="form-control" name="bank_reference" id="bank_reference" placeholder="Enter Bank Reference" readonly></textarea>
+                            <input type="text" class="form-control" name="bank_reference" id="bank_reference" placeholder="Enter Bank Reference" readonly>
                         </div>
 
                         <div class="form-group">

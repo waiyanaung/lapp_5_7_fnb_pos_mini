@@ -30,6 +30,7 @@ use App\Sample;
 use App\Setup\Township\Township;
 use App\Setup\Category\CategoryRepository;
 use App\Setup\Item\ItemRepository;
+use App\Setup\Brand\BrandRepository;
 
 class TransactionController extends Controller
 {
@@ -61,6 +62,9 @@ class TransactionController extends Controller
             $categoryRepo = new CategoryRepository();
             $categories = $categoryRepo->getObjs();
 
+            $brandRepo = new BrandRepository();
+            $brands = $brandRepo->getObjs();
+
             $itemRepo = new ItemRepository();
             $items = $itemRepo->getObjs();
 
@@ -70,7 +74,8 @@ class TransactionController extends Controller
                         ->with('countries',$countries)
                         ->with('customers',$customers)
                         ->with('categories',$categories)
-                        ->with('items',$items);
+                        ->with('items',$items)
+                        ->with('brands',$brands);
                             
         }
         return redirect('/');
@@ -142,6 +147,7 @@ class TransactionController extends Controller
                 $payment_type = $request->input('payment_type');
                 $paid_amt = $request->input('paid_amt');
                 $change_amt = $request->input('change_amt');
+                $bank_reference = $request->input('bank_reference');
                 $payment_remark = $request->input('payment_remark');
                 $due_amt = $request->input('due_amt');
                 $main_discount_type = $request->input('main_discount_type'); 
@@ -167,6 +173,7 @@ class TransactionController extends Controller
                 }
             
                 $categories_array = $request->input('category_id');
+                $brands_array = $request->input('brand_id');
                 $items_array = $request->input('item_id');
                 $prices_array = $request->input('price');
                 $item_qtys_array = $request->input('item_qty');
@@ -174,6 +181,10 @@ class TransactionController extends Controller
 
                 foreach ($categories_array as $key_category => $value_category) {
                     $transaction_items[$key_category]->category_id = $value_category;
+                }
+
+                foreach ($brands_array as $key_brand => $value_brand) {
+                    $transaction_items[$key_brand]->brand_id = $value_brand;
                 }
             
                 foreach ($items_array as $key_item => $value_item) {
@@ -232,6 +243,7 @@ class TransactionController extends Controller
                             $transaction_payment->paid_amt = $paid_amt;
                             $transaction_payment->change_amt = $change_amt;
                             $transaction_payment->remark = $payment_remark;
+                            $transaction_payment->bank_reference = $bank_reference;
 
                             // store transaction payment
                             $result_payment = $transaction_payment_repo->create($transaction_payment);
@@ -325,10 +337,20 @@ class TransactionController extends Controller
 
     }
 
-    public function edit($id)
+    public function edit($id,Request $request)
     {
         if(Auth::check()) {
             $obj        = Transaction::find($id);
+
+            // Checking Oject exist or not case
+            if(!isset($obj)){
+                if ($request->ajax()) {
+                    return response()->json(['fail'=>'Fail, invalid transaction !!! ...']);
+                } else {
+                    return redirect()->action('Setup\Transaction\TransactionController@index')
+                    ->with(FormatGenerator::message('Fail', 'Invalid transaction !!!'));
+                }
+            }
 
             $countryRepo = new CountryRepository();
             $countries = $countryRepo->getObjs();
@@ -342,6 +364,9 @@ class TransactionController extends Controller
             $itemRepo = new ItemRepository();
             $items = $itemRepo->getObjs();
 
+            $brandRepo = new BrandRepository();
+            $brands = $brandRepo->getObjs();
+
             $townships = Township::query()
                     ->where('city_id', '=', 14) 
                     ->get();
@@ -352,7 +377,8 @@ class TransactionController extends Controller
                         ->with('countries',$countries)
                         ->with('customers',$customers)
                         ->with('categories',$categories)
-                        ->with('items',$items);
+                        ->with('items',$items)
+                        ->with('brands',$brands);
         }
         return redirect('/backend_app/login');
     }
@@ -642,8 +668,24 @@ class TransactionController extends Controller
 
             $paramObj = Transaction::find($transaction_id);
             $existing_paid_amt = $paramObj->paid_amt;
+            $existing_due_amt = $paramObj->due_amt;
             $paramObj->paid_amt =  $existing_paid_amt + $paid_amt ;
             $paramObj->due_amt = $due_amt;
+
+            // checking payment completed or not 
+            if($existing_due_amt <= 0){
+                if ($request->ajax()) {
+                    return response()->json([
+                        'success'=>'Warning, this is a payment completed transaction !!! ',
+                        'obj'=>$paramObj,                                
+                        ]);
+                }
+                else{
+                    return redirect()->action('Setup\Transaction\TransactionController@index')
+                        ->with(FormatGenerator::message('Warning, this is a payment completed transaction !!! '));
+                }
+
+            }
 
             DB::beginTransaction();
             try {

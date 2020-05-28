@@ -40,5 +40,10 @@ class TransactionItem extends Model
         return $this->belongsTo('App\Setup\Category\Category','category_id','id');
     }
 
+    public function brand()
+    {
+        return $this->belongsTo('App\Setup\Brand\Brand','brand_id','id');
+    }
+
     
 }

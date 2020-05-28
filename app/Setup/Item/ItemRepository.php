@@ -14,6 +14,8 @@ use App\User;
 use App\Setup\Item\Item;
 use App\Core\Utility;
 use App\Core\ReturnMessage;
+use App\Setup\Brand\Brand;
+use App\Setup\Category\Category;
 class ItemRepository implements ItemRepositoryInterface
 {
     public function getObjs()
@@ -230,10 +232,36 @@ class ItemRepository implements ItemRepositoryInterface
         return $result;
     }
 
+    public function getItemByBrandId($brand_id){
+        $result = Item::where('brand_id', $brand_id)->whereNull('deleted_at')->get();
+        return $result;
+    }
+
     
     public function getItemById($id){
         $result_raw = Item::where('id', $id)->whereNull('deleted_at')->first();
         $result = $result_raw->toArray();
+        return $result;
+    }
+
+    public function getBrandsByCategoryId($category_id){
+
+        $item_obj = new Item();
+        $tb_item = $item_obj->getTable();
+
+        $brand_obj = new Brand();
+        $tb_brand = $brand_obj->getTable();
+
+        $category_obj = new Category();
+        $tb_category = $category_obj->getTable();
+
+        $result = DB::table($tb_item)
+            ->join($tb_brand, $tb_item.'.brand_id', '=', $tb_brand.'.id')
+            ->select($tb_brand.'.*')->distinct()
+            ->where($tb_item.'.category_id','=',$category_id)
+            ->get();
+
+        // $result = Item::where('category_id', $category_id)->whereNull('deleted_at')->get();
         return $result;
     }
 

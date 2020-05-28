@@ -88,18 +88,38 @@ class ItemController extends Controller
     {
 
         if($request->ajax()){
-            $category_id = Input::get('category_id');;
+            $inputs = Input::all();
+            $filter = isset($inputs['filter']) ? $inputs['filter'] : null;
+            $category_id = isset($inputs['category_id']) ? $inputs['category_id'] : null;
+            $brand_id = isset($inputs['brand_id']) ? $inputs['brand_id'] : null;
             $returnedObj['laravelStatus'] = ReturnMessage::INTERNAL_SERVER_ERROR;
             $returnedObj['laravelStatusMessage'] = "fail";
             $returnedObj['objs'] = "";
             $item_list = "";
 
             if (Auth::check()) {
-                if($category_id == null){
+
+                // searching all items case
+                if($filter == null){
                     $items = $this->repo->getObjsAllByLastItemFilter();
                 }
                 else{
-                    $items = $this->repo->getItemByCategoryId($category_id);
+
+                    // searching items by category case
+                    if($filter == "category"){
+                        $items = $this->repo->getItemByCategoryId($category_id);
+                    }
+
+                     // searching items by brand case
+                    else if ($filter == "brand"){
+                        $items = $this->repo->getItemByBrandId($brand_id);
+                    }
+                    
+                    // all items case for exception case
+                    else{
+                        $items = $this->repo->getObjsAllByLastItemFilter();
+                    }
+                    
                 }
 
                 if(isset($items) && count($items)>0){
