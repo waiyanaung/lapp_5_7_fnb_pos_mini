@@ -1,7 +1,9 @@
 @extends('layouts.master')
 @section('title','Transaction')
 @section('content')
-
+<?php
+use App\Core\Status As Status;
+?>
      
 <div class="page-breadcrumb">
     <div class="row">
@@ -57,7 +59,8 @@
                                     <th class="bg_n_fontcolor">Transaction ID</th>
                                     <th class="bg_n_fontcolor">Customer Name</th>
                                     <th class="bg_n_fontcolor">Phone</th>
-                                    <th class="bg_n_fontcolor">Status</th>
+                                    <th class="bg_n_fontcolor">Transaction Status</th>
+                                    <th class="bg_n_fontcolor">Payment Status</th>
                                     <th class="bg_n_fontcolor">Total Item Qty</th>
                                     <th class="bg_n_fontcolor">Sub Total</th>
                                     <th class="bg_n_fontcolor">Service Charges</th>
@@ -75,15 +78,8 @@
                                         <td><a href="/backend_app/transaction/{{$obj->id}}/edit">{{$obj->customer->first_name}} {{$obj->customer->last_name}}</a></td>
                                         
                                         <td>{{$obj->customer->phone}}</td>
-                                        <td>
-                                            @if($obj->status == 1)
-                                                Pending
-                                            @elseif($obj->status == 2)
-                                                CONFIRMED
-                                            @else
-                                                VOID
-                                            @endif
-                                        </td>
+                                        <td>{{Status::TRANSACTION_PAYMENT[$obj->status]}}</td>
+                                        <td>{{Status::TRANSACTION_PAYMENT[$obj->status_payment]}}</td>
                                         <td>{{$obj->total_item_qty}}</td>
                                         <td>{{$obj->sub_total}}</td>
                                         <td>{{$obj->service_charges}}</td>

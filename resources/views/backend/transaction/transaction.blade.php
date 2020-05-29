@@ -1,6 +1,9 @@
 @extends('layouts.master_transaction')
 @section('title','Transaction')
 @section('content')
+<?php
+use App\Core\Status As Status;
+?>
 
 <style>
     .width-200 {
@@ -159,14 +162,14 @@
                         <div class="col-md-4">
                             <h5 class="card-title m-b-0">Transaction Status</h5>
                             <div class="form-group m-t-20">
-                                <input type"text" class="form-control" id="status" name="status" value="{{$obj->status}}" " readonly>
+                                <input type"text" class="form-control" id="status" name="status" value="{{Status::TRANSACTION[$obj->status]}}" " readonly>
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <h5 class="card-title m-b-0">Payment Status</h5>
                             <div class="form-group m-t-20">
-                                <input type"text" class="form-control" id="status_payment" name="status_payment" value="{{$obj->status_payment}}" " readonly>
+                                <input type"text" class="form-control" id="status_payment" name="status_payment" value="{{Status::TRANSACTION_PAYMENT[$obj->status_payment]}}" " readonly>
                             </div>
                         </div>
 
@@ -386,11 +389,11 @@
                                         </td>
 
                                         <td>
-                                            <select class="form-control width-150 category_id" name="brand_id[]"
+                                            <select class="form-control width-150 brand_id" name="brand_id[]"
                                                 id="brand_id0" onchange="getItemsByBrand(this.id)">
                                                 <option value="">Select Brand</option>
                                             </select>
-                                            <p id="0_error" class="text-danger">{{$errors->first('brand_id0')}}</p>
+                                            <p id="brand_id0_error" class="text-danger">{{$errors->first('brand_id0')}}</p>
 
                                         </td>
 
@@ -665,7 +668,7 @@
             new_row += '</td>';
 
             new_row += '<td>';
-            new_row += '   <select class="form-control width-150 item_id" name="brand_id[]" id="brand_id'+i+'"  onchange="getItemsByBrand(this.id)">';
+            new_row += '   <select class="form-control width-150 brand_id" name="brand_id[]" id="brand_id'+i+'"  onchange="getItemsByBrand(this.id)">';
             new_row += '       <option value="" selected>Select Brand</option>';
             new_row += '   </select>';
             new_row += '<p id="brand_id'+i+'_error" class="text-danger">{{$errors->first("brand_id' +i+ '")}}</p>';
@@ -714,6 +717,13 @@
             cat_counter++;
         });
 
+        let b_counter = 0;        
+        $('.brand_id').each(function() {
+            let id = $(this).attr("id");
+            $('#brand_id'+ b_counter + "_error").text('');
+            b_counter++;
+        });
+
         let i_counter = 0;
         $('.item_id').each(function() {
             let id = $(this).attr("id");
@@ -745,6 +755,19 @@
             }
 
             category_counter++;
+        });
+
+        let brand_counter = 0;
+        $('.brand_id').each(function() {
+            let id = $(this).attr("id");
+            let brand_id = $( "#"+id).val();
+            
+            if (brand_id == "") {
+                $('#brand_id'+ brand_counter + "_error").text('Brand is Required !');
+                validation_result++;                
+            }
+
+            brand_counter++;
         });
 
         let item_counter = 0;

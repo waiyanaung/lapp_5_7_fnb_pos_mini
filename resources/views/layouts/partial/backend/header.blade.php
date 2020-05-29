@@ -1,4 +1,5 @@
 <?php
+use App\Core\Status As Status;
 $user_info = \App\Core\Check::getInfo();
 $user_id = $user_info['userId'];
 $companyName = \App\Core\Check::companyName();

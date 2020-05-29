@@ -1,8 +1,10 @@
 <?php
+use App\Core\Status As Status;
 $user_info = \App\Core\Check::getInfo();
 $user_id = $user_info['userId'];
 $companyName = \App\Core\Check::companyName();
 $companyLogo = \App\Core\Check::companyLogo();
+
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -74,8 +76,7 @@ $companyLogo = \App\Core\Check::companyLogo();
     <script src="/backend/plugins/summernote/summernote.min.js"></script>
     
     <!-- for image upload modal jquery -->
-    <script src="/backend/plugins/jasny/js/jasny-bootstrap.js"></script>
-    
+    <script src="/backend/plugins/jasny/js/jasny-bootstrap.js"></script>       
     
 <![endif]-->
 <style>
@@ -91,7 +92,68 @@ $companyLogo = \App\Core\Check::companyLogo();
     }
 </style>
 
+
+<script>
+    /* Get the documentElement (<html>) to display the page in fullscreen */
+var elem = document.documentElement;
+
+/* View in fullscreen */
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+    elem.msRequestFullscreen();
+  }
+  
+}
+
+/* Close fullscreen */
+function closeFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) { /* Firefox */
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) { /* IE/Edge */
+    document.msExitFullscreen();
+  }
+}
+
+$(document).ready(function() {
+    $("#open_full_screen").click();
+    
+});
+</script>
+
 </head>
+
+<div class="container">
+    <button type="button" id="open_full_screen" style="display: none;" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Small Modal</button>
+  
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"></h4>
+          </div>
+          <div class="modal-body">
+            <p>Would you like  <b>The Full Screen View ?</b>.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-primary" data-dismiss="modal" onclick="openFullscreen()">Go to Full Screen</button>
+                <button type="button" class="btn btn-secondary"" data-dismiss="modal">No, Thanks </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <body>
     <!-- ============================================================== -->

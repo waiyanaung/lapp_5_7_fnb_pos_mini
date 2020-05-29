@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Core\FormatGenerator As FormatGenerator;
 use App\Core\ReturnMessage As ReturnMessage;
+use App\Core\Status As Status;
 use App\Core\Check;
 
 use Illuminate\Support\Facades\Validator;
@@ -89,6 +90,7 @@ class TransactionController extends Controller
             $custom_inputs['customer_id'] = $request->input('customer_id');
 
             $input_category_ids = $request->input('category_id');
+            $input_brand_ids = $request->input('brand_id');
             $input_item_ids = $request->input('item_id');
             $input_item_qtys = $request->input('item_qty');
             $input_prices = $request->input('price');
@@ -96,6 +98,11 @@ class TransactionController extends Controller
             foreach ($input_category_ids as $key => $value) {
                 $custom_inputs['category_id' . $key] = $value;
                 $rules["category_id".$key] = 'required';
+            }
+
+            foreach($input_brand_ids as $key => $balue){
+                $custom_inputs['brand_id' . $key] = $value;
+                $rules["brand_id" . $key] = 'required';
             }
 
             foreach ($input_item_qtys as $key => $value) {
@@ -218,9 +225,22 @@ class TransactionController extends Controller
                     $paramObj->main_discount_amt = $main_discount_amt;
                     $paramObj->total_item_discounts = $total_item_discounts;
                     $paramObj->grand_total = $grand_total;
-                    $paramObj->status = 2;
+                    $paramObj->status = Status::TRANSACTION_CONFIRM;
+                    
                     $paramObj->due_amt = $due_amt;
                     $paramObj->remark = $remark;
+                    // start - saving payment when paid_amt greater than zero and not equal to null
+                    if ($paid_amt > 0 && $paid_amt <> null) {
+                        if($paid_amt >= $grand_total){
+                            $paramObj->status_payment = Status::TRANSACTION_PAYMENT_COMPLETED;
+                        }
+                        else{
+                            $paramObj->status_payment = Status::TRANSACTION_PAYMENT_IN_PROGRESS;
+                        }
+                    }
+                    else{                        
+                        $paramObj->status_payment = Status::TRANSACTION_PAYMENT_NOT_STARTED_YET;
+                    }
 
                     // Saving Transaction Header Object
                     $result = $this->repo->create($paramObj);
@@ -237,7 +257,7 @@ class TransactionController extends Controller
                             $last_payment_id = Check::getTableIncrementId($table_name_payment, $date);
                             $transaction_payment->id = $last_payment_id;
                             $transaction_payment->transaction_id = $last_transaction_id;
-                            $transaction_payment->status = 1;
+                            $transaction_payment->status = Status::TRANSACTION_PAYMENT_DETAIL_CONFIRM;
                             $transaction_payment->date = $date;
                             $transaction_payment->payment_type = $payment_type;
                             $transaction_payment->paid_amt = $paid_amt;
@@ -259,6 +279,10 @@ class TransactionController extends Controller
                             }
 
                         }
+                        else{
+                            
+                            $paramObj->status_payment = Status::TRANSACTION_PAYMENT_NOT_STARTED_YET;
+                        }
                         // end - saving payment when paid_amt greater than zero and not equal to null
 
                         // saving all transaction item cases
@@ -276,6 +300,7 @@ class TransactionController extends Controller
                             $transaction_item->discount_percent = $discount_percent;
                             $transaction_item->discount_amt = $discount_amt;
                             $transaction_item->sub_total_amt = $sub_total_amt;
+                            $transaction_item->status = Status::TRANSACTION_ITEM_CONFIRM;
 
                             // store transaction item
                             $result_item = $transaction_item_repo->create($transaction_item);
