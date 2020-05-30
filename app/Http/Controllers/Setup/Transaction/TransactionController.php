@@ -232,13 +232,16 @@ class TransactionController extends Controller
                     // start - saving payment when paid_amt greater than zero and not equal to null
                     if ($paid_amt > 0 && $paid_amt <> null) {
                         if($paid_amt >= $grand_total){
+                            $paramObj->paid_amt = $grand_total;
                             $paramObj->status_payment = Status::TRANSACTION_PAYMENT_COMPLETED;
                         }
                         else{
+                            $paramObj->paid_amt = $paid_amt;
                             $paramObj->status_payment = Status::TRANSACTION_PAYMENT_IN_PROGRESS;
                         }
                     }
-                    else{                        
+                    else{
+                        $paramObj->paid_amt = 0;
                         $paramObj->status_payment = Status::TRANSACTION_PAYMENT_NOT_STARTED_YET;
                     }
 
@@ -540,7 +543,7 @@ class TransactionController extends Controller
                     $paramObj->main_discount_amt = $main_discount_amt;
                     $paramObj->total_item_discounts = $total_item_discounts;
                     $paramObj->grand_total = $grand_total;
-                    $paramObj->status = 2;
+                    $paramObj->status = Status::TRANSACTION_CONFIRM;
                     $paramObj->due_amt = $due_amt;
                     $paramObj->remark = $remark;
 
@@ -691,11 +694,24 @@ class TransactionController extends Controller
             $payment_remark = $request->input('payment_remark');                
             $due_amt = $request->input('due_amt_payment_new');
 
+            $transaction_payment_repo = new TransactionPaymentRepository();
+            $existing_paid_amt = $transaction_payment_repo->getTotalPaidAmtByTransactionId($transaction_id);
+
             $paramObj = Transaction::find($transaction_id);
             $existing_paid_amt = $paramObj->paid_amt;
             $existing_due_amt = $paramObj->due_amt;
-            $paramObj->paid_amt =  $existing_paid_amt + $paid_amt ;
-            $paramObj->due_amt = $due_amt;
+
+            $paid_amt_raw = $existing_paid_amt + $paid_amt;
+            if($paid_amt_raw >= $paramObj->grand_total){
+                $paramObj->paid_amt = $paramObj->grand_total;
+                $paramObj->status_payment = Status::TRANSACTION_PAYMENT_COMPLETED;
+            }
+            else{
+                $paramObj->status_payment = Status::TRANSACTION_PAYMENT_IN_PROGRESS;
+                $paramObj->paid_amt = $existing_paid_amt + $paid_amt;
+            }
+
+            $paramObj->due_amt = $due_amt;            
 
             // checking payment completed or not 
             if($existing_due_amt <= 0){
@@ -714,7 +730,6 @@ class TransactionController extends Controller
 
             DB::beginTransaction();
             try {
-
                 // Updating Transaction Header Object
                 $result = $this->repo->update($paramObj);
 
@@ -722,8 +737,6 @@ class TransactionController extends Controller
                     
                     // start - saving new payment for existing transaction 
                     if ($paid_amt > 0 && $paid_amt <> null) {
-
-                        $transaction_payment_repo = new TransactionPaymentRepository();
 
                         // saving transaction payment
                         $transaction_payment = new TransactionPayment();

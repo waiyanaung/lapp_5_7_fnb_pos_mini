@@ -133,7 +133,7 @@
                         <td class="font-weight-bold">Pay Amount :</td>
                         <td class="font-weight-bold">
                             <input class="form-control" type="number" min="0" id="paid_amt" name="paid_amt"
-                                onchange="calculateTotalPrice()">
+                                onchange="calculateTotalPrice()" value="0.00">
                         </td>
                     </tr>
 

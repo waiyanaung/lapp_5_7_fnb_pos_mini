@@ -14,6 +14,8 @@ use App\User;
 use App\Setup\Transaction\Transaction;
 use App\Core\Utility;
 use App\Core\ReturnMessage;
+use App\Core\Status As Status;
+
 class TransactionPaymentRepository implements TransactionPaymentRepositoryInterface
 {
     public function getObjs()
@@ -186,6 +188,11 @@ class TransactionPaymentRepository implements TransactionPaymentRepositoryInterf
 
     public function checkToDelete($id){
         $result = DB::select("SELECT * FROM townships WHERE Item_id = $id AND deleted_at IS NULL");
+        return $result;
+    }
+
+    public function getTotalPaidAmtByTransactionId($id){
+        $result = DB::select("SELECT SUM(paid_amt) AS paid_amt FROM transaction_payment WHERE transaction_id = '".$id."' AND status = ". Status::TRANSACTION_PAYMENT_DETAIL_CONFIRM ." AND deleted_at IS NULL");
         return $result;
     }
 

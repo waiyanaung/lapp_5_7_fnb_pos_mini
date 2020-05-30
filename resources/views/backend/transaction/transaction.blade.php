@@ -1032,14 +1032,15 @@ use App\Core\Status As Status;
         // calculating due amount
         let change_amt = 0;
         let due_amt = 0;
-        let paid_amt = $("#paid_amt").val();
-        if(paid_amt > total_price){
+        let paid_amt_raw = $("#paid_amt").val();
+        let paid_amt = parseFloat(paid_amt_raw);
+        if(paid_amt >= total_price){
             change_amt = paid_amt - total_price;
             due_amt = 0;
         }
         else{
             due_amt = total_price - paid_amt;
-            change_amt = 0;
+            change_amt = 0;            
         }        
         change_amt = change_amt.toFixed(2);
         $("#show_change_amt").text(change_amt);

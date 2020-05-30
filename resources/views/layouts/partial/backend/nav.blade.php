@@ -16,10 +16,23 @@ $user_role_id = $user_info['userRoleId'];
                 
                 @if($user_role_id == 1)
 
-                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-shopping-cart m-r-5 m-l-5"></i><span class="hide-menu">Transactions</span></a>
-                        <ul aria-expanded="false" class="collapse  first-level">                        
+                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-shopping-cart m-r-5 m-l-5"></i><span class="hide-menu">Stock Management</span></a>
+                        <ul aria-expanded="false" class="collapse  first-level">  
                             
-                            <li class="sidebar-item"><a href="/backend_app/transaction_order" class="sidebar-link"><i class="ti-list m-r-5 m-l-5"></i><span class="hide-menu">Order</span></a></li>
+                            <li class="sidebar-item"><a href="/backend_app/transaction" class="sidebar-link"><i class="ti-list m-r-5 m-l-5"></i><span class="hide-menu">Stock Out / Invoice</span></a></li>
+                            
+                            <li class="sidebar-item"><a href="/backend_app/transaction_order" class="sidebar-link"><i class="ti-list m-r-5 m-l-5"></i><span class="hide-menu">Pre-Order</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Product Mangement</span></a>
+                        <ul aria-expanded="false" class="collapse  first-level">
+
+                            <li class="sidebar-item"><a href="/backend_app/item" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Item</span></a></li>
+
+                            <li class="sidebar-item"><a href="/backend_app/brand" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Brand</span></a></li>
+
+                            <li class="sidebar-item"><a href="/backend_app/category" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Category</span></a></li>
                         </ul>
                     </li>
 
@@ -45,17 +58,6 @@ $user_role_id = $user_info['userRoleId'];
                             <!-- <li class="sidebar-item"><a href="/backend_app/slider" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Slider Image</span></a></li> -->
 
                             <li class="sidebar-item"><a href="/backend_app/terms_and_conditions" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Terms and Conditions</span></a></li>
-                        </ul>
-                    </li>
-
-                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Product Mangement</span></a>
-                        <ul aria-expanded="false" class="collapse  first-level">
-
-                            <li class="sidebar-item"><a href="/backend_app/item" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Item</span></a></li>
-
-                            <li class="sidebar-item"><a href="/backend_app/brand" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Brand</span></a></li>
-
-                            <li class="sidebar-item"><a href="/backend_app/category" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Category</span></a></li>
                         </ul>
                     </li>
 
