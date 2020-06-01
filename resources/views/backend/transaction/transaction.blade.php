@@ -145,8 +145,7 @@ use App\Core\Status As Status;
                                     </option>
                                     @endif
                                     @endforeach
-                                    @else
-                                    <option value="" selected>Select Customer</option>
+                                    @else                                    
                                     @foreach($customers as $customer)
                                     <option value="{{$customer->id}}">{{$customer->first_name}} {{$customer->last_name}}
                                     </option>

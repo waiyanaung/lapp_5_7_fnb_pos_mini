@@ -22,7 +22,7 @@ class Default_002_RoleSeeder extends Seeder
             ['id'=>2, 'name'=>'ADMIN', 'description'=>'This is admin role','created_by'=>1,'created_at'=>$today],
             ['id'=>3, 'name'=>'SUPERVISOR', 'description'=>'This is supervisor role','created_by'=>1,'created_at'=>$today],
             ['id'=>4, 'name'=>'ACCOUNT', 'description'=>'This is account role','created_by'=>1,'created_at'=>$today],
-            ['id'=>5, 'name'=>'SALE PERSON', 'description'=>'This is basic user role','created_by'=>1,'created_at'=>$today],
+            ['id'=>5, 'name'=>'SALE PERSON', 'description'=>'This is basic staff role','created_by'=>1,'created_at'=>$today],
             ['id'=>6, 'name'=>'SUPPLIER', 'description'=>'This is supplier user role','created_by'=>1,'created_at'=>$today],
             ['id'=>7, 'name'=>'CUSTOMER', 'description'=>'This is customer user role','created_by'=>1,'created_at'=>$today],
         );

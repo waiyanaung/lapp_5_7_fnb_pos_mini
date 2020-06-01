@@ -58,7 +58,7 @@ class TransactionController extends Controller
             $countries = $countryRepo->getObjs();
 
             $userRepo = new UserRepository();
-            $customers = $userRepo->getUsersByRoleId(5);
+            $customers = $userRepo->getUsersByRoleId(7);
 
             $categoryRepo = new CategoryRepository();
             $categories = $categoryRepo->getObjs();
@@ -384,7 +384,7 @@ class TransactionController extends Controller
             $countries = $countryRepo->getObjs();
 
             $userRepo = new UserRepository();
-            $customers = $userRepo->getUsersByRoleId(5);
+            $customers = $userRepo->getUsersByRoleId(7);
 
             $categoryRepo = new CategoryRepository();
             $categories = $categoryRepo->getObjs();
