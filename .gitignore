@@ -30,3 +30,5 @@ yarn-error.log
 /public/images/township
 /public/images/upload
 /storage/logs/
+/public/images/expense
+/public/images/expense_type

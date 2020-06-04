@@ -410,6 +410,26 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
             Route::post('transaction/enable', array('as' => 'backend_app/transaction/enable', 'uses' => 'Setup\Transaction\TransactionController@enable'));
             Route::get('transaction/{id}', array('as' => 'backend_app/transaction/show', 'uses' => 'Setup\Transaction\TransactionController@show'));
             Route::post('transaction/payment/store', array('as' => 'backend_app/transaction/payment/store', 'uses' => 'Setup\Transaction\TransactionController@addPayment'));
+
+            //ExpenseType
+            Route::get('expense_type', array('as' => 'backend_app/expense_type', 'uses' => 'Setup\ExpenseType\ExpenseTypeController@index'));
+            Route::get('expense_type/create', array('as' => 'backend_app/expense_type/create', 'uses' => 'Setup\ExpenseType\ExpenseTypeController@create'));
+            Route::post('expense_type/store', array('as' => 'backend_app/expense_type/store', 'uses' => 'Setup\ExpenseType\ExpenseTypeController@store'));
+            Route::get('expense_type/{id}/edit', array('as' => 'backend_app/expense_type/edit', 'uses' => 'Setup\ExpenseType\ExpenseTypeController@edit'));
+            Route::post('expense_type/update', array('as' => 'backend_app/expense_type/update', 'uses' => 'Setup\ExpenseType\ExpenseTypeController@update'));
+            Route::post('expense_type/destroy', array('as' => 'backend_app/expense_type/destroy', 'uses' => 'Setup\ExpenseType\ExpenseTypeController@destroy'));
+            Route::post('expense_type/enable', array('as' => 'backend_app/expense_type/enable', 'uses' => 'Setup\ExpenseType\ExpenseTypeController@enable'));
+            Route::get('expense_type/{id}', array('as' => 'backend_app/expense_type/show', 'uses' => 'Setup\ExpenseType\ExpenseTypeController@show'));
+
+            //Expense
+            Route::get('expense', array('as' => 'backend_app/expense', 'uses' => 'Setup\Expense\ExpenseController@index'));
+            Route::get('expense/create', array('as' => 'backend_app/expense/create', 'uses' => 'Setup\Expense\ExpenseController@create'));
+            Route::post('expense/store', array('as' => 'backend_app/expense/store', 'uses' => 'Setup\Expense\ExpenseController@store'));
+            Route::get('expense/{id}/edit', array('as' => 'backend_app/expense/edit', 'uses' => 'Setup\Expense\ExpenseController@edit'));
+            Route::post('expense/update', array('as' => 'backend_app/expense/update', 'uses' => 'Setup\Expense\ExpenseController@update'));
+            Route::post('expense/destroy', array('as' => 'backend_app/expense/destroy', 'uses' => 'Setup\Expense\ExpenseController@destroy'));
+            Route::post('expense/enable', array('as' => 'backend_app/expense/enable', 'uses' => 'Setup\Expense\ExpenseController@enable'));
+            Route::get('expense/{id}', array('as' => 'backend_app/expense/show', 'uses' => 'Setup\Expense\ExpenseController@show'));            
         });
     });
 

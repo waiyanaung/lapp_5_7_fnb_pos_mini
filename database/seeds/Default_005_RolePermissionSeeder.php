@@ -298,7 +298,26 @@ class Default_005_RolePermissionSeeder extends Seeder
             ['role_id'=>1, 'permission_id'=>376,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>1, 'permission_id'=>377,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>1, 'permission_id'=>378,'created_by'=>1,'created_at'=>$today],
-            ['role_id'=>1, 'permission_id'=>379,'created_by'=>1,'created_at'=>$today],
+
+            //Expense Type
+            ['role_id'=>1, 'permission_id'=>381,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>382,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>383,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>384,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>385,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>386,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>387,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>388,'created_by'=>1,'created_at'=>$today],
+
+            //Expense 
+            ['role_id'=>1, 'permission_id'=>391,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>392,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>393,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>394,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>395,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>396,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>397,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>398,'created_by'=>1,'created_at'=>$today],
             
 
             // Role Permissions for the Role 1 - End
@@ -482,7 +501,26 @@ class Default_005_RolePermissionSeeder extends Seeder
             ['role_id'=>2, 'permission_id'=>376,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>2, 'permission_id'=>377,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>2, 'permission_id'=>378,'created_by'=>1,'created_at'=>$today],
-            ['role_id'=>2, 'permission_id'=>379,'created_by'=>1,'created_at'=>$today],
+
+            //Expense Type
+            ['role_id'=>2, 'permission_id'=>381,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>382,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>383,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>384,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>385,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>386,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>387,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>388,'created_by'=>1,'created_at'=>$today],
+
+            //Expense 
+            ['role_id'=>2, 'permission_id'=>391,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>392,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>393,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>394,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>395,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>396,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>397,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>398,'created_by'=>1,'created_at'=>$today],
 
             // Role Permissions for the Role 2 - End
             
@@ -570,7 +608,27 @@ class Default_005_RolePermissionSeeder extends Seeder
             ['role_id'=>3, 'permission_id'=>376,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>3, 'permission_id'=>377,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>3, 'permission_id'=>378,'created_by'=>1,'created_at'=>$today],
-            ['role_id'=>3, 'permission_id'=>379,'created_by'=>1,'created_at'=>$today],
+
+            //Expense Type
+            ['role_id'=>3, 'permission_id'=>381,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>382,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>383,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>384,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>385,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>386,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>387,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>388,'created_by'=>1,'created_at'=>$today],
+
+            //Expense 
+            ['role_id'=>3, 'permission_id'=>391,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>392,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>393,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>394,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>395,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>396,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>397,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>398,'created_by'=>1,'created_at'=>$today],
+
             // Role Permissions for the Role 3 - End
 
 

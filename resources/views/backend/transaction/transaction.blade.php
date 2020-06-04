@@ -1,9 +1,6 @@
 @extends('layouts.master_transaction')
 @section('title','Transaction')
 @section('content')
-<?php
-use App\Core\Status As Status;
-?>
 
 <style>
     .width-200 {

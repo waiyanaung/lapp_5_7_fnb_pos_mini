@@ -297,11 +297,26 @@ class Default_004_PermissionSeeder extends Seeder
              ['id' => 374, 'module' => 'Transaction', 'name' => 'Edit', 'description' => 'Transaction Edit', 'url' => 'backend_app/transaction/edit', 'created_by' => 1, 'created_at' => $today],
              ['id' => 375, 'module' => 'Transaction', 'name' => 'Update', 'description' => 'Transaction Update', 'url' => 'backend_app/transaction/update', 'created_by' => 1, 'created_at' => $today],
              ['id' => 376, 'module' => 'Transaction', 'name' => 'Destroy', 'description' => 'Transaction Destroy', 'url' => 'backend_app/transaction/destroy', 'created_by' => 1, 'created_at' => $today],
-             ['id' => 377, 'module' => 'Transaction', 'name' => 'Show', 'description' => 'Transaction Show', 'url' => 'backend_app/transaction/show', 'created_by' => 1, 'created_at' => $today],
-             ['id' => 378, 'module' => 'Transaction', 'name' => 'Show', 'description' => 'Transaction Show', 'url' => 'backend_app/transaction/show', 'created_by' => 1, 'created_at' => $today],
-             ['id' => 379, 'module' => 'Transaction', 'name' => 'Add New Payment', 'description' => 'Transaction Payment', 'url' => 'backend_app/transaction/payment/store', 'created_by' => 1, 'created_at' => $today],
+             ['id' => 377, 'module' => 'Transaction', 'name' => 'Show', 'description' => 'Transaction Show', 'url' => 'backend_app/transaction/show', 'created_by' => 1, 'created_at' => $today],             
+             ['id' => 378, 'module' => 'Transaction', 'name' => 'Add New Payment', 'description' => 'Transaction Payment', 'url' => 'backend_app/transaction/payment/store', 'created_by' => 1, 'created_at' => $today],
+
+             // ExpenseType
+             ['id' => 381, 'module' => 'ExpenseType', 'name' => 'Listing', 'description' => 'ExpenseType Listing', 'url' => 'backend_app/expense_type', 'created_by' => 1, 'created_at' => $today],
+             ['id' => 382, 'module' => 'ExpenseType', 'name' => 'New', 'description' => 'ExpenseType New', 'url' => 'backend_app/expense_type/create', 'created_by' => 1, 'created_at' => $today],
+             ['id' => 383, 'module' => 'ExpenseType', 'name' => 'store', 'description' => 'ExpenseType Store', 'url' => 'backend_app/expense_type/store', 'created_by' => 1, 'created_at' => $today],
+             ['id' => 384, 'module' => 'ExpenseType', 'name' => 'Edit', 'description' => 'ExpenseType Edit', 'url' => 'backend_app/expense_type/edit', 'created_by' => 1, 'created_at' => $today],
+             ['id' => 385, 'module' => 'ExpenseType', 'name' => 'Update', 'description' => 'ExpenseType Update', 'url' => 'backend_app/expense_type/update', 'created_by' => 1, 'created_at' => $today],
+             ['id' => 386, 'module' => 'ExpenseType', 'name' => 'Destroy', 'description' => 'ExpenseType Destroy', 'url' => 'backend_app/expense_type/destroy', 'created_by' => 1, 'created_at' => $today],
+             ['id' => 387, 'module' => 'ExpenseType', 'name' => 'Show', 'description' => 'ExpenseType Show', 'url' => 'backend_app/expense_type/show', 'created_by' => 1, 'created_at' => $today],
              
- 
+              // Expense
+              ['id' => 391, 'module' => 'Expense', 'name' => 'Listing', 'description' => 'Expense Listing', 'url' => 'backend_app/expense', 'created_by' => 1, 'created_at' => $today],
+              ['id' => 392, 'module' => 'Expense', 'name' => 'New', 'description' => 'Expense New', 'url' => 'backend_app/expense/create', 'created_by' => 1, 'created_at' => $today],
+              ['id' => 393, 'module' => 'Expense', 'name' => 'store', 'description' => 'Expense Store', 'url' => 'backend_app/expense/store', 'created_by' => 1, 'created_at' => $today],
+              ['id' => 394, 'module' => 'Expense', 'name' => 'Edit', 'description' => 'Expense Edit', 'url' => 'backend_app/expense/edit', 'created_by' => 1, 'created_at' => $today],
+              ['id' => 395, 'module' => 'Expense', 'name' => 'Update', 'description' => 'Expense Update', 'url' => 'backend_app/expense/update', 'created_by' => 1, 'created_at' => $today],
+              ['id' => 396, 'module' => 'Expense', 'name' => 'Destroy', 'description' => 'Expense Destroy', 'url' => 'backend_app/expense/destroy', 'created_by' => 1, 'created_at' => $today],
+              ['id' => 397, 'module' => 'Expense', 'name' => 'Show', 'description' => 'Expense Show', 'url' => 'backend_app/expense/show', 'created_by' => 1, 'created_at' => $today],
 
 
             //  //CSVImport

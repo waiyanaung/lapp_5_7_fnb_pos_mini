@@ -1,3 +1,5 @@
+@inject('Status', 'App\Core\Status')
+
 @include('layouts.partial.backend.header')
 @include('layouts.partial.backend.nav')
 @yield('script')
