@@ -65,8 +65,8 @@ $companyLogo = \App\Core\Check::companyLogo();
     <script src="/backend/matrix_admin/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
 
     <!-- my css and js file-->
-    {{-- <script src="/backend/plugins/sweetalert/sweetalert-dev.js"></script> --}}
-    <script src="/backend/plugins/sweetalert/sweetalert.2.1.2.min.js"></script>
+    <script src="/backend/plugins/sweetalert/sweetalert-dev.js"></script>
+    {{-- <script src="/backend/plugins/sweetalert/sweetalert.2.1.2.min.js"></script> --}}
     
 
     {{--For summernote editor--}}

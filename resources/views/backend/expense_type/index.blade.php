@@ -9,7 +9,7 @@
             <div class="ml-auto text-right">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/backend_app">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Expense Type</li>
                     </ol>
                 </nav>
@@ -33,7 +33,7 @@
             <div class="card">
                 <div class="card-body">
                     <button type="button" onclick='create_setup("expense_type");' class="btn btn-primary btn-md">New</button>
-                    <button type="button"  onclick='edit_setup("expense_type");' class="btn btn-primary btn-md">Edit</button>
+                    <button type="button"  onclick='edit_setup_v2("expense_type");' class="btn btn-primary btn-md">Edit</button>
                     <button type="button" onclick="activate_setup('expense_type');"  class="btn btn-primary btn-md">Activate</button>
                     <button type="button" onclick="delete_setup('expense_type');"  class="btn btn-danger btn-md">Deactivate</button>
                 </div>                           
@@ -102,7 +102,7 @@
             <div class="card">
                 <div class="card-body">
                     <button type="button" onclick='create_setup("expense_type");' class="btn btn-primary btn-md">New</button>
-                    <button type="button"  onclick='edit_setup("expense_type");' class="btn btn-primary btn-md">Edit</button>
+                    <button type="button"  onclick='edit_setup_v2("expense_type");' class="btn btn-primary btn-md">Edit</button>
                     <button type="button" onclick="activate_setup('expense_type');"  class="btn btn-primary btn-md">Activate</button>
                     <button type="button" onclick="delete_setup('expense_type');"  class="btn btn-danger btn-md">Deactivate</button>
                 </div>                           

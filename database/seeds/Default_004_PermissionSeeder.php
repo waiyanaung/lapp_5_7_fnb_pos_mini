@@ -308,6 +308,7 @@ class Default_004_PermissionSeeder extends Seeder
              ['id' => 385, 'module' => 'ExpenseType', 'name' => 'Update', 'description' => 'ExpenseType Update', 'url' => 'backend_app/expense_type/update', 'created_by' => 1, 'created_at' => $today],
              ['id' => 386, 'module' => 'ExpenseType', 'name' => 'Destroy', 'description' => 'ExpenseType Destroy', 'url' => 'backend_app/expense_type/destroy', 'created_by' => 1, 'created_at' => $today],
              ['id' => 387, 'module' => 'ExpenseType', 'name' => 'Show', 'description' => 'ExpenseType Show', 'url' => 'backend_app/expense_type/show', 'created_by' => 1, 'created_at' => $today],
+             ['id' => 388, 'module' => 'ExpenseType', 'name' => 'Activate', 'description' => 'ExpenseType Activate', 'url' => 'backend_app/expense_type/enable', 'created_by' => 1, 'created_at' => $today],
              
               // Expense
               ['id' => 391, 'module' => 'Expense', 'name' => 'Listing', 'description' => 'Expense Listing', 'url' => 'backend_app/expense', 'created_by' => 1, 'created_at' => $today],
@@ -317,6 +318,7 @@ class Default_004_PermissionSeeder extends Seeder
               ['id' => 395, 'module' => 'Expense', 'name' => 'Update', 'description' => 'Expense Update', 'url' => 'backend_app/expense/update', 'created_by' => 1, 'created_at' => $today],
               ['id' => 396, 'module' => 'Expense', 'name' => 'Destroy', 'description' => 'Expense Destroy', 'url' => 'backend_app/expense/destroy', 'created_by' => 1, 'created_at' => $today],
               ['id' => 397, 'module' => 'Expense', 'name' => 'Show', 'description' => 'Expense Show', 'url' => 'backend_app/expense/show', 'created_by' => 1, 'created_at' => $today],
+              ['id' => 398, 'module' => 'Expense', 'name' => 'Activate', 'description' => 'Expense Activate', 'url' => 'backend_app/expense/enable', 'created_by' => 1, 'created_at' => $today],
 
 
             //  //CSVImport

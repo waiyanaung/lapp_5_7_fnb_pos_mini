@@ -307,7 +307,7 @@ class Default_005_RolePermissionSeeder extends Seeder
             ['role_id'=>1, 'permission_id'=>385,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>1, 'permission_id'=>386,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>1, 'permission_id'=>387,'created_by'=>1,'created_at'=>$today],
-            ['role_id'=>1, 'permission_id'=>388,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>388,'created_by'=>1,'created_at'=>$today],            
 
             //Expense 
             ['role_id'=>1, 'permission_id'=>391,'created_by'=>1,'created_at'=>$today],

@@ -22,6 +22,26 @@ function edit_setup(type) {
     }
 }
 
+function edit_setup_v2(type) {
+    var data = [];
+    $("input[name='edit_check[]']:checked").each(function () {
+        data.push($(this).val());
+    });
+    var d = typeof(data);
+
+    if (data[0] == null) {
+
+        swal("Oops...", "Please select at least one item to edit !", "error");
+    }
+    else if (data[1] != null) {
+
+        swal("Oops...", "Please select only one item to edit !", "error");
+    }
+    else {
+        window.location ='/backend_app/' + type + "/" + data + "/edit/";
+    }
+}
+
 function delete_setup(type) {
     var data = [];
     $("input[name='edit_check[]']:checked").each(function () {
@@ -107,13 +127,14 @@ function activate_setup(type) {
     });
     var d = typeof(data);
     if (data[0] == null) {
-        swal("Oops...", "Please select at least one item to delete !", "error");
+        swal("Oops...", "Please select at least one item to activate !", "error");
     }
     //else if (data[1] != null) {
     //    sweetAlert("Oops...", "Please select only one item to delete !", "error");
     //
     //}
     else {
+        
         swal({
                 title: "Are you sure?",
                 text: "To proceed the Re-Activation .",
@@ -140,14 +161,14 @@ function activate_setup(type) {
     }
 }
 
-function multiple_activate_setup(type) {
+function multiple_activate_setup(type) {alert('a');return;
     var data = [];
     $("input[name='edit_check[]']:checked").each(function () {
         data.push($(this).val());
     });
     var d = typeof(data);
     if (data[0] == null) {
-        swal("Oops...", "Please select at least one item to delete !", "error");
+        swal("Oops...", "Please select at least one item to activate !", "error");
     }
     //else if (data[1] != null) {
     //    sweetAlert("Oops...", "Please select only one item to delete !", "error");
