@@ -7,7 +7,7 @@ use App\Backend\Infrastructure\Forms\ExpenseEntryRequest;
 use App\Core\Check;
 use App\Core\FormatGenerator as FormatGenerator;
 use App\Core\ReturnMessage as ReturnMessage;
-use App\Core\Utility;
+use App\Core\Utility AS Utility;
 use App\Http\Controllers\Controller;
 use App\Setup\Category\CategoryRepository;
 use App\Setup\Expense\Expense;
@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Setup\Country\CountryRepository;
 use App\Setup\Brand\BrandRepository;
+use App\Setup\ExpenseType\ExpenseTypeRepository;
 
 class ExpenseController extends Controller
 {
@@ -29,7 +30,6 @@ class ExpenseController extends Controller
 
     public function index(Request $request)
     {
-
         if($request->ajax()){
 
             $returnedObj['laravelStatus'] = ReturnMessage::INTERNAL_SERVER_ERROR;
@@ -64,20 +64,11 @@ class ExpenseController extends Controller
         else{
             if (Auth::check()) {
                 $expenses = $this->repo->getObjsAllByLastExpenseFilter();
-                $categoryRepo = new CategoryRepository();
-                $categories = $categoryRepo->getObjs();
-    
-                $countryRepo = new CountryRepository();
-                $countries = $countryRepo->getObjs();
-    
-                $brand_repo = new BrandRepository();
-                $brands = $brand_repo->getObjs();
+                $currency_types = Utility::getCoreSettingsByType('CURRENCY');
                 
                 return view('backend.expense.index')
                     ->with('objs', $expenses)
-                    ->with('brands', $brands)
-                    ->with('countries', $countries)
-                    ->with('categories', $categories);
+                    ->with('currency_types', $currency_types);
             }
             return redirect('/');
         }
@@ -217,19 +208,15 @@ class ExpenseController extends Controller
     public function create()
     {
         if (Auth::check()) {
-            $categoryRepo = new CategoryRepository();
-            $categories = $categoryRepo->getObjs();
+            $expense_type_repo = new ExpenseTypeRepository();
+            $expense_types = $expense_type_repo->getObjs();
 
-            $countryRepo = new CountryRepository();
-            $countries = $countryRepo->getObjs();
-
-            $brand_repo = new BrandRepository();
-            $brands = $brand_repo->getObjs();
-
-            return view('backend.expense.expense')
-                ->with('countries',$countries)
-                ->with('brands', $brands)                
-                ->with('categories', $categories);
+            $currency_types = Utility::getCoreSettingsByType('CURRENCY');
+            
+            return view('backend.expense.expense')                
+                ->with('expense_types', $expense_types)
+                ->with('currency_types', $currency_types)
+                ->with('action_type', 'create');
         }
         return redirect('/');
     }
@@ -239,17 +226,13 @@ class ExpenseController extends Controller
         try{
             $validated = $request->validated();
             $name = Input::get('name');
+            $date = Input::get('date');
             $status = Input::get('status');
-            $code = Input::get('code');
-            $price = Input::get('price');
-            $model = Input::get('model');
-            $category_id = Input::get('category_id');
-            $brand_id = Input::get('brand_id');
-            $country_id = Input::get('country_id');
+            $expense_type_id = Input::get('expense_type_id');
+            $currency_id = Input::get('currency_id');
+            $amount = Input::get('amount');
             $description = Input::get('description');
-            $detail_info = Input::get('detail_info');        
-            $remark = Input::get('remark');            
-            $custom_features = Input::get('custom_features');            
+            $remark = Input::get('remark');
 
             $image_url_name = "";
             //Start Saving Image
@@ -292,19 +275,19 @@ class ExpenseController extends Controller
 
             $paramObj = new Expense();
 
+            $table_name = $paramObj->getTable();
+            $date_today = date('Y-m-d');
+            $last_id = Check::getTableIncrementId($table_name, $date_today);
+
+            $paramObj->id = $last_id;
             $paramObj->name = $name;
-            $paramObj->code = $code;
-            $paramObj->price = $price;
-            $paramObj->model = $model;
+            $paramObj->date = $date;
             $paramObj->status = $status;
-            $paramObj->category_id = $category_id;
-            $paramObj->brand_id = $brand_id;
-            $paramObj->country_id = $country_id;
+            $paramObj->expense_type_id = $expense_type_id;
+            $paramObj->currency_id = $currency_id;
+            $paramObj->amount = $amount;            
             $paramObj->description = $description;
-            $paramObj->detail_info = $detail_info;
-            $paramObj->remark = $remark;            
-            $paramObj->custom_features = $custom_features;
-            
+            $paramObj->remark = $remark;
             $paramObj->image_url = '/images/expense/' . $image_url_name;
             $paramObj->image_url1 = '/images/expense/' . $image_url_name1;        
 
@@ -326,24 +309,38 @@ class ExpenseController extends Controller
 
     }
 
+    public function show($id)
+    {
+        if (Auth::check()) {
+            $expense = Expense::find($id);
+            $expense_type_repo = new ExpenseTypeRepository();
+            $expense_types = $expense_type_repo->getObjs();
+
+            $currency_types = Utility::getCoreSettingsByType('CURRENCY');
+            
+            return view('backend.expense.expense')
+                ->with('obj', $expense)
+                ->with('expense_types', $expense_types)
+                ->with('currency_types', $currency_types)
+                ->with('action_type', 'show');
+        }
+        return redirect('/backend_app/login');
+    }
+
     public function edit($id)
     {
         if (Auth::check()) {
             $expense = Expense::find($id);
-            $categoryRepo = new CategoryRepository();
-            $categories = $categoryRepo->getObjs();
+            $expense_type_repo = new ExpenseTypeRepository();
+            $expense_types = $expense_type_repo->getObjs();
 
-            $countryRepo = new CountryRepository();
-            $countries = $countryRepo->getObjs();
-
-            $brand_repo = new BrandRepository();
-            $brands = $brand_repo->getObjs();
+            $currency_types = Utility::getCoreSettingsByType('CURRENCY');
 
             return view('backend.expense.expense')
                 ->with('obj', $expense)
-                ->with('countries',$countries)
-                ->with('brands', $brands)                
-                ->with('categories', $categories);
+                ->with('expense_types', $expense_types)
+                ->with('currency_types', $currency_types)
+                ->with('action_type', 'edit');
         }
         return redirect('/backend_app/login');
     }

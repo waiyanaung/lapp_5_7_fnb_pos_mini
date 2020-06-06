@@ -161,7 +161,7 @@ function activate_setup(type) {
     }
 }
 
-function multiple_activate_setup(type) {alert('a');return;
+function multiple_activate_setup(type) {
     var data = [];
     $("input[name='edit_check[]']:checked").each(function () {
         data.push($(this).val());

@@ -14,6 +14,7 @@ use Image;
 use App\Log\LogCustom;
 use Mail;
 use App\Setup\Item\Item;
+use App\Setup\CoreSettings\CoreSettings;
 
 class Utility
 {
@@ -507,4 +508,29 @@ class Utility
 
         }
     }
+
+    public static function getCoreSettingsByType($type){
+        if($type == null){
+            return array();
+        }
+
+        $result = array();
+        $objs = DB::select("SELECT * FROM core_settings WHERE `type` = '". $type . "' ORDER BY value" );
+        foreach($objs as $obj){
+            $result[$obj->code] = $obj;
+        }
+        
+        return $result;
+      }
+
+      public static function getCoreSettingByValue($type,$value){
+        if($type == null || $value == null){
+            $result = new CoreSettings();
+            return $result;
+        }
+
+        $result = array();
+        $result = CoreSettings::where('value', $value)->where('type', $type);
+        return $result;
+      }
 }

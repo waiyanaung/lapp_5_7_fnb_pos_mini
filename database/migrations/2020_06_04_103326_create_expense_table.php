@@ -14,13 +14,14 @@ class CreateExpenseTable extends Migration
     public function up()
     {
         Schema::create('expenses', function (Blueprint $table) {
-            $table->increments('id');
+            $table->string('id', 30)->primary();
             $table->integer('expense_type_id');
             $table->integer('status')->default(1);
             $table->date('date')->nullable();
             $table->decimal('amount',10,2)->nullable();
+            $table->string('currency_id',10)->default('MMK');
 
-            $table->string('name', 255)->unique();
+            $table->string('name',255);
             $table->string('name_mm',255)->nullable();
             $table->string('name_jp',255)->nullable();
             $table->string('name_zh',255)->nullable();

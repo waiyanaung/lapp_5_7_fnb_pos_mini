@@ -6,13 +6,15 @@
     <div class="row">
         <div class="col-12 d-flex no-block align-expense_types-center">
             <h4 class="page-title">
+                Expense Type - 
                 @if($action_type == 'edit' )
-                    Expense Type - Edit
+                    Edit
                 @elseif($action_type == 'show' )
-                    Expense Type - Show
+                    Show
                 @else
-                    Expense Type - Create
+                    Create
                 @endif
+                View
             </h4>
             <div class="ml-auto text-right">
                 <nav aria-label="breadcrumb">
@@ -39,10 +41,10 @@
 
     @if($action_type == 'edit' )
         {!! Form::open(array('url' => '/backend_app/expense_type/update','id'=>'expense_type', 'class'=> 'form-horizontal user-form-border','files' => true)) !!}
-    @elseif($action_type == 'show' )
-        {!! Form::open(array('url' => '/backend_app/expense_type/' . $obj->id . '/edit','id'=>'expense_type', 'class'=> 'form-horizontal user-form-border','files' => true, 'method' => 'get')) !!}
-    @else
+    @elseif($action_type == 'create' )
         {!! Form::open(array('url' => '/backend_app/expense_type/store','id'=>'expense_type', 'class'=> 'form-horizontal user-form-border','files' => true)) !!}
+    @else
+        <form>
     @endif 
 
     <input type="hidden" name="id" value="{{isset($obj)? $obj->id:''}}"/>
@@ -51,15 +53,14 @@
         <div class="col-md-12 text-right">
             <div class="card">
                 <div class="card-body border-top">
-                    <button type="submit" class="btn btn-primary btn-md">
-                        @if($action_type == 'edit' )
-                            Update
-                        @elseif($action_type == 'show' )
-                            Edit
-                        @else
-                            Save
-                        @endif
-                    </button>
+                    @if($action_type == 'edit' )
+                        <button type="submit" class="btn btn-primary btn-md">Update</button>
+                    @elseif($action_type == 'show' )
+                        <a href="/backend_app/expense_type/{{$obj->id}}/edit" class="btn btn-primary btn-md">Edit</a>
+                    @else
+                        <button type="submit" class="btn btn-primary btn-md">Save</button>
+                    @endif
+
                     <button onclick="cancel_setup('expense_type')" type="button" class="btn btn-secondary btn-md">Cancel</button>
                 </div>
             </div>                     
@@ -187,15 +188,15 @@
         <div class="col-md-12 text-right">
             <div class="card">
                 <div class="card-body border-top">
-                    <button type="submit" class="btn btn-primary btn-md">
-                        @if($action_type == 'edit' )
-                            Update
-                        @elseif($action_type == 'show' )
-                            Edit
-                        @else
-                            Save
-                        @endif
-                    </button>
+                    
+                    @if($action_type == 'edit' )
+                        <button type="submit" class="btn btn-primary btn-md">Update</button>
+                    @elseif($action_type == 'show' )
+                        <a href="/backend_app/expense_type/{{$obj->id}}/edit" class="btn btn-primary btn-md">Edit</a>
+                    @else
+                        <button type="submit" class="btn btn-primary btn-md">Save</button>
+                    @endif                    
+
                     <button onclick="cancel_setup('expense_type')" type="button" class="btn btn-secondary btn-md">Cancel</button>
                 </div>
             </div>                     
