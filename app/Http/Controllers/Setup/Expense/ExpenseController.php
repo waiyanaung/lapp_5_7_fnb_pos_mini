@@ -350,17 +350,13 @@ class ExpenseController extends Controller
         $validated = $request->validated();
         $id = Input::get('id');
         $name = Input::get('name');
-        $code = Input::get('code');
-        $price = Input::get('price');
-        $model = Input::get('model');
-        $category_id = Input::get('category_id');
-        $brand_id = Input::get('brand_id');
-        $country_id = Input::get('country_id');
-        $description = Input::get('description');
-        $detail_info = Input::get('detail_info');
+        $date = Input::get('date');
         $status = Input::get('status');
-        $remark = Input::get('remark');        
-        $custom_features = Input::get('custom_features');
+        $expense_type_id = Input::get('expense_type_id');
+        $currency_id = Input::get('currency_id');
+        $amount = Input::get('amount');
+        $description = Input::get('description');
+        $remark = Input::get('remark');
 
         $removeImageFlag = (Input::has('removeImageFlag')) ? Input::get('removeImageFlag') : 0;
         $path = base_path() . '/public/images/expense/';
@@ -371,21 +367,16 @@ class ExpenseController extends Controller
         $remove_old_image1 = false;
 
         $paramObj = Expense::find($id);
+        $paramObj->name = $name;
+        $paramObj->date = $date;
+        $paramObj->status = $status;
+        $paramObj->expense_type_id = $expense_type_id;
+        $paramObj->currency_id = $currency_id;
+        $paramObj->amount = $amount;            
+        $paramObj->description = $description;
+        $paramObj->remark = $remark;
         $old_image = $paramObj->image_url;
         $old_image1 = $paramObj->image_url1;
-        
-        $paramObj->name = $name;
-        $paramObj->code = $code;
-        $paramObj->price = $price;
-        $paramObj->model = $model;
-        $paramObj->status = $status;
-        $paramObj->category_id = $category_id;
-        $paramObj->brand_id = $brand_id;
-        $paramObj->country_id = $country_id;
-        $paramObj->description = $description;
-        $paramObj->detail_info = $detail_info;
-        $paramObj->remark = $remark;
-        $paramObj->custom_features = $custom_features;        
        
         if (Input::hasFile('image_url')) {
             //Start Saving Image

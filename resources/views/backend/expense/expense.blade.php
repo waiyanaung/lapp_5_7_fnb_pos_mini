@@ -272,24 +272,33 @@
                 <div class="col-md-4">
                     <h5 class="card-title m-b-0">Expense Image 1</h5>
                     <div class="form-group m-t-20">
-                        <div class="add_image_div add_image_div_red"
-                            style="background-image: url({{ isset($obj)? $obj->image_url:Request::old('image_url') }});">
-                        </div>
-                        <input type="hidden" id="removeImageFlag" value="0" name="removeImageFlag">
-                        <input type="button" class="form-control image_remove_btn" value="Remove Image" id="removeImage"
-                            name="removeImage">
+                        @if($action_type == 'show' )
+                            <div class="add_image_div add_image_div_red"
+                                style="background-image: url({{ isset($obj)? $obj->image_url:Request::old('image_url') }});">
+                            </div>
+                        @else
+                            <div class="add_image_div add_image_div_red"
+                                style="background-image: url({{ isset($obj)? $obj->image_url:Request::old('image_url') }});">
+                            </div>
+                            <input type="hidden" id="removeImageFlag" value="0" name="removeImageFlag">
+                            <input type="button" class="form-control image_remove_btn" value="Remove Image" id="removeImage"
+                                name="removeImage">
+                        @endif
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <h5 class="card-title m-b-0">Expense Image 2</h5>
                     <div class="form-group m-t-20">
-                        <div class="add_image_div1 add_image_div_red1"
-                            style="background-image: url({{ isset($obj)? $obj->image_url1:Request::old('image_url1') }});">
-                        </div>
-                        <input type="hidden" id="removeImageFlag1" value="0" name="removeImageFlag1">
-                        <input type="button" class="form-control image_remove_btn" value="Remove Image"
-                            id="removeImage1" name="removeImage1">
+                        @if($action_type == 'show' )
+                            <div class="add_image_div1 add_image_div_red1" style="background-image: url({{ isset($obj)? $obj->image_url1:Request::old('image_url1') }});">
+                        @else
+                            <div class="add_image_div1 add_image_div_red1" style="background-image: url({{ isset($obj)? $obj->image_url1:Request::old('image_url1') }});">
+                            </div>
+                            <input type="hidden" id="removeImageFlag1" value="0" name="removeImageFlag1">
+                            <input type="button" class="form-control image_remove_btn" value="Remove Image"
+                                id="removeImage1" name="removeImage1">
+                        @endif
                     </div>
                 </div>
 
