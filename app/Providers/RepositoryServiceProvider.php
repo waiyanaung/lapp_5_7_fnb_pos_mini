@@ -35,7 +35,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind('App\Setup\City\CityRepositoryInterface','App\Setup\City\CityRepository');        
         $this->app->bind('App\Setup\Autocomplete\AutocompleteRepositoryInterface','App\Setup\Autocomplete\AutocompleteRepository');
         $this->app->bind('App\Setup\Customer\CustomerRepositoryInterface','App\Setup\Customer\CustomerRepository');
-        $this->app->bind('App\Setup\Report\ReportRepositoryInterface','App\Setup\Report\ReportRepository');        
+                
         $this->app->bind('App\Setup\Slider\SliderRepositoryInterface','App\Setup\Slider\SliderRepository');
         $this->app->bind('App\Setup\Page\PageRepositoryInterface','App\Setup\Page\PageRepository');        
         $this->app->bind('App\Setup\CsvImport\CsvImportRepositoryInterface','App\Setup\CsvImport\CsvImportRepository');
@@ -71,6 +71,10 @@ class RepositoryServiceProvider extends ServiceProvider
 
         $this->app->bind('App\Setup\Expense\ExpenseRepositoryInterface','App\Setup\Expense\ExpenseRepository');
         $this->app->bind('App\Setup\ExpenseType\ExpenseTypeRepositoryInterface','App\Setup\ExpenseType\ExpenseTypeRepository');
+
+        // Report
+        $this->app->bind('App\Setup\Report\ReportRepositoryInterface','App\Setup\Report\ReportRepository');
+        $this->app->bind('App\Setup\Report\ExpenseReportRepositoryInterface','App\Setup\Report\ExpenseReportRepository'); 
         
     }
 }

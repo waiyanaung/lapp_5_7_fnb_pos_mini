@@ -429,8 +429,39 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
             Route::post('expense/update', array('as' => 'backend_app/expense/update', 'uses' => 'Setup\Expense\ExpenseController@update'));
             Route::post('expense/destroy', array('as' => 'backend_app/expense/destroy', 'uses' => 'Setup\Expense\ExpenseController@destroy'));
             Route::post('expense/enable', array('as' => 'backend_app/expense/enable', 'uses' => 'Setup\Expense\ExpenseController@enable'));
-            Route::get('expense/{id}', array('as' => 'backend_app/expense/show', 'uses' => 'Setup\Expense\ExpenseController@show'));            
+            Route::get('expense/{id}', array('as' => 'backend_app/expense/show', 'uses' => 'Setup\Expense\ExpenseController@show'));  
+            
+            //SaleSummary Report
+            Route::get('salesummaryreport',array(
+                'as'=>'backend_app/salesummaryreport',
+                'uses'=>'Report\SaleSummaryReportController@index'
+            ));
+            Route::get('salesummaryreport/search/{type?}/{from?}/{to?}',
+                array(
+                    'as'=>'backend_app/salesummaryreport/search/{type?}/{from?}/{to?}',
+                    'uses'=>'Report\SaleSummaryReportController@search'
+                ));
+            Route::get('salesummaryreport/exportexcel/{type?}/{from?}/{to?}',
+                array(
+                    'as'=>'backend_app/salesummaryreport/exportexcel/{type?}/{from?}/{to?}',
+                    'uses'=>'Report\SaleSummaryReportController@excel'
+                ));
+            
+
+            //Expense Report
+            Route::get('report/expense',array(
+                'as'=>'backend_app/report/expense',
+                'uses'=>'Report\ExpenseReportController@index'
+            ));
+
+            //Expense Report
+            Route::post('report/expense',array(
+                'as'=>'backend_app/report/expense',
+                'uses'=>'Report\ExpenseReportController@view'
+            ));
+
         });
+            
     });
 
 });

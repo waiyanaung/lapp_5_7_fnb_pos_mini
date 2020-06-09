@@ -75,9 +75,19 @@ $companyLogo = \App\Core\Check::companyLogo();
     
     <!-- for image upload modal jquery -->
     <script src="/backend/plugins/jasny/js/jasny-bootstrap.js"></script>
+
+     <!-- Chosen JS -->
+     
+     
+     <link href="/jquery/chosen_v1.8.7/chosen.css" rel="stylesheet">
+     <link href="/jquery/chosen_v1.8.7/chosen.min.css" rel="stylesheet">
+     <script src="/jquery/chosen_v1.8.7/chosen.jquery.min.js"></script>
+     <script src="/jquery/chosen_v1.8.7/chosen.proto.js"></script>
+
+     <link rel="stylesheet" href="/jquery/jquery-ui.css">
+     <script src="/jquery/jquery-ui.js"></script>
     
-    
-<![endif]-->
+<!-- [endif] -->
 <style>
 
 .error {

@@ -318,6 +318,14 @@ class Default_005_RolePermissionSeeder extends Seeder
             ['role_id'=>1, 'permission_id'=>396,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>1, 'permission_id'=>397,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>1, 'permission_id'=>398,'created_by'=>1,'created_at'=>$today],
+
+            // Reports
+            ['role_id'=>1, 'permission_id'=>101,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>1002,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>1003,'created_by'=>1,'created_at'=>$today],
+
+            // Expense Report
+            ['role_id'=>1, 'permission_id'=>1101,'created_by'=>1,'created_at'=>$today],
             
 
             // Role Permissions for the Role 1 - End
@@ -522,6 +530,15 @@ class Default_005_RolePermissionSeeder extends Seeder
             ['role_id'=>2, 'permission_id'=>397,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>2, 'permission_id'=>398,'created_by'=>1,'created_at'=>$today],
 
+            // Reports
+            ['role_id'=>2, 'permission_id'=>1001,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>1002,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>1003,'created_by'=>1,'created_at'=>$today],
+            
+            // Expense Report
+            ['role_id'=>2, 'permission_id'=>1101,'created_by'=>1,'created_at'=>$today],
+            
+
             // Role Permissions for the Role 2 - End
             
             // Role Permissions for the Role 3 - Start
@@ -628,6 +645,15 @@ class Default_005_RolePermissionSeeder extends Seeder
             ['role_id'=>3, 'permission_id'=>396,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>3, 'permission_id'=>397,'created_by'=>1,'created_at'=>$today],
             ['role_id'=>3, 'permission_id'=>398,'created_by'=>1,'created_at'=>$today],
+
+            // Reports
+            ['role_id'=>3, 'permission_id'=>1001,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>1002,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>1003,'created_by'=>1,'created_at'=>$today],
+
+            // Expense Report
+            ['role_id'=>3, 'permission_id'=>1101,'created_by'=>1,'created_at'=>$today],
+            
 
             // Role Permissions for the Role 3 - End
 

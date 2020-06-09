@@ -59,7 +59,7 @@
                                     <th class="bg_n_fontcolor">Currency Type</th>
                                     <th class="bg_n_fontcolor">Amount</th>
                                     <th class="bg_n_fontcolor">Date</th>
-                                    <th class="bg_n_fontcolor">Date</th>
+                                    <th class="bg_n_fontcolor">Status</th>
                                     
                                 </tr>
                             </thead>
@@ -94,7 +94,7 @@
                                             @endif
                                             </strong></a>
                                         </td>
-                                        </tr>
+
                                     </tr>
                                 @endforeach                    
                             </tbody>

@@ -325,9 +325,13 @@ class Default_004_PermissionSeeder extends Seeder
             // ['id'=>600,'module'=>'CSVImport','name'=>'Listing','description'=>'CSVImport Listing','url'=>'backend_app/import','created_by'=>1,'created_at'=>$today],
             // ['id'=>601,'module'=>'CSVImport','name'=>'Store','description'=>'CSVImport Store','url'=>'backend_app/import/store','created_by'=>1,'created_at'=>$today],
 
-            //  ['id'=>360,'module'=>'Report','name'=>'Sale Summary Report','description'=>'Sale Summary Report Listing','url'=>'backend_app/salesummaryreport','created_by'=>1,'created_at'=>$today],
-            // ['id'=>361,'module'=>'Report','name'=>'Sale Summary Report Search','description'=>'Sale Summary Report Search','url'=>'backend_app/salesummaryreport/search/{type?}/{from?}/{to?}','created_by'=>1,'created_at'=>$today],
-            // ['id'=>362,'module'=>'Report','name'=>'Sale Summary Report Excel','description'=>'Sale Summary Report Excel','url'=>'backend_app/salesummaryreport/exportexcel/{type?}/{from?}/{to?}','created_by'=>1,'created_at'=>$today],
+            // Reports
+             ['id'=>1001,'module'=>'Report','name'=>'Sale Summary Report','description'=>'Sale Summary Report Listing','url'=>'backend_app/salesummaryreport','created_by'=>1,'created_at'=>$today],
+            ['id'=>1002,'module'=>'Report','name'=>'Sale Summary Report Search','description'=>'Sale Summary Report Search','url'=>'backend_app/salesummaryreport/search/{type?}/{from?}/{to?}','created_by'=>1,'created_at'=>$today],
+            ['id'=>1003,'module'=>'Report','name'=>'Sale Summary Report Excel','description'=>'Sale Summary Report Excel','url'=>'backend_app/salesummaryreport/exportexcel/{type?}/{from?}/{to?}','created_by'=>1,'created_at'=>$today],
+
+            // Expense Reports
+            ['id'=>1101,'module'=>'Report_Expense','name'=>'Expense Report','description'=>'Expense Summary Report Listing','url'=>'backend_app/report/expense','created_by'=>1,'created_at'=>$today],
 
             // ['id'=>520,'module'=>'Slider','name'=>'Create','description'=>'Slider Create','url'=>'backend_app/slider/create','created_by'=>1,'created_at'=>$today],
             // ['id'=>521,'module'=>'Slider','name'=>'Store','description'=>'Slider Store','url'=>'backend_app/slider/store','created_by'=>1,'created_at'=>$today],

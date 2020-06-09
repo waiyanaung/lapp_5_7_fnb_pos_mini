@@ -45,6 +45,13 @@ $user_role_id = $user_info['userRoleId'];
                         </ul>
                     </li>
 
+                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Report Mangement</span></a>
+                        <ul aria-expanded="false" class="collapse  first-level">
+
+                            <li class="sidebar-item"><a href="/backend_app/salesummaryreport" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Sale Summary</span></a></li>
+                        </ul>
+                    </li>
+
                     <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Frontend</span></a>
                         <ul aria-expanded="false" class="collapse  first-level">                        
                             
@@ -122,7 +129,7 @@ $user_role_id = $user_info['userRoleId'];
                             <li class="sidebar-item"><a href="/backend_app/category" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Category</span></a></li>
                             
                         </ul>
-                    </li>
+                    </li>```
 
                     <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Expense Mangement</span></a>
                         <ul aria-expanded="false" class="collapse  first-level">
@@ -130,6 +137,15 @@ $user_role_id = $user_info['userRoleId'];
                             <li class="sidebar-item"><a href="/backend_app/expense" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Expense</span></a></li>
 
                             <li class="sidebar-item"><a href="/backend_app/expense_type" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Expense Type</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Report Mangement</span></a>
+                        <ul aria-expanded="false" class="collapse  first-level">
+
+                            <li class="sidebar-item"><a href="/backend_app/salesummaryreport" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Sale Summary</span></a></li>
+
+                            <li class="sidebar-item"><a href="/backend_app/report/expense" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Expense Summary</span></a></li>
                         </ul>
                     </li>
 
