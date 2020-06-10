@@ -457,7 +457,7 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
             //Expense Report
             Route::post('report/expense',array(
                 'as'=>'backend_app/report/expense',
-                'uses'=>'Report\ExpenseReportController@view'
+                'uses'=>'Report\ExpenseReportController@index'
             ));
 
         });

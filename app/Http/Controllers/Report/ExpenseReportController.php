@@ -25,60 +25,27 @@ class ExpenseReportController extends Controller
     public function index(){
         
         if(Auth::check()) {
-            $type       = null;
-            $from_date  = null;
-            $to_date    = null;
-            $expense_type_id_arr = null;
-            $currency_id_arr = null;
-            
-            //$objs = $this->repo->getObjsAllByLastExpenseFilter();
-            $objs = $this->repo->getObjs();
-            if(isset($bookings) && count($bookings) > 0){
-                foreach($objs as $booking){
-                    $grandTotal += $objs->total_payable_amt;
-                }
-            }
-           
-            $currency_types = Utility::getCoreSettingsByType('CURRENCY');
-            $expense_type_repo = new ExpenseTypeRepository();
-            $expense_types = $expense_type_repo->getObjs();
-
-            return view('report.expense.expense_summary')
-                ->with('objs', $objs)
-                ->with('currency_types', $currency_types)
-                ->with('action_type', 'create')
-                ->with('expense_types', $expense_types);
-        }
-        return redirect('/');
-
-    }
-
-    public function view(){
-                
-        if(Auth::check()) {
             $all_inputs = Input::all();
-            $from_date       = isset($all_inputs['from']) ? $all_inputs['from'] : null ;
-            $to_date       = isset($all_inputs['to']) ? $all_inputs['to'] : null ;
+            $from_date       = isset($all_inputs['from_date']) ? $all_inputs['from_date'] : null ;
+            $to_date       = isset($all_inputs['to_date']) ? $all_inputs['to_date'] : null ;
             $expense_type_id_arr       = isset($all_inputs['expense_type_id']) ? $all_inputs['expense_type_id'] : null ;
             $currency_id_arr       = isset($all_inputs['currency_id']) ? $all_inputs['currency_id'] : null ;
                         
             //$objs = $this->repo->getObjsAllByLastExpenseFilter();
-            $objs = $this->repo->summary($expense_type_id_arr,$currency_id_arr,$from_date,$to_date);
-            if(isset($bookings) && count($bookings) > 0){
-                foreach($objs as $booking){
-                    $grandTotal += $objs->total_payable_amt;
-                }
-            }
-            
+            $objs = $this->repo->summary($expense_type_id_arr,$currency_id_arr,$from_date,$to_date);            
             $currency_types = Utility::getCoreSettingsByType('CURRENCY');
             $expense_type_repo = new ExpenseTypeRepository();
             $expense_types = $expense_type_repo->getObjs();
-
+            
             return view('report.expense.expense_summary')
                 ->with('objs', $objs)
-                ->with('currency_types', $currency_types)
                 ->with('action_type', 'create')
-                ->with('expense_types', $expense_types);
+                ->with('currency_types', $currency_types)
+                ->with('expense_types', $expense_types)
+                ->with('from_date', $from_date)
+                ->with('to_date', $to_date)
+                ->with('selected_currency_ids', $currency_id_arr)
+                ->with('selected_expense_type_ids', $expense_type_id_arr);
         }
         return redirect('/');
 
