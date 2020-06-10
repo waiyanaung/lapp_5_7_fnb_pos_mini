@@ -167,72 +167,135 @@
                                     <?php $col_count = 4; ?>
 
                                     <?php $currency_amounts = array(); ?>
-                                    @foreach ($currency_types as $key => $currency_type)
-                                    <th class="bg_n_fontcolor">{{ $currency_type->code}}</th>
-                                    <?php 
-                                            $currency_amounts[$key] = 0; 
-                                            $col_count++;
-                                        ?>
-                                    @endforeach
+                                    @if($selected_currency_ids == null )
+                                        @foreach ($currency_types as $key => $currency_type)
+                                            <th class="bg_n_fontcolor">{{ $currency_type->code}}</th>
+                                            <?php 
+                                                    $currency_amounts[$key] = 0; 
+                                                    $col_count++;
+                                            ?>
+                                        @endforeach
+                                    @else
+                                        @foreach ($currency_types as $key => $currency_type)
+                                            @if (in_array($currency_type->code, $selected_currency_ids))
+                                                <th class="bg_n_fontcolor">{{ $currency_type->code}}</th>
+                                                <?php 
+                                                        $currency_amounts[$key] = 0; 
+                                                        $col_count++;
+                                                ?>
+                                            @endif
+                                        @endforeach
+                                    @endif
 
                                 </tr>
                             </thead>
                             <tbody>
                                 @if(isset($objs) && count($objs)>0)
 
-                                <?php 
-                                $counter = 1;
-                                $total = 0;
-                                ?>
-                                @foreach($objs as $key => $obj)
-                                <tr>
-                                    <td>{{ $counter }}</td>
-                                    <td><a href="/backend_app/expense/{{$obj->id}}">{{$obj->name}}</a></td>
-
-                                    <td>
-                                        <a
-                                            href="/backend_app/expense/{{$obj->id}}">{{ $expense_types[$obj->expense_type_id]->name }}</a>
-                                    </td>
-
-                                    <td>
-                                        <a href="/backend_app/expense/{{$obj->id}}">{{$obj->date}}</a>
-                                    </td>
-
-                                    @foreach ($currency_types as $key2 => $currency_type2)
-                                    <td>
-                                        @if($obj->currency_id == $currency_type2->code)
-                                        <a href="/backend_app/expense/{{$obj->id}}">{{$obj->amount}}</a>
-                                        <?php $currency_amounts[$key2] = $currency_amounts[$key2] + $obj->amount; ?>
-                                        @endif
-                                    </td>
-                                    @endforeach
-
-                                </tr>
-                                <?php $counter++; 
-                                    $total = $total + $obj->amount; 
+                                    <?php 
+                                    $counter = 1;
+                                    $total = 0;
                                     ?>
-                                @endforeach
 
-                                {{-- for grand total - start --}}
-                                <tr>
-                                    <td colspan="4
-                                    " class="text-right"><b>Grand Total</b></td>
+                                    @if($selected_currency_ids == null )
+                                        @foreach($objs as $key => $obj)
 
-                                    @foreach ($currency_types as $key3 => $currency_type3)
-                                    <td class="text-right">
-                                        {{ $currency_type3->code }}
-                                        <?php echo number_format( (float) $currency_amounts[$key3], 2, '.', ''); ?>
-                                    </td>
-                                    @endforeach
+                                            
+                                            <tr>
+                                                <td>{{ $counter }}</td>
+                                                <td><a href="/backend_app/expense/{{$obj->id}}">{{$obj->name}}</a></td>
 
-                                </tr>
-                                {{-- for grand total - end --}}
+                                                <td>
+                                                    <a href="/backend_app/expense/{{$obj->id}}">{{ $expense_types[$obj->expense_type_id]->name }}</a>
+                                                </td>
+
+                                                <td>
+                                                    <a href="/backend_app/expense/{{$obj->id}}">{{$obj->date}}</a>
+                                                </td>
+
+                                                @foreach ($currency_types as $key2 => $currency_type2)
+                                                <td>
+                                                    @if($obj->currency_id == $currency_type2->code)
+                                                    <a href="/backend_app/expense/{{$obj->id}}">{{$obj->amount}}</a>
+                                                    <?php $currency_amounts[$key2] = $currency_amounts[$key2] + $obj->amount; ?>
+                                                    @endif
+                                                </td>
+                                                @endforeach
+
+                                            </tr>
+                                            <?php $counter++; 
+                                                $total = $total + $obj->amount; 
+                                            ?>
+                                            
+                                        @endforeach
+
+                                    @else
+                                        @foreach($objs as $key => $obj)
+                                            @if (in_array($obj->currency_id, $selected_currency_ids))
+                                                <tr>
+                                                    <td>{{ $counter }}</td>
+                                                    <td><a href="/backend_app/expense/{{$obj->id}}">{{$obj->name}}</a></td>
+
+                                                    <td>
+                                                        <a
+                                                            href="/backend_app/expense/{{$obj->id}}">{{ $expense_types[$obj->expense_type_id]->name }}</a>
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="/backend_app/expense/{{$obj->id}}">{{$obj->date}}</a>
+                                                    </td>
+
+                                                    @foreach ($currency_types as $key2 => $currency_type2)
+                                                        @if (in_array($currency_type2->code, $selected_currency_ids))
+                                                        <td>
+                                                            @if($obj->currency_id == $currency_type2->code)
+                                                            <a href="/backend_app/expense/{{$obj->id}}">{{$obj->amount}}</a>
+                                                            <?php $currency_amounts[$key2] = $currency_amounts[$key2] + $obj->amount; ?>
+                                                            @endif
+                                                        </td>
+                                                        @endif
+                                                    @endforeach
+
+                                                </tr>
+                                            
+                                                <?php $counter++; 
+                                                    $total = $total + $obj->amount; 
+                                                ?>
+                                            @endif
+                                        @endforeach
+                                    @endif
+
+                                    {{-- for grand total - start --}}
+                                    <tr>
+                                        <td colspan="4" class="text-right"><b>Grand Total</b></td>
+
+                                        @if($selected_currency_ids == null )
+                                            @foreach ($currency_types as $key3 => $currency_type3)
+                                            <td class="text-right">
+                                                {{ $currency_type3->code }}
+                                                <?php echo number_format( (float) $currency_amounts[$key3], 2, '.', ''); ?>
+                                            </td>
+                                            @endforeach
+                                        @else
+                                            @foreach ($currency_types as $key3 => $currency_type3)
+                                                @if (in_array($currency_type3->code, $selected_currency_ids))
+                                                    <td class="text-right">
+                                                        {{ $currency_type3->code }}
+                                                        <?php echo number_format( (float) $currency_amounts[$key3], 2, '.', ''); ?>
+                                                    </td>
+                                                @endif
+                                            @endforeach
+                                        @endif
+
+                                    </tr>
+                                    {{-- for grand total - end --}}
                                 @else
+
                                 <td colspan="{{$col_count}}" class="text-center">
                                     <b>There is no records about your searching filters !!! </b>
-                    </div>
+                                </td>
 
-                    @endif
+                        @endif
 
                     </tbody>
 
