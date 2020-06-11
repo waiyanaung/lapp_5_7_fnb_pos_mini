@@ -332,6 +332,8 @@ class Default_004_PermissionSeeder extends Seeder
 
             // Expense Reports
             ['id'=>1101,'module'=>'Report_Expense','name'=>'Expense Report','description'=>'Expense Summary Report Listing','url'=>'backend_app/report/expense','created_by'=>1,'created_at'=>$today],
+            ['id'=>1102,'module'=>'Report_Expense','name'=>'Expense Report PDF Export','description'=>'Expense Summary Report PDF Expoert','url'=>'backend_app/report/expense/pdf','created_by'=>1,'created_at'=>$today],
+            ['id'=>1103,'module'=>'Report_Expense','name'=>'Expense Report Excel Export','description'=>'Expense Summary Report Excel Expoert','url'=>'backend_app/report/expense/excel','created_by'=>1,'created_at'=>$today],
 
             // ['id'=>520,'module'=>'Slider','name'=>'Create','description'=>'Slider Create','url'=>'backend_app/slider/create','created_by'=>1,'created_at'=>$today],
             // ['id'=>521,'module'=>'Slider','name'=>'Store','description'=>'Slider Store','url'=>'backend_app/slider/store','created_by'=>1,'created_at'=>$today],

@@ -27,6 +27,7 @@ use App\Setup\Transaction\TransactionRepositoryInterface;
 use App\Setup\Transaction\Transaction;
 use App\Setup\TransactionItem\TransactionItemRepository;
 use App\Setup\TransactionItem\TransactionItem;
+use PDF;
 
 class SamplesController extends Controller
 {
@@ -308,5 +309,51 @@ class SamplesController extends Controller
             }
         
 
+    }
+
+    public function pdf()
+    {
+        if(Auth::check()) {
+
+            return view('backend.sample.export_pdf');
+                            
+        }
+        return redirect('/');
+    }
+    
+    public function exportPdf1()
+    {
+        $data = ['title' => 'Welcome To '];
+        $pdf = PDF::loadView('backend.sample.pdf_sample_template', $data);
+  
+        return $pdf->download('sample_pdf.pdf');
+    }
+
+    public function exportPdf2()
+    {
+        
+        // This  $data array will be passed to our PDF blade
+       $data = [
+        'title' => 'First PDF for Medium',
+        'heading' => 'Hello from 99Points.info',
+        'content' => 'Content'        
+          ];
+      
+      $pdf = PDF::loadView('backend.sample.pdf_sample_template2', $data);  
+      return $pdf->download('sample_pdf2.pdf');
+    }
+
+    public function exportPdf3()
+    {
+        
+        // This  $data array will be passed to our PDF blade
+       $data = [
+        'title' => 'First PDF for Medium',
+        'heading' => 'Hello from 99Points.info',
+        'content' => 'Content'        
+          ];
+      
+      $pdf = PDF::loadView('backend.sample.pdf_sample_template3', $data);  
+      return $pdf->download('sample_pdf3.pdf');
     }
 }

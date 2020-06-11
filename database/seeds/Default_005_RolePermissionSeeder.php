@@ -326,6 +326,8 @@ class Default_005_RolePermissionSeeder extends Seeder
 
             // Expense Report
             ['role_id'=>1, 'permission_id'=>1101,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>1102,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>1, 'permission_id'=>1103,'created_by'=>1,'created_at'=>$today],
             
 
             // Role Permissions for the Role 1 - End
@@ -537,6 +539,8 @@ class Default_005_RolePermissionSeeder extends Seeder
             
             // Expense Report
             ['role_id'=>2, 'permission_id'=>1101,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>1102,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>2, 'permission_id'=>1103,'created_by'=>1,'created_at'=>$today],
             
 
             // Role Permissions for the Role 2 - End
@@ -653,6 +657,8 @@ class Default_005_RolePermissionSeeder extends Seeder
 
             // Expense Report
             ['role_id'=>3, 'permission_id'=>1101,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>1102,'created_by'=>1,'created_at'=>$today],
+            ['role_id'=>3, 'permission_id'=>1103,'created_by'=>1,'created_at'=>$today],
             
 
             // Role Permissions for the Role 3 - End

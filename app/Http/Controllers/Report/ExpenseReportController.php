@@ -12,6 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Core\Utility AS Utility;
 use App\Setup\ExpenseType\ExpenseTypeRepository;
 use Illuminate\Support\Facades\Input;
+use PDF;
 
 class ExpenseReportController extends Controller
 {
@@ -37,7 +38,7 @@ class ExpenseReportController extends Controller
             $expense_type_repo = new ExpenseTypeRepository();
             $expense_types = $expense_type_repo->getObjs();
             
-            return view('report.expense.expense_summary')
+            return view('report.expense.expense_report')
                 ->with('objs', $objs)
                 ->with('action_type', 'create')
                 ->with('currency_types', $currency_types)
@@ -51,45 +52,77 @@ class ExpenseReportController extends Controller
 
     }
 
-    public function search($type = null, $from = null, $to = null){
+    public function exportPdf()
+    {
         if(Auth::check()) {
-            $from_year      = null;
-            $to_year        = null;
-            $from_month     = null;
-            $to_month       = null;
-            $from_date      = null;
-            $to_date        = null;
-            $grandTotal     = 0.00;
+            
+            $all_inputs = Input::all();
+            $from_date       = isset($all_inputs['from_date']) ? $all_inputs['from_date'] : null ;
+            $to_date       = isset($all_inputs['to_date']) ? $all_inputs['to_date'] : null ;
+            $expense_type_id_arr       = isset($all_inputs['expense_type_id']) ? $all_inputs['expense_type_id'] : null ;
+            $currency_id_arr       = isset($all_inputs['currency_id']) ? $all_inputs['currency_id'] : null ;
 
-            if($type == "yearly"){
-                $from_year  = $from;
-                $to_year    = $to;
-            }
-            if($type == "monthly"){
-                $from_month = $from;
-                $to_month   = $to;
-            }
-            if($type == "daily"){
-                $from_date  = $from;
-                $to_date    = $to;
-            }
-            $bookings       = $this->repo->saleSummaryReport($type, $from, $to);
+            $objs = $this->repo->summary($expense_type_id_arr,$currency_id_arr,$from_date,$to_date);            
+            $currency_types = Utility::getCoreSettingsByType('CURRENCY');
+            $expense_type_repo = new ExpenseTypeRepository();
+            $expense_types = $expense_type_repo->getObjs();
 
-            if(isset($bookings) && count($bookings) > 0){
-                foreach($bookings as $booking){
-                    $grandTotal += $booking->total_payable_amt;
-                }
-            }
+            // This  $data array will be passed to our PDF blade
+            $data = [
+                'objs' => $objs,
+                'action_type' => 'create',
+                'currency_types' => $currency_types,
+                'expense_types' => $expense_types,
+                'from_date' => $from_date,
+                'to_date' => $to_date,
+                'selected_currency_ids' => $currency_id_arr,
+                'selected_expense_type_ids' => $expense_type_id_arr,
+                ];
+            
+            $pdf = PDF::loadView('report.expense.expense_summary', $data);  
+            return $pdf->download('expense_report.pdf');
 
-            return view('report.sale_summary_report')->with('bookings',$bookings)
-                ->with('from_year',$from_year)
-                ->with('from_month',$from_month)
-                ->with('from_date',$from_date)
-                ->with('to_year',$to_year)
-                ->with('to_month',$to_month)
-                ->with('to_date',$to_date)
-                ->with('grandTotal',$grandTotal)
-                ->with('type',$type) ;
+            return view('report.expense.expense_report')
+                ->with('objs', $objs)
+                ->with('action_type', 'create')
+                ->with('currency_types', $currency_types)
+                ->with('expense_types', $expense_types)
+                ->with('from_date', $from_date)
+                ->with('to_date', $to_date)
+                ->with('selected_currency_ids', $currency_id_arr)
+                ->with('selected_expense_type_ids', $expense_type_id_arr);
+        }
+        return redirect('/');
+    }
+
+    public function exportExcel()
+    {
+        if(Auth::check()) {
+            $all_inputs = Input::all();
+            $from_date       = isset($all_inputs['from_date']) ? $all_inputs['from_date'] : null ;
+            $to_date       = isset($all_inputs['to_date']) ? $all_inputs['to_date'] : null ;
+            $expense_type_id_arr       = isset($all_inputs['expense_type_id']) ? $all_inputs['expense_type_id'] : null ;
+            $currency_id_arr       = isset($all_inputs['currency_id']) ? $all_inputs['currency_id'] : null ;
+
+            $objs = $this->repo->summary($expense_type_id_arr,$currency_id_arr,$from_date,$to_date);            
+            $currency_types = Utility::getCoreSettingsByType('CURRENCY');
+            $expense_type_repo = new ExpenseTypeRepository();
+            $expense_types = $expense_type_repo->getObjs();;
+
+            // This  $data array will be passed to our PDF blade
+            $data = [
+                'objs' => $objs,
+                'action_type' => 'create',
+                'currency_types' => $currency_types,
+                'expense_types' => $expense_types,
+                'from_date' => $from_date,
+                'to_date' => $to_date,
+                'selected_currency_ids' => $currency_id_arr,
+                'selected_expense_type_ids' => $expense_type_id_arr,
+                ];
+            
+                $pdf = PDF::loadView('backend.sample.expense_summary', $data);  
+                return $pdf->download('expense_report.pdf');
         }
         return redirect('/');
     }

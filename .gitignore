@@ -11,6 +11,7 @@ npm-debug.log
 yarn-error.log
 .env
 /.phpintel
+composer.lock
 /public/images/article
 /public/images/category
 /public/images/city

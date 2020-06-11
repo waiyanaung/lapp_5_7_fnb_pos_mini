@@ -105,6 +105,8 @@ $user_role_id = $user_info['userRoleId'];
                         <ul aria-expanded="false" class="collapse  first-level">
                             
                             <li class="sidebar-item"><a href="/backend_app/sample/dynamic_form" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">Dynamic Form</span></a></li>
+
+                            <li class="sidebar-item"><a href="/backend_app/sample/pdf" class="sidebar-link"><i class="ti-settings m-r-5 m-l-5"></i><span class="hide-menu">PDF Export</span></a></li>
                             
                         </ul>
                     </li>

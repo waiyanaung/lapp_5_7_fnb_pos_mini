@@ -99,6 +99,11 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
         Route::get('sample/dynamic_form2/create', array('as' => 'backend_app/sample/dynamic_form2/create', 'uses' => 'Sample\SamplesController@create'));
         Route::post('sample/dynamic_form2/store', array('as' => 'backend_app/sample/dynamic_form2/store', 'uses' => 'Sample\SamplesController@store'));
 
+        Route::get('sample/pdf', array('as' => 'backend_app/sample/pdf', 'uses' => 'Sample\SamplesController@pdf'));
+        Route::post('sample/pdf1', array('as' => 'backend_app/sample/pdf', 'uses' => 'Sample\SamplesController@exportPdf1'));
+        Route::post('sample/pdf2', array('as' => 'backend_app/sample/pdf', 'uses' => 'Sample\SamplesController@exportPdf2'));
+        Route::post('sample/pdf3', array('as' => 'backend_app/sample/pdf', 'uses' => 'Sample\SamplesController@exportPdf3'));
+
         Route::post('api/items', array('as' => 'backend_app/api/items', 'uses' => 'Api\ApiItemController@getItems'));
         
         Route::post('api/brands_by_category', array('as' => 'backend_app/api/brands_by_category', 'uses' => 'Api\ApiItemController@getBrandsbyCategory'));
@@ -459,6 +464,20 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
                 'as'=>'backend_app/report/expense',
                 'uses'=>'Report\ExpenseReportController@index'
             ));
+
+            //Expense Report
+            Route::post('report/expense/pdf',array(
+                'as'=>'backend_app/report/expense/pdf',
+                'uses'=>'Report\ExpenseReportController@exportPdf'
+            ));
+
+            //Expense Report
+            Route::post('report/expense/excel',array(
+                'as'=>'backend_app/report/expense/excel',
+                'uses'=>'Report\ExpenseReportController@exportExcel'
+            ));
+
+            
 
         });
             
