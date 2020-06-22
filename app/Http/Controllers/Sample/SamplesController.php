@@ -14,8 +14,8 @@ use App\Sample;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
-use App\Core\FormatGenerator As FormatGenerator;
-use App\Core\ReturnMessage As ReturnMessage;
+use App\Core\FormatGenerator as FormatGenerator;
+use App\Core\ReturnMessage as ReturnMessage;
 use App\Core\Check;
 use App\Setup\Township\Township;
 use App\Setup\Category\CategoryRepository;
@@ -28,6 +28,10 @@ use App\Setup\Transaction\Transaction;
 use App\Setup\TransactionItem\TransactionItemRepository;
 use App\Setup\TransactionItem\TransactionItem;
 use PDF;
+use Excel;
+use App\Exports\SampleExport;
+use App\Exports\SampleExportView;
+use App\Exports\SampleExportView2;
 
 class SamplesController extends Controller
 {
@@ -43,7 +47,6 @@ class SamplesController extends Controller
 
     public function getLocations()
     {
-
         $locations = [
             ['<b>Bondi Beach</b><a href="/backend_app/systemreference"><img src="/images/logo.jpg"></a>', -33.890542, 151.274856, 4],
             ['Coogee Beach</b><a href="/backend_app/systemreference"><img src="/images/logo.jpg"></a>', -33.923036, 151.259052, 5],
@@ -66,7 +69,7 @@ class SamplesController extends Controller
         $rules = [];
 
 
-        foreach($request->input('name') as $key => $value) {
+        foreach ($request->input('name') as $key => $value) {
             $rules["name.{$key}"] = 'required';
         }
 
@@ -75,9 +78,7 @@ class SamplesController extends Controller
 
 
         if ($validator->passes()) {
-
-
-            foreach($request->input('name') as $key => $value) {
+            foreach ($request->input('name') as $key => $value) {
                 Sample::create(['name'=>$value]);
             }
 
@@ -91,7 +92,7 @@ class SamplesController extends Controller
 
     public function create()
     {
-        if(Auth::check()) {
+        if (Auth::check()) {
             $countryRepo = new CountryRepository();
             $countries = $countryRepo->getObjs();
 
@@ -107,216 +108,199 @@ class SamplesController extends Controller
             $obj = new Transaction();
 
             return view('backend.sample.dynamic_form2')
-                        ->with('countries',$countries)
-                        ->with('customers',$customers)
-                        ->with('categories',$categories)
-                        ->with('items',$items);
-                            
+                        ->with('countries', $countries)
+                        ->with('customers', $customers)
+                        ->with('categories', $categories)
+                        ->with('items', $items);
         }
         return redirect('/');
     }
 
-    public function store(Request $request){      
-            
-            
-            $rules = [];
-            $rules["customer_id"] = 'required';
-            $custom_inputs = array();
-            $custom_inputs['customer_id'] = $request->input('customer_id');
+    public function store(Request $request)
+    {
+        $rules = [];
+        $rules["customer_id"] = 'required';
+        $custom_inputs = array();
+        $custom_inputs['customer_id'] = $request->input('customer_id');
 
-            $input_category_ids = $request->input('category_id');
-            $input_item_ids = $request->input('item_id');
-            $input_item_qtys = $request->input('item_qty');
-            $input_prices = $request->input('price');
+        $input_category_ids = $request->input('category_id');
+        $input_item_ids = $request->input('item_id');
+        $input_item_qtys = $request->input('item_qty');
+        $input_prices = $request->input('price');
         
-            foreach ($input_category_ids as $key => $value) {
-                $custom_inputs['category_id' . $key] = $value;
-                $rules["category_id".$key] = 'required';
-            }
+        foreach ($input_category_ids as $key => $value) {
+            $custom_inputs['category_id' . $key] = $value;
+            $rules["category_id".$key] = 'required';
+        }
 
-            foreach ($input_item_qtys as $key => $value) {
-                $custom_inputs['item_qty' . $key] = $value;
-                $rules["item_qty".$key] = 'required';
-            }
+        foreach ($input_item_qtys as $key => $value) {
+            $custom_inputs['item_qty' . $key] = $value;
+            $rules["item_qty".$key] = 'required';
+        }
 
-            foreach ($input_item_ids as $key => $value) {
-                $custom_inputs['item_id' . $key] = $value;
-                $rules["item_id".$key] = 'required';
-            }
+        foreach ($input_item_ids as $key => $value) {
+            $custom_inputs['item_id' . $key] = $value;
+            $rules["item_id".$key] = 'required';
+        }
 
-            foreach ($input_prices as $key => $value) {
-                $custom_inputs['price' . $key] = $value;
-                $rules["price".$key] = 'required';
-            }
+        foreach ($input_prices as $key => $value) {
+            $custom_inputs['price' . $key] = $value;
+            $rules["price".$key] = 'required';
+        }
        
-            // $validator = Validator::make($request->all(), $rules);
-            $validator = Validator::make($custom_inputs, $rules);
+        // $validator = Validator::make($request->all(), $rules);
+        $validator = Validator::make($custom_inputs, $rules);
         
-            if ($validator->fails()) {
-
-                if ($request->ajax()) {
-                    
-                    return response()->json([
+        if ($validator->fails()) {
+            if ($request->ajax()) {
+                return response()->json([
                         'fail'=>'Fail, Validation Error',
                         'error'  => $validator->errors()->all()
                        ]);
-                }
-                else{
-                    return redirect('/backend_app/transaction/create')
+            } else {
+                return redirect('/backend_app/transaction/create')
                         ->withErrors($validator)
                         ->withInput();
-                }
-            } else {
-                
-                $customer_id = $request->input('customer_id');
-                $date = date('Y-m-d');
-                $total_item_qty = 0;
-                $total_price = $request->input('total_price');
+            }
+        } else {
+            $customer_id = $request->input('customer_id');
+            $date = date('Y-m-d');
+            $total_item_qty = 0;
+            $total_price = $request->input('total_price');
             
-                $service_charges = 0;
-                $tax_percent = 0;
-                $tax_type = 0;
-                $tax_amt = 0;
-                $main_discount_type = 0;
-                $main_discount_percent = 0;
-                $main_discount_amt = 0;
-                $total_item_discounts = 0;
+            $service_charges = 0;
+            $tax_percent = 0;
+            $tax_type = 0;
+            $tax_amt = 0;
+            $main_discount_type = 0;
+            $main_discount_percent = 0;
+            $main_discount_amt = 0;
+            $total_item_discounts = 0;
 
-                $paramObj = new Transaction();
-                $table_name = $paramObj->getTable();
+            $paramObj = new Transaction();
+            $table_name = $paramObj->getTable();
             
-                $last_id = Check::getTableIncrementId($table_name, $date);
-                $paramObj->id = $last_id;
-                $paramObj->customer_id = $customer_id;
-                $paramObj->date = $date;
+            $last_id = Check::getTableIncrementId($table_name, $date);
+            $paramObj->id = $last_id;
+            $paramObj->customer_id = $customer_id;
+            $paramObj->date = $date;
 
-                $transaction_items = array();
-                $total_item_count = count($request->input('category_id'));
-                for ($i = 0; $i < $total_item_count; $i++) {
-                    $transaction_items[$i] = new TransactionItem();
-                    $transaction_items[$i]->transaction_id = $last_id;
-                    $transaction_items[$i]->date = $date;
-                }
+            $transaction_items = array();
+            $total_item_count = count($request->input('category_id'));
+            for ($i = 0; $i < $total_item_count; $i++) {
+                $transaction_items[$i] = new TransactionItem();
+                $transaction_items[$i]->transaction_id = $last_id;
+                $transaction_items[$i]->date = $date;
+            }
             
-                $categories_array = $request->input('category_id');
-                $items_array = $request->input('item_id');
-                $prices_array = $request->input('price');
-                $item_qtys_array = $request->input('item_qty');
-                $item_amounts_array = $request->input('item_amount');
+            $categories_array = $request->input('category_id');
+            $items_array = $request->input('item_id');
+            $prices_array = $request->input('price');
+            $item_qtys_array = $request->input('item_qty');
+            $item_amounts_array = $request->input('item_amount');
             
-                foreach ($items_array as $key_item => $value_item) {
-                    $transaction_items[$key_item]->item_id = $value_item;
-                }
+            foreach ($items_array as $key_item => $value_item) {
+                $transaction_items[$key_item]->item_id = $value_item;
+            }
 
-                foreach ($prices_array as $key_price => $value_price) {
-                    $transaction_items[$key_price]->item_price = $value_price;
-                }
+            foreach ($prices_array as $key_price => $value_price) {
+                $transaction_items[$key_price]->item_price = $value_price;
+            }
 
-                foreach ($item_qtys_array as $key_qty => $value_qty) {
-                    $transaction_items[$key_qty]->item_qty = $value_qty;
-                    $total_item_qty += $value_qty;
-                }
+            foreach ($item_qtys_array as $key_qty => $value_qty) {
+                $transaction_items[$key_qty]->item_qty = $value_qty;
+                $total_item_qty += $value_qty;
+            }
 
-                foreach ($item_amounts_array as $key_amt => $value_amt) {
-                    $transaction_items[$key_amt]->item_amt = $value_amt;
-                }
+            foreach ($item_amounts_array as $key_amt => $value_amt) {
+                $transaction_items[$key_amt]->item_amt = $value_amt;
+            }
 
-                DB::beginTransaction();
-                try {
-                    $paramObj->total_item_qty = $total_item_qty;
-                    $paramObj->sub_total = $total_price;
-                    $paramObj->service_charges = $service_charges;
-                    $paramObj->tax_percent = $tax_percent;
-                    $paramObj->tax_type = $tax_type;
-                    $paramObj->tax_amt = $tax_amt;
-                    $paramObj->main_discount_type = $main_discount_type;
-                    $paramObj->main_discount_percent = $main_discount_percent;
-                    $paramObj->main_discount_amt = $main_discount_amt;
-                    $paramObj->total_item_discounts = $total_item_discounts;
-                    $paramObj->status = 2;
+            DB::beginTransaction();
+            try {
+                $paramObj->total_item_qty = $total_item_qty;
+                $paramObj->sub_total = $total_price;
+                $paramObj->service_charges = $service_charges;
+                $paramObj->tax_percent = $tax_percent;
+                $paramObj->tax_type = $tax_type;
+                $paramObj->tax_amt = $tax_amt;
+                $paramObj->main_discount_type = $main_discount_type;
+                $paramObj->main_discount_percent = $main_discount_percent;
+                $paramObj->main_discount_amt = $main_discount_amt;
+                $paramObj->total_item_discounts = $total_item_discounts;
+                $paramObj->status = 2;
 
-                    $total_price = $total_price + $service_charges + $tax_amt;
-                    $total_dis_amt = $main_discount_amt + $total_item_discounts;
+                $total_price = $total_price + $service_charges + $tax_amt;
+                $total_dis_amt = $main_discount_amt + $total_item_discounts;
 
-                    $grand_total = $total_price - $total_dis_amt;
-                    $paramObj->grand_total = $grand_total;
+                $grand_total = $total_price - $total_dis_amt;
+                $paramObj->grand_total = $grand_total;
 
-                    $result = $this->repo->create($paramObj);
-                    // Sample::create(['name'=>$value]);
+                $result = $this->repo->create($paramObj);
+                // Sample::create(['name'=>$value]);
 
-                    if ($result['laravelStatusCode'] ==  ReturnMessage::OK) {
-                        $transaction_item_repo = new TransactionItemRepository();
+                if ($result['laravelStatusCode'] ==  ReturnMessage::OK) {
+                    $transaction_item_repo = new TransactionItemRepository();
 
-                        foreach ($transaction_items as $key_tran_item => $transaction_item) {
-                            $discount_type = 0;
-                            $discount_percent = 0;
-                            $discount_amt = 0;
-                            $sub_total_amt = $transaction_item->item_amt - $discount_amt;
+                    foreach ($transaction_items as $key_tran_item => $transaction_item) {
+                        $discount_type = 0;
+                        $discount_percent = 0;
+                        $discount_amt = 0;
+                        $sub_total_amt = $transaction_item->item_amt - $discount_amt;
                         
-                            $table_name2 = $transaction_item->getTable();
-                            $last_id2 = Check::getTableIncrementId($table_name2, $date);
-                            $transaction_item->id = $last_id2;
-                            $transaction_item->discount_type = $discount_type;
-                            $transaction_item->discount_percent = $discount_percent;
-                            $transaction_item->discount_amt = $discount_amt;
-                            $transaction_item->sub_total_amt = $sub_total_amt;
+                        $table_name2 = $transaction_item->getTable();
+                        $last_id2 = Check::getTableIncrementId($table_name2, $date);
+                        $transaction_item->id = $last_id2;
+                        $transaction_item->discount_type = $discount_type;
+                        $transaction_item->discount_percent = $discount_percent;
+                        $transaction_item->discount_amt = $discount_amt;
+                        $transaction_item->sub_total_amt = $sub_total_amt;
 
-                            $result2 = $transaction_item_repo->create($transaction_item);
+                        $result2 = $transaction_item_repo->create($transaction_item);
 
-                            if ($result2['laravelStatusCode'] !=  ReturnMessage::OK) {
-                                DB::rollBack();
-                                if ($request->ajax()) {
-                                    return response()->json(['fail'=>'Fail, Transaction Item is not created at detail table saving ...']);
-                                }
-                                else{
-                                    return redirect()->action('Setup\Transaction\TransactionController@index')
+                        if ($result2['laravelStatusCode'] !=  ReturnMessage::OK) {
+                            DB::rollBack();
+                            if ($request->ajax()) {
+                                return response()->json(['fail'=>'Fail, Transaction Item is not created at detail table saving ...']);
+                            } else {
+                                return redirect()->action('Setup\Transaction\TransactionController@index')
                                         ->with(FormatGenerator::message('Fail', 'Transaction Item is not created at detail table saving ...'));
-                                }
                             }
                         }
-
-                        DB::commit();
-                        if ($request->ajax()) {
-                            return response()->json(['success'=>'Success, successfully created transaction.']);
-                        }
-                        else{
-                            return redirect()->action('Setup\Transaction\TransactionController@index')
-                                ->with(FormatGenerator::message('Success', 'Transaction is created ...'));
-                        }
-
-                        
-                    } else {
-                        DB::rollBack();
-                        if ($request->ajax()) {
-                            return response()->json(['fail'=>'Fail, Transaction is not created at header table saving ...']);
-                        }
-                        else{
-                            return redirect()->action('Setup\Transaction\TransactionController@index')
-                                ->with(FormatGenerator::message('Fail', 'Transaction is not created at header table saving ...'));
-                        }
                     }
-                } catch (Exception $e) {
+
+                    DB::commit();
+                    if ($request->ajax()) {
+                        return response()->json(['success'=>'Success, successfully created transaction.']);
+                    } else {
+                        return redirect()->action('Setup\Transaction\TransactionController@index')
+                                ->with(FormatGenerator::message('Success', 'Transaction is created ...'));
+                    }
+                } else {
                     DB::rollBack();
                     if ($request->ajax()) {
-                        return response()->json(['fail'=>'Fail, Transaction is not created and got exception.']);
-                    }
-                    else{
+                        return response()->json(['fail'=>'Fail, Transaction is not created at header table saving ...']);
+                    } else {
                         return redirect()->action('Setup\Transaction\TransactionController@index')
-                            ->with(FormatGenerator::message('Fail', 'Transaction is not created and got exception '));
+                                ->with(FormatGenerator::message('Fail', 'Transaction is not created at header table saving ...'));
                     }
                 }
-                
+            } catch (Exception $e) {
+                DB::rollBack();
+                if ($request->ajax()) {
+                    return response()->json(['fail'=>'Fail, Transaction is not created and got exception.']);
+                } else {
+                    return redirect()->action('Setup\Transaction\TransactionController@index')
+                            ->with(FormatGenerator::message('Fail', 'Transaction is not created and got exception '));
+                }
             }
-        
-
+        }
     }
 
     public function pdf()
     {
-        if(Auth::check()) {
-
+        if (Auth::check()) {
             return view('backend.sample.export_pdf');
-                            
         }
         return redirect('/');
     }
@@ -333,27 +317,105 @@ class SamplesController extends Controller
     {
         
         // This  $data array will be passed to our PDF blade
-       $data = [
+        $data = [
         'title' => 'First PDF for Medium',
         'heading' => 'Hello from 99Points.info',
-        'content' => 'Content'        
+        'content' => 'Content'
           ];
       
-      $pdf = PDF::loadView('backend.sample.pdf_sample_template2', $data);  
-      return $pdf->download('sample_pdf2.pdf');
+        $pdf = PDF::loadView('backend.sample.pdf_sample_template2', $data);
+        return $pdf->download('sample_pdf2.pdf');
     }
 
     public function exportPdf3()
     {
         
         // This  $data array will be passed to our PDF blade
-       $data = [
+        $data = [
         'title' => 'First PDF for Medium',
         'heading' => 'Hello from 99Points.info',
-        'content' => 'Content'        
+        'content' => 'Content'
           ];
       
-      $pdf = PDF::loadView('backend.sample.pdf_sample_template3', $data);  
-      return $pdf->download('sample_pdf3.pdf');
+        $pdf = PDF::loadView('backend.sample.pdf_sample_template3', $data);
+        return $pdf->download('sample_pdf3.pdf');
+    }
+
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function excel()
+    {
+        if (Auth::check()) {
+            return view('backend.sample.export_excel');
+        }
+        return redirect('/');
+    }
+    
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function exportExcel1()
+    {
+        return Excel::download(new SampleExport, 'samples.xlsx');
+    }
+
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function exportExcel2()
+    {
+        return Excel::download(new SampleExport, 'samples.csv');
+    }
+
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function exportExcel3()
+    {
+        return Excel::download(new SampleExport, 'samples.pdf');
+    }
+
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function exportExcel4()
+    {
+        return Excel::download(new SampleExport, 'samples.html');
+    }
+
+
+    public function exportExcel5()
+    {
+        return Excel::download(new SampleExportView(), 'export.xlsx');
+    }
+
+    public function exportExcel6()
+    {
+        return Excel::download(new SampleExportView2(), 'export.xlsx');
+        // return Excel::download(new SampleExportView, 'samples.xlsx');
+    }
+
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function importCSV()
+    {
+        dd("import CSV");
+        Excel::import(new ImportUsers, request()->file('file'));
+            
+        return back();
+    }
+    
+    
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function importExcel()
+    {
+        dd("import Excel");
+        Excel::import(new ImportUsers, request()->file('file'));
+            
+        return back();
     }
 }

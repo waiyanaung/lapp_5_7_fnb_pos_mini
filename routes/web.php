@@ -10,8 +10,8 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
     Route::get('/home2', 'Frontend\HomeController@index2')->name('home2');
     Route::get('coming', array('as' => '/coming', 'uses' => 'Frontend\HomeController@comingsoon'));
 
-    Route::any('login','Frontend\LoginController@doLogin');
-    Route::get('logout','Frontend\LoginController@logout');
+    Route::any('login', 'Frontend\LoginController@doLogin');
+    Route::get('logout', 'Frontend\LoginController@logout');
 
     //Display About Us Information
     Route::get('about_us', array('as' => '/about_us', 'uses' => 'Frontend\AboutUsController@index'));
@@ -50,7 +50,7 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
     Route::post('password/reset', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@reset']);
 
     // User(Customer Registration)
-    Route::get('register','Frontend\UserRegistrationController@create');    
+    Route::get('register', 'Frontend\UserRegistrationController@create');
     Route::post('register', 'Frontend\UserRegistrationController@store');
     Route::get('register/check_email', ['as' => 'register/check_email', 'uses' => 'Frontend\UserRegistrationController@check_email']);
 
@@ -63,14 +63,12 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
     Route::group(['middleware' => 'web'], function () {
     
         // User(Customer Registration)
-        Route::get('cart','Frontend\CartController@create');    
+        Route::get('cart', 'Frontend\CartController@create');
         Route::post('cart', 'Frontend\CartController@store');
-
     });
 
     //Backend
     Route::group(['prefix' => 'backend_app'], function () {
-
         Route::get('/', 'Auth\AuthController@showLogin');
         Route::get('login', array('as' => 'backend_app/login', 'uses' => 'Auth\AuthController@showLogin'));
         Route::post('login', array('as' => 'backend_app/login', 'uses' => 'Auth\AuthController@doLogin'));
@@ -104,12 +102,20 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
         Route::post('sample/pdf2', array('as' => 'backend_app/sample/pdf', 'uses' => 'Sample\SamplesController@exportPdf2'));
         Route::post('sample/pdf3', array('as' => 'backend_app/sample/pdf', 'uses' => 'Sample\SamplesController@exportPdf3'));
 
+        Route::get('sample/excel', array('as' => 'backend_app/sample/excel', 'uses' => 'Sample\SamplesController@excel'));
+        Route::post('sample/excel1', array('as' => 'backend_app/sample/excel1', 'uses' => 'Sample\SamplesController@exportExcel1'));
+        Route::post('sample/excel2', array('as' => 'backend_app/sample/excel2', 'uses' => 'Sample\SamplesController@exportExcel2'));
+        Route::post('sample/excel3', array('as' => 'backend_app/sample/excel3', 'uses' => 'Sample\SamplesController@exportExcel3'));
+        Route::post('sample/excel4', array('as' => 'backend_app/sample/excel4', 'uses' => 'Sample\SamplesController@exportExcel4'));
+        Route::post('sample/excel5', array('as' => 'backend_app/sample/excel5', 'uses' => 'Sample\SamplesController@exportExcel5'));
+        Route::post('sample/excel6', array('as' => 'backend_app/sample/excel6', 'uses' => 'Sample\SamplesController@exportExcel6'));
+        Route::post('sample/excel/import', array('as' => 'backend_app/sample/excel/import', 'uses' => 'Sample\SamplesController@importExcel'));
+        Route::post('sample/csv/import', array('as' => 'backend_app/sample/csv/import', 'uses' => 'Sample\SamplesController@importCSV'));
+
         Route::post('api/items', array('as' => 'backend_app/api/items', 'uses' => 'Api\ApiItemController@getItems'));
         
         Route::post('api/brands_by_category', array('as' => 'backend_app/api/brands_by_category', 'uses' => 'Api\ApiItemController@getBrandsbyCategory'));
         Route::post('api/item', array('as' => 'backend_app/api/item', 'uses' => 'Api\ApiItemController@getItem'));
-
-
     });
 
     Route::group(['middleware' => 'right'], function () {
@@ -122,9 +128,9 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
             Route::post('config', array('as' => 'backend_app/config', 'uses' => 'Core\ConfigController@update'));
             /* End Config */
 
-             /* Start System Reference */
-             Route::get('reference', array('as' => 'backend_app/reference', 'uses' => 'Backend\SystemReferenceController@index'));
-             /* End ConfSystem Referenceig */
+            /* Start System Reference */
+            Route::get('reference', array('as' => 'backend_app/reference', 'uses' => 'Backend\SystemReferenceController@index'));
+            /* End ConfSystem Referenceig */
 
             /* Start Role */
             Route::get('role', array('as' => 'backend_app/role', 'uses' => 'Core\RoleController@index'));
@@ -434,53 +440,52 @@ Route::group(['middleware' => 'frontendorbackend'], function () {
             Route::post('expense/update', array('as' => 'backend_app/expense/update', 'uses' => 'Setup\Expense\ExpenseController@update'));
             Route::post('expense/destroy', array('as' => 'backend_app/expense/destroy', 'uses' => 'Setup\Expense\ExpenseController@destroy'));
             Route::post('expense/enable', array('as' => 'backend_app/expense/enable', 'uses' => 'Setup\Expense\ExpenseController@enable'));
-            Route::get('expense/{id}', array('as' => 'backend_app/expense/show', 'uses' => 'Setup\Expense\ExpenseController@show'));  
+            Route::get('expense/{id}', array('as' => 'backend_app/expense/show', 'uses' => 'Setup\Expense\ExpenseController@show'));
             
             //SaleSummary Report
-            Route::get('salesummaryreport',array(
+            Route::get('salesummaryreport', array(
                 'as'=>'backend_app/salesummaryreport',
                 'uses'=>'Report\SaleSummaryReportController@index'
             ));
-            Route::get('salesummaryreport/search/{type?}/{from?}/{to?}',
+            Route::get(
+                'salesummaryreport/search/{type?}/{from?}/{to?}',
                 array(
                     'as'=>'backend_app/salesummaryreport/search/{type?}/{from?}/{to?}',
                     'uses'=>'Report\SaleSummaryReportController@search'
-                ));
-            Route::get('salesummaryreport/exportexcel/{type?}/{from?}/{to?}',
+                )
+            );
+            Route::get(
+                'salesummaryreport/exportexcel/{type?}/{from?}/{to?}',
                 array(
                     'as'=>'backend_app/salesummaryreport/exportexcel/{type?}/{from?}/{to?}',
                     'uses'=>'Report\SaleSummaryReportController@excel'
-                ));
+                )
+            );
             
 
             //Expense Report
-            Route::get('report/expense',array(
+            Route::get('report/expense', array(
                 'as'=>'backend_app/report/expense',
                 'uses'=>'Report\ExpenseReportController@index'
             ));
 
             //Expense Report
-            Route::post('report/expense',array(
+            Route::post('report/expense', array(
                 'as'=>'backend_app/report/expense',
                 'uses'=>'Report\ExpenseReportController@index'
             ));
 
             //Expense Report
-            Route::post('report/expense/pdf',array(
+            Route::post('report/expense/pdf', array(
                 'as'=>'backend_app/report/expense/pdf',
                 'uses'=>'Report\ExpenseReportController@exportPdf'
             ));
 
             //Expense Report
-            Route::post('report/expense/excel',array(
+            Route::post('report/expense/excel', array(
                 'as'=>'backend_app/report/expense/excel',
                 'uses'=>'Report\ExpenseReportController@exportExcel'
             ));
-
-            
-
         });
-            
     });
-
 });
